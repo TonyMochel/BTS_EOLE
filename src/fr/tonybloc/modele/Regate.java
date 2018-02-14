@@ -1,6 +1,8 @@
 package fr.tonybloc.modele;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Object Regate
@@ -26,13 +28,15 @@ public class Regate {
 	/**
 	 * Date de depart de la régate
 	 */
-	private Date date_de_depart;
+	private String date_depart;
 	
 	/**
 	 * Est-elle coloturé ?
 	 */
 	private boolean cloture = false;
 	
+	
+	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
 	/**
 	 * Crée une instance de la classe 'Regate' : vide
@@ -43,14 +47,14 @@ public class Regate {
 	 * Crée une instance de la classe 'Regate'
 	 * @param intituler
 	 * @param distance
-	 * @param date_de_depart
+	 * @param date_depart
 	 * @param cloture
 	 */
-	public Regate(String intituler, double distance, Date date_de_depart, boolean cloture) {
+	public Regate(String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = 0;
 		this.intituler = intituler;
 		this.distance = distance;
-		this.date_de_depart = date_de_depart;
+		this.date_depart = DATE_FORMAT.format(date_depart);
 		this.cloture = cloture;
 	}
 	/**
@@ -61,11 +65,11 @@ public class Regate {
 	 * @param date_de_depart
 	 * @param cloture
 	 */
-	public Regate(int id, String intituler, double distance, Date date_de_depart, boolean cloture) {
+	public Regate(int id, String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = id;
 		this.intituler = intituler;
 		this.distance = distance;
-		this.date_de_depart = date_de_depart;
+		this.date_depart = DATE_FORMAT.format(date_depart);
 		this.cloture = cloture;
 	}
 	
@@ -95,12 +99,22 @@ public class Regate {
 		this.intituler = intituler;
 	}
 
-	public Date getDate_de_depart() {
-		return date_de_depart;
+	public Date getDate_depart_date() {
+		try {
+			return (Date) DATE_FORMAT.parse(date_depart);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
+	public String getDate_depart_string() {
+		return this.date_depart;
 	}
 
-	public void setDate_de_depart(Date date_de_depart) {
-		this.date_de_depart = date_de_depart;
+	public void setDate_depart(Date date_de_depart) {
+		this.date_depart = DATE_FORMAT.format(date_depart);
+	}
+	public void setDate_depart(String date_de_depart) {
+		this.date_depart = DATE_FORMAT.format(date_depart);
 	}
 
 	public boolean isCloture() {
@@ -120,7 +134,7 @@ public class Regate {
 				+ "'id' => " + this.id + ", "
 				+ "'intituler' => " + this.intituler + ", "
 				+ "'distance' => " + this.distance + ", "
-				+ "'date_de_depart' => " + this.date_de_depart + ", "
+				+ "'date_de_depart' => " + this.date_depart + ", "
 				+ "'cloture' => " + this.cloture
 				+ "}";
 		

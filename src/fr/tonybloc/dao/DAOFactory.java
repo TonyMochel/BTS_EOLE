@@ -20,7 +20,7 @@ public class DAOFactory {
 	 * Retourne un object Voilier interagissant avec la bdd
 	 * @return DAO
 	 */
-	public static DAO getVoilierDAO() {
+	public static VoilierDAO getVoilierDAO() {
 		return new VoilierDAO(connect);
 	}
 	
@@ -28,7 +28,7 @@ public class DAOFactory {
 	 * Retourne un object Regate interagissant avec la bdd
 	 * @return DAO
 	 */
-	public static DAO getRegateDAO() {
+	public static RegateDAO getRegateDAO() {
 		return new RegateDAO(connect);
 	}
 	
@@ -36,7 +36,7 @@ public class DAOFactory {
 	 * Retourne un object Categorie interagissant avec la bdd
 	 * @return DAO
 	 */
-	public static DAO getCategorieDAO() {
+	public static CategorieDAO getCategorieDAO() {
 		return new CategorieDAO(connect);
 	}
 	

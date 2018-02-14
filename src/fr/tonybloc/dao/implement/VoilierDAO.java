@@ -103,5 +103,27 @@ public class VoilierDAO extends DAO<Voilier> {
 	
 		return listVoilier;
 	}
+	
+	/**
+	 * Retourne le nombre d'élèment de la table : voilier
+	 * @return int
+	 */
+	public int getRowCount() {
+		int rowCount = 0;
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT count(*) as ROWCOUNT FROM voilier");
+			if(result.first()) {
+				rowCount = result.getInt("ROWCOUNT");
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return rowCount;
+	}
 
 }

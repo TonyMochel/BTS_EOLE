@@ -109,5 +109,27 @@ public class ClassementDAO extends DAO<Classement> {
 		
 		return listClassement;
 	}
+	
+	/**
+	 * Retourne le nombre d'élèment de la table : classement, pour une Régate
+	 * @return int
+	 */
+	public int getRowCount(int idRegate) {
+		int rowCount = 0;
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT count(*) as ROWCOUNT FROM classement WHERE ID_REGATE = " + idRegate);
+			if(result.first()) {
+				rowCount = result.getInt("ROWCOUNT");
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return rowCount;
+	}
 
 }
