@@ -1,5 +1,8 @@
 package fr.tonybloc.outils;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.text.JTextComponent;
 
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -22,5 +25,15 @@ public class Outils {
 	 */
 	public static boolean estVide(JDatePickerImpl composant) {
 		return ( composant.getModel().getValue().equals("") ) ? true : false;
+	}
+	/**
+	 * Convertie une date en Calendar
+	 * @param date
+	 * @return
+	 */
+	public static Calendar dateToCalendar(Date date){ 
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		return cal;
 	}
 }

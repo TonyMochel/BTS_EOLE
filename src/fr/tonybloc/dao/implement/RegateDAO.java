@@ -17,45 +17,62 @@ public class RegateDAO extends DAO<Regate> {
 	 */
 	public RegateDAO(Connection con) {
 		super(con);
-		// TODO Auto-generated constructor stub
 	}
 	/**
 	 * Ajoute une nouvelle 'Régate' dans la base de donnée
 	 */
 	@Override
 	public boolean create(Regate obj) {
-		// 
+		boolean requeteExecuter = false;
 		try 
 		{
-			
 			Statement stat = this.connect.createStatement();
-			stat.executeUpdate("INSERT INTO `regate`(`LIBELLER`, `DISTANCE`, `DATE_DEPART`, `CLOTURE`) VALUES ( '" + obj.getIntituler() +"', " + obj.getDistance() +", '" + obj.getDate_depart_string() +"', " + obj.isCloture() + ")");
-			return true;
+			stat.executeUpdate("INSERT INTO `regate`(`LIBELLE`, `DISTANCE`, `DATE_DEPART`, `CLOTURE`) VALUES ( '" + obj.getIntituler() +"', " + obj.getDistance() +", '" + obj.getDate_depart_string() +"', " + obj.isCloture() + ")");
+			requeteExecuter = true;
 		}
 		catch(Exception e) 
 		{
 			e.printStackTrace();
 		}
-		
-		
-		return false;
+		return requeteExecuter;
 	}
 	/**
 	 * Supprime une 'Régate' dans la base de donnée
 	 */
 	@Override
 	public boolean delete(Regate obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			stat.executeUpdate("DELETE FROM `regate` WHERE ID_REGATE = " + obj.getId());
+			requeteExecuter = true;
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return requeteExecuter;
 	}
 
 	/**
-	 * Mes à jour une 'Régate' dans la base de donnée
+	 * Met à jour une 'Régate' dans la base de donnée
 	 */
 	@Override
 	public boolean update(Regate obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			stat.executeUpdate("UPDATE `regate` SET `LIBELLE`= '"+obj.getIntituler()+"',`DISTANCE`="+obj.getDistance()+",`DATE_DEPART`= '"+obj.getDate_depart_string()+"',`CLOTURE`="+obj.isCloture()+" WHERE `ID_REGATE` = "+ obj.getId());
+			requeteExecuter = true;
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return requeteExecuter;
 	}
 
 	/**
@@ -73,7 +90,7 @@ public class RegateDAO extends DAO<Regate> {
 			if(result.first()) {
 				regate = new Regate (
 						id, 
-						result.getString("LIBELLER"),
+						result.getString("LIBELLE"),
 						result.getDouble("DISTANCE"),
 						result.getDate("DATE_DEPART"),
 						result.getBoolean("CLOTURE")
@@ -86,7 +103,30 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return regate;
 	}
-	
+	public Regate findLastRegateInserted() {
+		Regate regate = new Regate();
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT * FROM regate WHERE ID_REGATE = (SELECT Max(ID_REGATE) FROM regate)");
+			if(result.first()) {
+				regate = new Regate(
+						result.getInt("ID_REGATE"),
+						result.getString("LIBELLE"),
+						result.getDouble("DISTANCE"),
+						result.getDate("DATE_DEPART"),
+						result.getBoolean("CLOTURE")
+						);
+						
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return regate;
+	}
 	/**
 	 * Retourn tous les élément de la table : Régate
 	 * @return List<Regate>
@@ -102,7 +142,7 @@ public class RegateDAO extends DAO<Regate> {
 			while(result.next()) {
 				listRegate.add(new Regate( 
 						result.getInt("ID_REGATE"), 
-						result.getString("LIBELLER"),
+						result.getString("LIBELLE"),
 						result.getDouble("DISTANCE"),
 						result.getDate("DATE_DEPART"),
 						result.getBoolean("CLOTURE")

@@ -12,13 +12,13 @@ public class ModelListRegate extends AbstractTableModel {
 	private RegateDAO regateManager;
 	
 	private List<Regate> regates;
-	private final String[] entetes = { "ID_REGATE", "LIBELLER", "DISTANCE", "DATE_DEPART", "CLOTURE"};
+	private final String[] entetes = { "ID_REGATE", "LIBELLE", "DISTANCE", "DATE_DEPART", "CLOTURE"};
 	
-	private final static int ID_REGATE = 0;
-	private final static int LIBELLER = 1;
-	private final static int DISTANCE = 2;
-	private final static int DATE_DEPART = 3;
-	private final static int CLOTURE = 4;
+	public final static int ID_REGATE = 0;
+	public final static int LIBELLE = 1;
+	public final static int DISTANCE = 2;
+	public final static int DATE_DEPART = 3;
+	public final static int CLOTURE = 4;
 	
 	
 	/**
@@ -66,7 +66,7 @@ public class ModelListRegate extends AbstractTableModel {
 		{
 			case ID_REGATE: 
 				return regate.getId();
-			case LIBELLER:
+			case LIBELLE:
 				return regate.getIntituler();
 			case DISTANCE:
 				return regate.getDistance();
@@ -79,13 +79,15 @@ public class ModelListRegate extends AbstractTableModel {
 		}
 	}
 	
+	
 	/**
 	 * Ajoute une ligne au tableau
 	 * @param regate
 	 */
 	public void addRegate(Regate regate) {
 		this.regateManager.create(regate);
-		this.regates = regateManager.findAll();
+		this.regates.add(this.regateManager.findLastRegateInserted());
+		
 		fireTableRowsInserted(regates.size()-1, regates.size() -1);
 		
 	}
@@ -94,8 +96,16 @@ public class ModelListRegate extends AbstractTableModel {
 	 * @param rowIndex
 	 */
 	public void removeRegate(int rowIndex) {
+		
 		this.regateManager.delete(regates.get(rowIndex));
-		fireTableRowsDeleted(rowIndex, rowIndex);
+		this.regates.remove(rowIndex);
+		fireTableRowsDeleted(rowIndex, rowIndex);		
+	}
+	
+	public void updateRegate(Regate regate, int rowIndex) {
+		this.regateManager.update(regate);
+		this.regates.set(rowIndex, regate);
+		fireTableRowsUpdated(rowIndex, rowIndex);
 	}
 
 }

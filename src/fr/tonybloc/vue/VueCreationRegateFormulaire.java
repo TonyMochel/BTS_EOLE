@@ -2,6 +2,7 @@ package fr.tonybloc.vue;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.Properties;
@@ -28,7 +29,8 @@ public class VueCreationRegateFormulaire {
 	JTextField tfNomRegate;
 	JNumberField tfDistance;
 	JDatePickerImpl datePicker;
-	JButton btnCreationRegate;
+	JButton btnCreation;
+	JButton btnAnnuler;
 	
 	Dimension dim;
 	Font police;
@@ -62,10 +64,12 @@ public class VueCreationRegateFormulaire {
 		JLabel lbDistance = new JLabel("Distance :");
 		JLabel lbDate = new JLabel("Date de départ :");
 		
-		// TextField
+		// TextField & Buttons
 		this.tfNomRegate = new JTextField();
 		this.tfDistance	= new JNumberField();
-		this.btnCreationRegate = new JButton("Créer");
+		this.btnCreation = new JButton("Créer");
+		this.btnAnnuler = new JButton("Annuler");
+		this.btnAnnuler.setVisible(false);
 		
 		// DatePicker
 		UtilDateModel model	= new UtilDateModel();
@@ -88,12 +92,14 @@ public class VueCreationRegateFormulaire {
 		this.tfNomRegate.setFont(police);
 		this.tfDistance.setFont(police);
 		this.datePicker.setFont(police);
-		this.btnCreationRegate.setFont(police);
+		this.btnCreation.setFont(police);
+		this.btnAnnuler.setFont(police);
 		
 		// Panel de positionnement
 		JPanel panelLabel = new JPanel(new GridLayout(3,0));
 		JPanel panelTextField = new JPanel(new GridLayout(3,0));
 		JPanel panelSouth = new JPanel(new BorderLayout());
+		JPanel panelButtons = new JPanel(new FlowLayout());
 		
 		
 		panelLabel.add(lbNomRegate);
@@ -104,7 +110,10 @@ public class VueCreationRegateFormulaire {
 		panelTextField.add(this.tfDistance);
 		panelTextField.add(this.datePicker);
 		
-		panelSouth.add(btnCreationRegate, BorderLayout.EAST);
+		panelButtons.add(btnAnnuler);
+		panelButtons.add(btnCreation);
+		
+		panelSouth.add(panelButtons, BorderLayout.EAST);
 		
 		// Regroupement des Panels
 		JPanel panelContent = new JPanel(new BorderLayout());
@@ -121,19 +130,20 @@ public class VueCreationRegateFormulaire {
 	public JPanel getPanelFormulaire() {
 		return formulaire;
 	}
-
 	public JTextField getTfNomRegate() {
 		return tfNomRegate;
 	}
-
 	public JNumberField getTfDistance() {
 		return tfDistance;
 	}
 	public JDatePickerImpl getDatePicker() {
 		return datePicker;
 	}
-	public JButton getBtnCreationRegate() {
-		return btnCreationRegate;
+	public JButton getBtnCreation() {
+		return btnCreation;
+	}
+	public JButton getBtnAnnuler() {
+		return btnAnnuler;
 	}
 	
 }

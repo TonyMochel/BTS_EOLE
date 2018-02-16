@@ -40,16 +40,24 @@ public class Main {
 		*/
 		
 		// Controleur : Creation Régate
-		FormulaireCreationRegate formulaireCreationRegate = new FormulaireCreationRegate
+		RegateControleur regateControleur = new RegateControleur
 				(
-						
+						vueCreationRegate.getVueList().getModel(),
 						vueCreationRegate.getVueFormulaire().getTfNomRegate(),
 						vueCreationRegate.getVueFormulaire().getTfDistance(),
 						vueCreationRegate.getVueFormulaire().getDatePicker(),
-						vueCreationRegate.getVueFormulaire().getBtnCreationRegate()
+						vueCreationRegate.getVueFormulaire().getBtnCreation(),
+						vueCreationRegate.getVueFormulaire().getBtnAnnuler(),
+						vueCreationRegate.getVueList().getBtnSupprimer(),
+						vueCreationRegate.getVueList().getBtnModifier(),
+						vueCreationRegate.getVueList().getListRegate()
 				);
 		
-		vueCreationRegate.getVueFormulaire().getBtnCreationRegate().addActionListener(formulaireCreationRegate);
+		vueCreationRegate.getVueFormulaire().getBtnCreation().addActionListener(regateControleur);
+		vueCreationRegate.getVueList().getBtnSupprimer().addActionListener(regateControleur);
+		vueCreationRegate.getVueList().getBtnModifier().addActionListener(regateControleur);
+		vueCreationRegate.getVueFormulaire().getBtnAnnuler().addActionListener(regateControleur);
+		
 		
 		// Controleur : Inscription 
 		InscriptionControle inscriptionControleur = new InscriptionControle 
