@@ -14,7 +14,7 @@ public class Voilier {
 	/**
 	 * Catégorie du voilier
 	 */
-	private int categorie;
+	private Categorie categorie;
 	/**
 	 * Nom du voilier
 	 */
@@ -23,6 +23,10 @@ public class Voilier {
 	 * Nom du skippeur (Capitaine)
 	 */
 	private String nomSkippeur;
+	/**
+	 * Prenom du skippeur (Capitaine)
+	 */
+	private String prenomSkippeur;
 	/**
 	 * Rating du voilier
 	 */
@@ -40,11 +44,12 @@ public class Voilier {
 	 * @param nomSkippeur
 	 * @param rating
 	 */
-	public Voilier(int categorie, String nomVoilier, String nomSkippeur, int rating) {
+	public Voilier(Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {
 		this.id = 0;
 		this.categorie = categorie;
 		this.nomVoilier = nomVoilier;
 		this.nomSkippeur = nomSkippeur;
+		this.prenomSkippeur = prenomSkippeur;
 		this.rating = rating;
 	}
 	/**
@@ -55,11 +60,12 @@ public class Voilier {
 	 * @param nomSkippeur
 	 * @param rating
 	 */
-	public Voilier(int id, int categorie, String nomVoilier, String nomSkippeur, int rating) {
+	public Voilier(int id, Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {
 		this.id = id;
 		this.categorie = categorie;
 		this.nomVoilier = nomVoilier;
 		this.nomSkippeur = nomSkippeur;
+		this.prenomSkippeur = prenomSkippeur;
 		this.rating = rating;
 	}
 		
@@ -71,11 +77,11 @@ public class Voilier {
 		this.id = id;
 	}
 
-	public int getCategorie() {
+	public Categorie getCategorie() {
 		return categorie;
 	}
 
-	public void setCategorie(int categorie) {
+	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
 
@@ -93,6 +99,14 @@ public class Voilier {
 
 	public void setNomSkippeur(String nomSkippeur) {
 		this.nomSkippeur = nomSkippeur;
+	}
+	
+	public String getPrenomSkippeur() {
+		return prenomSkippeur;
+	}
+
+	public void setPrenomSkippeur(String prenomSkippeur) {
+		this.prenomSkippeur = prenomSkippeur;
 	}
 
 	public int getRating() {
@@ -113,6 +127,7 @@ public class Voilier {
 				+ "'categorie' => " + this.categorie + ", "
 				+ "'nomVoilier' => " + this.nomVoilier + ", "
 				+ "'nomSkippeur' => " + this.nomSkippeur + ", "
+				+ "'PrenomSkippeur' => " + this.prenomSkippeur + ", "
 				+ "'rating' => " + this.rating
 				+ "}";
 		

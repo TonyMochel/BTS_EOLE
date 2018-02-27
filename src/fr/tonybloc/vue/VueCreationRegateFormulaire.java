@@ -13,32 +13,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import fr.tonybloc.modele.date.DateLabelFormatter;
-import fr.tonybloc.outils.JNumberField;
+import fr.tonybloc.outils.CapitaliseDocumentFilter;
+import fr.tonybloc.outils.JDoubleField;
 
 
 public class VueCreationRegateFormulaire {
 
-	JPanel formulaire;
+	private JPanel formulaire;
 	
-	JTextField tfNomRegate;
-	JNumberField tfDistance;
-	JDatePickerImpl datePicker;
-	JButton btnCreation;
-	JButton btnAnnuler;
+	private JTextField tfNomRegate;
+	private JDoubleField tfDistance;
+	private JDatePickerImpl datePicker;
+	private JButton btnCreation;
+	private JButton btnAnnuler;
 	
-	Dimension dim;
-	Font police;
+	private final Dimension dim = new Dimension(150, 30);
+	private final Font police = new Font("Arial", Font.PLAIN, 14);
 	
 	public VueCreationRegateFormulaire() {		
 		
-		this.dim 		= new Dimension(150, 30);
-		this.police 	= new Font("Arial", Font.PLAIN, 14);
 		//this.content 	= new JPanel(new BorderLayout(100, 20));
 		
 		initFormulaire();
@@ -56,8 +59,7 @@ public class VueCreationRegateFormulaire {
 		
 		// Formulaire de création : Régate
 		this.formulaire 	= new JPanel(new BorderLayout());
-		Border border = BorderFactory.createTitledBorder("Creation de Régates ");
-		formulaire.setBorder(border);
+		this.formulaire.setBorder(new EmptyBorder(20, 10, 20, 10));
 		
 		// Label
 		JLabel lbNomRegate = new JLabel("Nom Régate :");
@@ -66,10 +68,14 @@ public class VueCreationRegateFormulaire {
 		
 		// TextField & Buttons
 		this.tfNomRegate = new JTextField();
-		this.tfDistance	= new JNumberField();
+		this.tfDistance	= new JDoubleField();
 		this.btnCreation = new JButton("Créer");
 		this.btnAnnuler = new JButton("Annuler");
 		this.btnAnnuler.setVisible(false);
+		
+		DocumentFilter uppercaseFilter = new CapitaliseDocumentFilter();
+		((AbstractDocument) this.tfNomRegate.getDocument()).setDocumentFilter(uppercaseFilter);
+		
 		
 		// DatePicker
 		UtilDateModel model	= new UtilDateModel();
@@ -121,6 +127,7 @@ public class VueCreationRegateFormulaire {
 		panelContent.add(panelTextField, BorderLayout.CENTER);
 		panelContent.add(panelSouth, BorderLayout.SOUTH);
 		
+		panelContent.setBorder(BorderFactory.createTitledBorder("Creation de régates"));
 		
 		formulaire.add(panelContent, BorderLayout.NORTH);
 		
@@ -133,7 +140,7 @@ public class VueCreationRegateFormulaire {
 	public JTextField getTfNomRegate() {
 		return tfNomRegate;
 	}
-	public JNumberField getTfDistance() {
+	public JDoubleField getTfDistance() {
 		return tfDistance;
 	}
 	public JDatePickerImpl getDatePicker() {

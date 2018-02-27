@@ -1,4 +1,4 @@
-package fr.tonybloc.modele;
+package fr.tonybloc.modele.composant;
 
 import java.util.List;
 
@@ -6,8 +6,14 @@ import javax.swing.table.AbstractTableModel;
 
 import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
+import fr.tonybloc.modele.Regate;
 
 public class ModelListRegate extends AbstractTableModel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private RegateDAO regateManager;
 	
@@ -81,7 +87,7 @@ public class ModelListRegate extends AbstractTableModel {
 	
 	
 	/**
-	 * Ajoute une ligne au tableau
+	 * Ajoute une Régate à la liste
 	 * @param regate
 	 */
 	public void addRegate(Regate regate) {
@@ -92,7 +98,7 @@ public class ModelListRegate extends AbstractTableModel {
 		
 	}
 	/**
-	 * Supprime une ligne du tableau
+	 * Supprime une Régate de la liste
 	 * @param rowIndex
 	 */
 	public void removeRegate(int rowIndex) {
@@ -102,6 +108,11 @@ public class ModelListRegate extends AbstractTableModel {
 		fireTableRowsDeleted(rowIndex, rowIndex);		
 	}
 	
+	/**
+	 * Mise à jour d'une Régate de la liste
+	 * @param regate
+	 * @param rowIndex
+	 */
 	public void updateRegate(Regate regate, int rowIndex) {
 		this.regateManager.update(regate);
 		this.regates.set(rowIndex, regate);

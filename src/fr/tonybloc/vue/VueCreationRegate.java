@@ -6,28 +6,28 @@ import javax.swing.JPanel;
 
 public class VueCreationRegate {
 
-	VueCreationRegateFormulaire vueFormulaire;
-	VueCreationRegateListe vueList;
+	private VueCreationRegateFormulaire vueFormulaire;
+	private VueCreationRegateListe vueListe;
 	
-	JPanel content;
+	private JPanel content;
 	
 	public VueCreationRegate() {
 		
 		// Vue JTable
-		this.vueList 		= new VueCreationRegateListe();
+		this.vueListe 		= new VueCreationRegateListe();
 		// Vue Formulaire
 		this.vueFormulaire 	= new VueCreationRegateFormulaire();
 			
 		this.content = new JPanel(new BorderLayout());
 		content.add(vueFormulaire.getPanelFormulaire(),BorderLayout.WEST);
-		content.add(vueList.getPanelListRegate(), BorderLayout.CENTER);
+		content.add(vueListe.getPanelListRegate(), BorderLayout.CENTER);
 		
 	}
 	public VueCreationRegateFormulaire getVueFormulaire() {
 		return this.vueFormulaire;
 	}
-	public VueCreationRegateListe getVueList() {
-		return this.vueList;
+	public VueCreationRegateListe getVueListe() {
+		return this.vueListe;
 	}
 	public JPanel getContent() {
 		return this.content;

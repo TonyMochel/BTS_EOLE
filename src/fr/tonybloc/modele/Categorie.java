@@ -59,10 +59,7 @@ public class Categorie {
 	 */
 	@Override
 	public String toString() {
-		return "{ "
-				+ "'id' => " + this.id + ", "
-				+ "'libeller' => " + this.libeller + ", "
-				+ "}";
+		return this.libeller;
 		
 	}
 	

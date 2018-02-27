@@ -9,29 +9,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import fr.tonybloc.modele.ModelListRegate;
+import fr.tonybloc.modele.composant.ModelListRegate;
 
 public class VueCreationRegateListe {
 
-	JPanel panelListRegate;
-	JTable listRegate;
-	JButton btnModifier;
-	JButton btnSupprimer;
-	ModelListRegate modelListRegate;
-	TableColumnModel columnModelListRegate;
+	private JPanel panelListRegate;
+	private JTable listRegate;
+	private JButton btnModifier;
+	private JButton btnSupprimer;
+	private ModelListRegate modelListRegate;
+	//private TableColumnModel columnModelListRegate;
 	
-	Dimension dim;
-	Font police;
+	private final Dimension dim = new Dimension(150, 30);
+	private final Font police = new Font("Arial", Font.PLAIN, 14);
+	
 	
 	public VueCreationRegateListe() {
 		
-		this.dim 		= new Dimension(150, 30);
-		this.police 	= new Font("Arial", Font.PLAIN, 14);
-		
 		this.panelListRegate = new JPanel(new BorderLayout());
+		this.panelListRegate.setBorder(new EmptyBorder(20, 10, 20, 10));
 		JPanel boutons = new JPanel();
 		
 		this.modelListRegate = new ModelListRegate();

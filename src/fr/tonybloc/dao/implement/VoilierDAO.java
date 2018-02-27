@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.tonybloc.dao.DAO;
+import fr.tonybloc.dao.DAOFactory;
+import fr.tonybloc.modele.Categorie;
+import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 
 public class VoilierDAO extends DAO<Voilier> {
@@ -23,11 +26,10 @@ public class VoilierDAO extends DAO<Voilier> {
 			
 			Statement stat = this.connect.createStatement();
 			stat.executeUpdate(""
-					+ "INSERT INTO `voilier` "
-					+ "(`ID_VOILIER`, `CATEGORIE`, `NOM_VOILIER`, `NOM_SKIPPEUR`, `RATING`) "
-					+ "VALUES ( "+obj.getId()+", "+obj.getCategorie()+", "+obj.getNomVoilier()+", "+obj.getNomSkippeur()+", "+obj.getRating()+")"
+					+ "INSERT INTO `voilier` (`CATEGORIE`, `NOM_VOILIER`, `NOM_SKIPPEUR`, `PRENOM_SKIPPEUR`, `RATING`) "
+					+ "VALUES ( "+obj.getCategorie().getId()+", '"+obj.getNomVoilier()+"', '"+obj.getNomSkippeur()+"', '"+ obj.getPrenomSkippeur() +"', "+ obj.getRating()+")"
 					);
-			stat.close();
+//			stat.close();
 			requestExecuted = true;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -56,16 +58,12 @@ public class VoilierDAO extends DAO<Voilier> {
 			Statement stat = this.connect.createStatement();
 			result = stat.executeQuery("SELECT * FROM voilier WHERE ID_VOILIER = " + id);
 			if(result.first()) {
-				System.out.println(result.getInt("CATEGORIE") + " - " +
-						result.getString("NOM_VOILIER") + " - " +
-						result.getString("NOM_SKIPPEUR") + " - " +
-						result.getInt("RATING"));
-				
 				voilier = new Voilier( 
 						id, 
-						result.getInt("CATEGORIE"),
+						DAOFactory.getCategorieDAO().find(result.getInt("CATEGORIE")),
 						result.getString("NOM_VOILIER"),
 						result.getString("NOM_SKIPPEUR"),
+						result.getString("PRENOM_SKIPPEUR"),
 						result.getInt("RATING")
 						);
 			}
@@ -89,9 +87,10 @@ public class VoilierDAO extends DAO<Voilier> {
 				
 				listVoilier.add(new Voilier(
 						result.getInt("ID_VOILIER"), 
-						result.getInt("CATEGORIE"),
+						DAOFactory.getCategorieDAO().find(result.getInt("CATEGORIE")),
 						result.getString("NOM_VOILIER"),
 						result.getString("NOM_SKIPPEUR"),
+						result.getString("PRENOM_SKIPPEUR"),
 						result.getInt("RATING")
 						));
 			}
@@ -124,6 +123,32 @@ public class VoilierDAO extends DAO<Voilier> {
 			e.printStackTrace();
 		}
 		return rowCount;
+	}
+
+	public Voilier findLastVoilierInserted() {
+		Voilier voilier = new Voilier();
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT * FROM voilier v, categorie c WHERE v.CATEGORIE = c.ID_CATEGORIE AND ID_VOILIER = (SELECT Max(ID_VOILIER) FROM voilier)");
+			if(result.first()) {
+				voilier = new Voilier(
+						result.getInt("ID_Voilier"),
+						new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+						result.getString("NOM_VOILIER"),
+						result.getString("NOM_SKIPPEUR"),
+						result.getString("PRENOM_SKIPPEUR"),
+						result.getInt("RATING")
+						);
+						
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return voilier;
 	}
 
 }

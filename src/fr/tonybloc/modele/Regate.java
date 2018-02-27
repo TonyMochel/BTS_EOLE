@@ -130,13 +130,7 @@ public class Regate {
 	 */
 	@Override
 	public String toString() {
-		return "{ "
-				+ "'id' => " + this.id + ", "
-				+ "'intituler' => " + this.intituler + ", "
-				+ "'distance' => " + this.distance + ", "
-				+ "'date_de_depart' => " + this.date_depart + ", "
-				+ "'cloture' => " + this.cloture
-				+ "}";
+		return this.intituler + " du " + this.date_depart;
 		
 	}
 }

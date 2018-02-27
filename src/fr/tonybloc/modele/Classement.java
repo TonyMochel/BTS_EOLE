@@ -4,7 +4,6 @@ import java.sql.Time;
 /**
  * Objet Classement
  * @author Tony
- *
  */
 public class Classement {
 	
@@ -19,11 +18,11 @@ public class Classement {
 	/**
 	 * Temps arrivé
 	 */
-	private Time tempsArrive = null;
+	private Time tempsArrive;
 	/**
 	 * temps compensé
 	 */
-	private Time tempsCompense = null;
+	private Time tempsCompense;
 	
 	
 	/**
@@ -43,6 +42,18 @@ public class Classement {
 		this.tempsArrive = tempsArrive;
 		this.tempsCompense = tempsCompense;
 	}
+	/**
+	 * Crée une instance de la classe Classement
+	 * @param idVoilier
+	 * @param idRegate
+	 */
+	public Classement(int idVoilier, int idRegate) {
+		this.idVoilier = idVoilier;
+		this.idRegate = idRegate;
+		this.tempsArrive = null;
+		this.tempsCompense = null;
+	}
+	
 	public int getIdVoilier() {
 		return idVoilier;
 	}

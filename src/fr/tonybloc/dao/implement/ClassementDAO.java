@@ -18,14 +18,43 @@ public class ClassementDAO extends DAO<Classement> {
 
 	@Override
 	public boolean create(Classement obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			
+			if(obj.getTempsArrive() == null && obj.getTempsCompense() == null) {
+				stat.executeUpdate("INSERT INTO `classement`(`ID_VOILIER`, `ID_REGATE`, `TEMPS_ARRIVER`, `TEMPS_COMPENSE`) "
+						+ "VALUES ( "+obj.getIdVoilier()+", "+obj.getIdRegate()+", "+obj.getTempsArrive()+","+obj.getTempsCompense()+" )");
+				requeteExecuter = true;
+			}else {
+				stat.executeUpdate("INSERT INTO `classement`(`ID_VOILIER`, `ID_REGATE`, `TEMPS_ARRIVER`, `TEMPS_COMPENSE`) "
+						+ "VALUES ( "+obj.getIdVoilier()+", "+obj.getIdRegate()+", '"+obj.getTempsArrive()+"', '"+obj.getTempsCompense()+"' )");
+				requeteExecuter = true;
+			}
+			
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return requeteExecuter;
 	}
 
 	@Override
 	public boolean delete(Classement obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			stat.executeUpdate("DELETE FROM `classement` WHERE ID_REGATE = " + obj.getIdRegate() + " AND ID_VOILIER = " + obj.getIdVoilier() );
+			requeteExecuter = true;
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return requeteExecuter;
 	}
 
 	@Override

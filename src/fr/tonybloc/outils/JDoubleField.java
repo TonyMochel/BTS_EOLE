@@ -7,18 +7,18 @@ import javax.swing.JTextField;
 /**
 * Class héritant de la class JTextfield
 * permettant de limiter la saisie au caractères choisi
-* Nombre entier
+* Nombre décimaux
 * 
 */
-public class JNumberField extends JTextField
+public class JDoubleField extends JTextField
 {
  
-    public JNumberField()
+    public JDoubleField()
     {
         super();
     }
  
-    public JNumberField(String string)
+    public JDoubleField(String string)
     {
         super(string);
     }
@@ -31,9 +31,15 @@ public class JNumberField extends JTextField
                 case KeyEvent.KEY_TYPED:
                 case KeyEvent.KEY_PRESSED:
                 case KeyEvent.KEY_RELEASED:
-                	if (allowKey(e))
+                	if(e.getKeyChar() == KeyEvent.VK_COMMA) {
+                		System.out.println("COMMA !");
+                		e.setKeyChar((char) KeyEvent.VK_PERIOD);
+                		
+                		super.processComponentKeyEvent(e);
+                	}
+                	else if (allowKey(e))
                     {
-                	    super.processComponentKeyEvent(e);
+                		super.processComponentKeyEvent(e);
                     }                    
                     else
                     {
@@ -67,6 +73,8 @@ public class JNumberField extends JTextField
             keyCode == KeyEvent.VK_END          ||
             keyCode == KeyEvent.VK_ENTER        ||
             keyCode == KeyEvent.VK_ESCAPE       ||
+            keyChar == KeyEvent.VK_COMMA        ||
+            keyChar == KeyEvent.VK_PERIOD       ||
             keyCode == KeyEvent.VK_SHIFT)
         {
         	
@@ -78,4 +86,3 @@ public class JNumberField extends JTextField
         }
     }
 }
-

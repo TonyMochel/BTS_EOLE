@@ -8,10 +8,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -21,8 +23,8 @@ import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.exceptions.ExceptionChampsVide;
 import fr.tonybloc.exceptions.ExceptionAucuneLigneSelectionne;
-import fr.tonybloc.modele.ModelListRegate;
 import fr.tonybloc.modele.Regate;
+import fr.tonybloc.modele.composant.ModelListRegate;
 import fr.tonybloc.outils.*;
 
 /**
@@ -33,14 +35,15 @@ import fr.tonybloc.outils.*;
 public class RegateControleur implements ActionListener {
 
 	//JPanel panelCreationRegate;
-	JTextField tfNomRegate;
-	JNumberField tfDistance;
-	JDatePickerImpl dpDate;
-	JButton btnCreation;
-	JButton btnAnnuler;
-	JButton btnModifier;
-	JButton btnSupprimer;
-	JTable listeRegates;
+	private JTextField tfNomRegate;
+	private JDoubleField tfDistance;
+	private JDatePickerImpl dpDate;
+	private JButton btnCreation;
+	private JButton btnAnnuler;
+	private JButton btnModifier;
+	private JButton btnSupprimer;
+	private JTable listeRegates;
+	
 	ModelListRegate modelListRegate;
 	
 	private RegateDAO regateManager = DAOFactory.getRegateDAO();
@@ -66,13 +69,13 @@ public class RegateControleur implements ActionListener {
 	public RegateControleur ( 
 			ModelListRegate modelListRegate, 
 			JTextField tfNomRegate, 
-			JNumberField tfDistance, 
+			JDoubleField tfDistance, 
 			JDatePickerImpl dpDate, 
 			JButton btnCreation,
 			JButton btnAnnuler,
 			JButton btnSupprimer,
 			JButton btnModifier,
-			JTable listRegates) {
+			JTable listRegates ) {
 		
 		//panelCreationRegate = new JPanel();
 		this.modelListRegate = modelListRegate;
@@ -84,6 +87,7 @@ public class RegateControleur implements ActionListener {
 		this.btnModifier = btnModifier;
 		this.btnSupprimer = btnSupprimer;
 		this.listeRegates = listRegates;
+		
 		
 		this.action = ACTION_CREE;
 		this.ligneAModifier = -1;
@@ -146,26 +150,24 @@ public class RegateControleur implements ActionListener {
 	 * Action de modification : Modifie une régate
 	 * @throws ExceptionAucuneLigneSelectionne 
 	 */
-	@SuppressWarnings("deprecation")
 	private void ActionModificationActiver() throws ExceptionAucuneLigneSelectionne {
 		this.ligneAModifier = this.listeRegates.getSelectedRow();
 		
 		if( this.ligneAModifier != -1) {
 			
-			DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+			DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd").withLocale(Locale.FRANCE);
 			
 			this.btnAnnuler.setVisible(true);
 			this.tfNomRegate.setText( (String) this.modelListRegate.getValueAt( ligneAModifier, ModelListRegate.LIBELLE ) );
 			this.tfDistance.setText( "" + this.modelListRegate.getValueAt( ligneAModifier, ModelListRegate.DISTANCE ) );
-			
+			this.btnCreation.setText("Confirmer la modification");
 			LocalDate date = LocalDate.parse( (String) this.modelListRegate.getValueAt( ligneAModifier, ModelListRegate.DATE_DEPART ), DATE_FORMAT);
 			
-			
-			this.dpDate.getModel().setDay(date.getDayOfMonth());
-			this.dpDate.getModel().setMonth(date.getMonthValue()-1);
-			this.dpDate.getModel().setYear(date.getYear());
+//			System.out.println("DAY :" +date.getDayOfMonth() + "MONTH :" +date.getMonthValue() + "YEAR" + date.getYear());
 
 			this.dpDate.getModel().setSelected(true);
+			this.dpDate.getModel().setDate(date.getYear(), date.getMonthValue()-1, date.getDayOfMonth());
+			
 			this.action = ACTION_MODIF;
 			
 		}else {
@@ -225,6 +227,7 @@ public class RegateControleur implements ActionListener {
 		this.tfNomRegate.setText("");
 		this.tfDistance.setText("");
 		this.dpDate.getJFormattedTextField().setText("");
+		this.btnCreation.setText("Créer");
 		this.action = ACTION_CREE;
 	}
 }

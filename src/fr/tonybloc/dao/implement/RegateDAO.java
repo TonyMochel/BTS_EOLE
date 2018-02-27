@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.tonybloc.dao.DAO;
+import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
+import fr.tonybloc.modele.Voilier;
 
 public class RegateDAO extends DAO<Regate> {
 
@@ -154,6 +156,59 @@ public class RegateDAO extends DAO<Regate> {
 			e.printStackTrace();
 		}
 		return listRegate;
+	}
+	/**
+	 * Retourn tout les regate qui ne sont pas cloturées
+	 */
+	public List<Regate> findRegateNotClosure() {
+		List<Regate> listRegate = new ArrayList<Regate>();
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT * FROM regate WHERE CLOTURE = false");
+			while(result.next()) {
+				listRegate.add(new Regate( 
+						result.getInt("ID_REGATE"), 
+						result.getString("LIBELLE"),
+						result.getDouble("DISTANCE"),
+						result.getDate("DATE_DEPART"),
+						result.getBoolean("CLOTURE")
+						));
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return listRegate;
+	}
+	
+	public List<Voilier> getAllParticipant(int id){
+		
+		
+		List<Voilier> listParticipant = new ArrayList<Voilier>();
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT DISTINCT v.*, cat.* FROM classement c, voilier v, regate r, categorie cat WHERE v.ID_VOILIER = c.ID_VOILIER AND c.ID_REGATE = "+id+" AND cat.ID_CATEGORIE = v.CATEGORIE");
+			while(result.next()) {
+				listParticipant.add(new Voilier(
+						result.getInt("ID_Voilier"),
+						new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+						result.getString("NOM_VOILIER"),
+						result.getString("NOM_SKIPPEUR"),
+						result.getString("PRENOM_SKIPPEUR"),
+						result.getInt("RATING")
+						));
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return listParticipant;
 	}
 	
 	/**
