@@ -3,11 +3,16 @@ package fr.tonybloc.dao.implement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.tonybloc.dao.DAO;
+import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Classement;
+import fr.tonybloc.modele.Regate;
+import fr.tonybloc.modele.Voilier;
 
 public class ClassementDAO extends DAO<Classement> {
 
@@ -25,11 +30,11 @@ public class ClassementDAO extends DAO<Classement> {
 			
 			if(obj.getTempsArrive() == null && obj.getTempsCompense() == null) {
 				stat.executeUpdate("INSERT INTO `classement`(`ID_VOILIER`, `ID_REGATE`, `TEMPS_ARRIVER`, `TEMPS_COMPENSE`) "
-						+ "VALUES ( "+obj.getIdVoilier()+", "+obj.getIdRegate()+", "+obj.getTempsArrive()+","+obj.getTempsCompense()+" )");
+						+ "VALUES ( "+obj.getVoilier().getId()+", "+obj.getRegate().getId()+", "+obj.getTempsArrive()+","+obj.getTempsCompense()+" )");
 				requeteExecuter = true;
 			}else {
 				stat.executeUpdate("INSERT INTO `classement`(`ID_VOILIER`, `ID_REGATE`, `TEMPS_ARRIVER`, `TEMPS_COMPENSE`) "
-						+ "VALUES ( "+obj.getIdVoilier()+", "+obj.getIdRegate()+", '"+obj.getTempsArrive()+"', '"+obj.getTempsCompense()+"' )");
+						+ "VALUES ( "+obj.getVoilier().getId()+", "+obj.getRegate().getId()+", '"+obj.getTempsArrive()+"', '"+obj.getTempsCompense()+"' )");
 				requeteExecuter = true;
 			}
 			
@@ -47,7 +52,7 @@ public class ClassementDAO extends DAO<Classement> {
 		try 
 		{
 			Statement stat = this.connect.createStatement();
-			stat.executeUpdate("DELETE FROM `classement` WHERE ID_REGATE = " + obj.getIdRegate() + " AND ID_VOILIER = " + obj.getIdVoilier() );
+			stat.executeUpdate("DELETE FROM `classement` WHERE ID_REGATE = " + obj.getRegate().getId() + " AND ID_VOILIER = " + obj.getVoilier().getId() );
 			requeteExecuter = true;
 		}
 		catch(Exception e) 
@@ -58,9 +63,24 @@ public class ClassementDAO extends DAO<Classement> {
 	}
 
 	@Override
-	public boolean update(Classement obj) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Classement obj) {	
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			if(obj.getTempsArrive() == null) {
+				stat.executeUpdate("UPDATE classement SET TEMPS_ARRIVER= "+obj.getTempsArrive()+", TEMPS_COMPENSE = "+obj.getTempsCompense()+" WHERE ID_VOILIER = "+obj.getVoilier().getId()+" AND ID_REGATE = "+obj.getRegate().getId());
+			}else {
+				stat.executeUpdate("UPDATE classement SET TEMPS_ARRIVER= '"+obj.getTempsArrive()+"', TEMPS_COMPENSE = '"+obj.getTempsCompense()+"' WHERE ID_VOILIER = "+obj.getVoilier().getId()+" AND ID_REGATE = "+obj.getRegate().getId());
+			}
+			requeteExecuter = true;
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return requeteExecuter;
 	}
 
 	@Override
@@ -75,19 +95,19 @@ public class ClassementDAO extends DAO<Classement> {
 	 * @param idRegate
 	 * @return
 	 */
-	public Classement find(int idVoilier, int idRegate) {
+	public Classement find(Voilier voilier, Regate regate) {
 		Classement classement = new Classement();
 		
 		try
 		{
 			ResultSet result;
 			Statement stat = this.connect.createStatement();
-			result = stat.executeQuery("SELECT * FROM classement WHERE ID_VOILIER = " + idVoilier + " AND ID_REGATE = " + idRegate);
+			result = stat.executeQuery("SELECT * FROM classement c WHERE ID_VOILIER = " + voilier.getId() + " AND ID_REGATE = " + regate.getId());
 			
 			if(result.first()) {
 				classement = new Classement(
-						idVoilier, 
-						idRegate, 
+						voilier, 
+						regate, 
 						result.getTime("TEMPS_ARRIVER"),
 						result.getTime("TEMPS_COMPENSE")
 						);
@@ -108,24 +128,30 @@ public class ClassementDAO extends DAO<Classement> {
 	}
 	
 	/**
-	 * Recherche tout les participant d'une regate
+	 * Recherche tout les classement d'une regate
 	 * @param idVoilier
 	 * @param idRegate
 	 * @return
 	 */
-	public List<Classement> findAll(int idRegate) {
+	public List<Classement> findAllParticipant(Regate regate) {
 		List<Classement> listClassement = new ArrayList<Classement>();
 		
 		try
 		{
 			ResultSet result;
 			Statement stat = this.connect.createStatement();
-			result = stat.executeQuery("SELECT * FROM classement WHERE ID_REGATE = " + idRegate);
-			
+			result = stat.executeQuery("SELECT *  FROM classement c, categorie cat, voilier v WHERE c.ID_VOILIER = v.ID_VOILIER AND cat.ID_CATEGORIE = v.CATEGORIE AND c.ID_REGATE = " + regate.getId());
 			while(result.next()) {
 				listClassement.add(new Classement(
-						result.getInt("ID_VOILIER"), 
-						result.getInt("ID_REGATE"), 
+						new Voilier(
+								result.getInt("ID_VOILIER"),
+								new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+								result.getString("NOM_VOILIER"),
+								result.getString("NOM_SKIPPEUR"),
+								result.getString("PRENOM_SKIPPEUR"),
+								result.getInt("RATING")
+								), 
+						regate, 
 						result.getTime("TEMPS_ARRIVER"),
 						result.getTime("TEMPS_COMPENSE")
 						));

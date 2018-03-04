@@ -108,7 +108,7 @@ public class ModelListParticipant extends AbstractTableModel {
 		Voilier lastParticipant = participantManager.findLastVoilierInserted();
 		this.participants.add(lastParticipant);
 		
-		this.classementManager.create( new Classement( lastParticipant.getId(), regate.getId() ));
+		this.classementManager.create( new Classement( lastParticipant, regate ));
 		
 		fireTableRowsInserted(participants.size()-1, participants.size() -1);
 	}
@@ -118,7 +118,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	 */
 	public void removeParticpant(int rowIndex, Regate regate) {
 		
-		this.classementManager.delete( new Classement(participants.get(rowIndex).getId(), regate.getId()) );
+		this.classementManager.delete( new Classement(participants.get(rowIndex), regate) );
 		this.participants.remove(rowIndex);
 		
 		fireTableRowsDeleted(rowIndex, rowIndex);	

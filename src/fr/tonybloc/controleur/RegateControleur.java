@@ -101,22 +101,26 @@ public class RegateControleur implements ActionListener {
 		Object source = e.getSource();
 		
 		// Définition des Actions
-		if (source == this.btnCreation) {
+		if (source.equals(this.btnCreation)) {
+			
 			System.out.println("Création");
 			try {
 				this.ActionCreer();
 			} catch (ExceptionChampsVide e1) {
 				e1.printStackTrace();
 			}
-		}else if(source == this.btnModifier) {
+			
+		}else if(source.equals(this.btnModifier)) {
+			
 			System.out.println("Modification");
 			try {
 				ActionModificationActiver();
 			} catch (ExceptionAucuneLigneSelectionne e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		}else if(source == this.btnSupprimer) {
+			
+		}else if(source.equals(this.btnSupprimer)) {
+			
 			System.out.println("Suppression");
 			try {
 				this.ActionSupprimer();
@@ -124,11 +128,15 @@ public class RegateControleur implements ActionListener {
 				e1.printStackTrace();
 			}
 			
-		}else if(source == this.btnAnnuler) {
+		}else if(source.equals(this.btnAnnuler)) {
+			
 			this.ActionAnnuler();
+		
 		}
 		else {
+		
 			System.out.println("source non trouvé !");
+		
 		}
 	}
 	/**

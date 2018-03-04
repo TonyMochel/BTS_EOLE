@@ -2,6 +2,8 @@ package fr.tonybloc.controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.sql.Time;
+import java.time.LocalTime;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -29,7 +31,7 @@ public class Fenetre extends JFrame {
 	Menu menuPrincipal;
 	VueCreationRegate vueCreationRegate;
 	VueInscription vueInscription;
-	
+	VueSimulation vueSimulation;
 	
 	public Fenetre() {
 		
@@ -38,12 +40,13 @@ public class Fenetre extends JFrame {
 		this.menuPrincipal = new Menu();
 		this.vueCreationRegate = new VueCreationRegate();
 		this.vueInscription = new VueInscription();
+		this.vueSimulation = new VueSimulation();
 		
 		this.panelCreationRegate = vueCreationRegate.getContent();
 		this.panelInscription = vueInscription.getContent();
+		this.panelSimulation = vueSimulation.getContent();
 		
-		
-		// Controleur Regate
+		// Controleur : Création de Regate
 		RegateControleur regateControleur = new RegateControleur
 				(
 						this.vueCreationRegate.getVueListe().getModel(),
@@ -62,6 +65,7 @@ public class Fenetre extends JFrame {
 		this.vueCreationRegate.getVueListe().getBtnModifier().addActionListener(regateControleur);
 		this.vueCreationRegate.getVueFormulaire().getBtnAnnuler().addActionListener(regateControleur);
 		
+		// Controleur : Inscription des participants
 		InscriptionControleur inscriptionControleur = new InscriptionControleur
 				(
 						this.vueInscription.getVueListe().getModel(),
@@ -82,13 +86,40 @@ public class Fenetre extends JFrame {
 		this.vueInscription.getVueFormulaire().getCbCategorie().addActionListener(inscriptionControleur);
 		this.vueInscription.getVueListe().getBtnAnnuler().addActionListener(inscriptionControleur);
 		
+		// Controleur : Classement des participants
+		ClassementControleur classementControleur = new ClassementControleur(
+				this.panelSimulation,
+				this.vueSimulation.getVueTableau().getModelListParticipant(),
+				this.vueSimulation.getVueCommande().getBtnCloture(),
+				this.vueSimulation.getVueTableau().getBtnArriver(),
+				this.vueSimulation.getVueTableau().getBtnModifier(),
+				this.vueSimulation.getVueTableau().getBtnAbandonner(),
+				this.vueSimulation.getVueCommande().getBtnArreteChrono(),
+				this.vueSimulation.getVueCommande().getBtnRecommencer(),
+				this.vueSimulation.getVueCommande().getBtnDemarreChrono(),
+				this.vueSimulation.getVueTableau().getCbChoixRegate(),
+				this.vueSimulation.getVueTableau().getListParticipant(),
+				this.vueSimulation.getVueCommande().getLbChrono(),
+				this.vueSimulation.getVueCommande().getChrono()
+				);
+		this.vueSimulation.getVueCommande().getBtnCloture().addActionListener(classementControleur);
+		this.vueSimulation.getVueTableau().getBtnArriver().addActionListener(classementControleur);
+		this.vueSimulation.getVueTableau().getBtnModifier().addActionListener(classementControleur);
+		this.vueSimulation.getVueTableau().getBtnAbandonner().addActionListener(classementControleur);
+		this.vueSimulation.getVueTableau().getCbChoixRegate().addActionListener(classementControleur);
+		this.vueSimulation.getVueCommande().getBtnArreteChrono().addActionListener(classementControleur);
+		this.vueSimulation.getVueCommande().getBtnRecommencer().addActionListener(classementControleur);
+		this.vueSimulation.getVueCommande().getBtnDemarreChrono().addActionListener(classementControleur);
+		
 		// Controleur : Menu
 		MenuControle menuControleur = new MenuControle
 				(
 						this.eoleApplication,
 						this.panelCreationRegate,
 						this.panelInscription,
+						this.panelSimulation,
 						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
+						this.vueSimulation.getVueTableau().getCbChoixRegate(),
 						this.menuPrincipal.getItemCreationRegate(), 
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
@@ -121,10 +152,7 @@ public class Fenetre extends JFrame {
 	public static void main(String[] args) {
 		new Fenetre();
 		
-		String str1 = "h";
 		
-		
-		System.out.println(str1.substring(0, 1).toUpperCase()+str1.substring(1));
 		/*
 		JOptionPane.showMessageDialog(maFrame,
 				"Course non créée \nLa distance n'est pas un décimal",

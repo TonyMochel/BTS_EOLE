@@ -30,8 +30,10 @@ public class MenuControle implements ActionListener {
 	
 	JPanel contenuCreationRegate;
 	JPanel contenuInscription;
+	JPanel contenuSimulation;
 	
-	JComboBox cbChoixRegate;
+	JComboBox cbChoixRegateInscription;
+	JComboBox cbChoixRegateClassement;
 	
 	JFrame frame;
 	
@@ -50,7 +52,9 @@ public class MenuControle implements ActionListener {
 			JFrame frame,
 			JPanel contenuCreationRegate,
 			JPanel contenuInscription,
-			JComboBox cbChoixRegate,
+			JPanel contenuSimulation,
+			JComboBox cbChoixRegateInscription,
+			JComboBox cbChoixRegateClassement, 
 			JMenuItem itemCreationRegate, 
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
@@ -61,6 +65,7 @@ public class MenuControle implements ActionListener {
 		this.frame = frame;
 		this.contenuCreationRegate = contenuCreationRegate;
 		this.contenuInscription = contenuInscription;
+		this.contenuSimulation = contenuSimulation;
 		
 		this.itemCreationRegate = itemCreationRegate;
 		this.itemInscription = itemInscription;
@@ -69,8 +74,8 @@ public class MenuControle implements ActionListener {
 		this.itemAide = itemAide;
 		this.itemInformation = itemInformation;
 		
-		this.cbChoixRegate = cbChoixRegate;
-		
+		this.cbChoixRegateInscription = cbChoixRegateInscription;
+		this.cbChoixRegateClassement = cbChoixRegateClassement;
 	}
 	/**
 	 * Evenement
@@ -80,24 +85,29 @@ public class MenuControle implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
-		if(source == this.itemCreationRegate) {
+		if(source.equals(itemCreationRegate) ) {
 			
 			this.frame.setContentPane(this.contenuCreationRegate);
 			this.frame.setVisible(true);
 		
-		}else if(source == this.itemInscription) {
+		}else if(source.equals(itemInscription)) {
 			
-			this.cbChoixRegate.setModel(new ModelComboBoxRegates());
+			this.cbChoixRegateInscription.setModel(new ModelComboBoxRegates());
+			
 			this.frame.setContentPane(this.contenuInscription);			
 			this.frame.setVisible(true);
 			
-		}else if(source == this.itemResultatRegate) {
+		}else if(source.equals(this.itemResultatRegate)) {
 			
-		}else if(source == this.itemSimulation) {
+		}else if(source.equals(this.itemSimulation)) {
 			
-		}else if(source == this.itemAide) {
+			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates());
 			
-		}else if(source == this.itemInformation) {
+			this.frame.setContentPane(this.contenuSimulation);
+			this.frame.setVisible(true);
+		}else if(source.equals(this.itemAide)) {
+			
+		}else if(source.equals(this.itemInformation)) {
 			
 		}else {
 			System.out.println("Elément de menu [" + e.getActionCommand()

@@ -184,7 +184,7 @@ public class RegateDAO extends DAO<Regate> {
 		return listRegate;
 	}
 	
-	public List<Voilier> getAllParticipant(int id){
+	public List<Voilier> getAllParticipant(Regate regate){
 		
 		
 		List<Voilier> listParticipant = new ArrayList<Voilier>();
@@ -192,7 +192,7 @@ public class RegateDAO extends DAO<Regate> {
 		{
 			ResultSet result;
 			Statement stat = this.connect.createStatement();
-			result = stat.executeQuery("SELECT DISTINCT v.*, cat.* FROM classement c, voilier v, regate r, categorie cat WHERE v.ID_VOILIER = c.ID_VOILIER AND c.ID_REGATE = "+id+" AND cat.ID_CATEGORIE = v.CATEGORIE");
+			result = stat.executeQuery("SELECT DISTINCT v.*, cat.* FROM classement c, voilier v, regate r, categorie cat WHERE v.ID_VOILIER = c.ID_VOILIER AND c.ID_REGATE = "+regate.getId()+" AND cat.ID_CATEGORIE = v.CATEGORIE");
 			while(result.next()) {
 				listParticipant.add(new Voilier(
 						result.getInt("ID_Voilier"),
@@ -231,6 +231,22 @@ public class RegateDAO extends DAO<Regate> {
 			e.printStackTrace();
 		}
 		return rowCount;
+	}
+	
+	public boolean clotureRegate(Regate obj) {
+		boolean requeteExecuter = false;
+		try 
+		{
+			Statement stat = this.connect.createStatement();
+			stat.executeUpdate("UPDATE `regate` SET `CLOTURE`="+obj.isCloture()+" WHERE `ID_REGATE` = "+ obj.getId());
+			requeteExecuter = true;
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return requeteExecuter;
 	}
 
 }

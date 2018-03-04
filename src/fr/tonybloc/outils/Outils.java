@@ -65,4 +65,31 @@ public class Outils {
 			}
 		});
 	}
+	/**
+	 * Convertie un nombre de seconde en HH:MM:SS
+	 * @param pSeconde
+	 * @return
+	 */
+	public static String convertHMS(int pSeconde) {
+		int heure = (int) pSeconde/3600;
+		int minute = (int) ((pSeconde % 3600) / 60);
+		int seconde = (int) ((pSeconde % 3600) % 60);
+		
+		String res = 	( ( heure < 10 ) 	? "0" + heure : heure )		+ ":" +
+				( ( minute < 10 ) ? "0" + minute : minute )	+ ":" +
+				( ( seconde < 10 ) ? "0" + seconde : seconde );
+		
+		return res;
+	}
+	
+	
+	/**
+	 * Convertie une date (HH:MM:SS) en seconde
+	 * @param date
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	public static int convertHTStoS(Date date) {
+		return ( date.getSeconds() + (date.getMinutes()*60) + (date.getHours()*60*60) );
+	}
 }

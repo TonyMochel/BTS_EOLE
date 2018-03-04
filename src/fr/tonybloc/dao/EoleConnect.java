@@ -11,7 +11,7 @@ public class EoleConnect {
 	/**
 	 * Url de connexion
 	 */
-	private String url = "jdbc:mysql://localhost/eole";
+	private String url = "jdbc:mysql://localhost/eole?zeroDateTimeBehavior=convertToNull";
 	/**
 	 * Login de connexion
 	 */

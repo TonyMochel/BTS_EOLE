@@ -47,9 +47,9 @@ public class InscriptionControleur implements ActionListener {
 	private JTable listParticipants;
 	private JLabel lbInfoJTable;
 	
-	private RegateDAO regateManager = DAOFactory.getRegateDAO();
-	private VoilierDAO voilierManager = DAOFactory.getVoilierDAO();
-	private ClassementDAO ClassementManager = DAOFactory.getClassementDAO();
+	private final RegateDAO regateManager = DAOFactory.getRegateDAO();
+	private final VoilierDAO voilierManager = DAOFactory.getVoilierDAO();
+	private final ClassementDAO ClassementManager = DAOFactory.getClassementDAO();
 	
 	private ModelListParticipant modelListParticipant;
 	
@@ -153,7 +153,7 @@ public class InscriptionControleur implements ActionListener {
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegate.getSelectedItem();
 		System.out.println(regateSelectionner.getId() + " - " + regateSelectionner.getIntituler());
-		List<Voilier> participants = regateManager.getAllParticipant(regateSelectionner.getId());
+		List<Voilier> participants = regateManager.getAllParticipant(regateSelectionner);
 		modelListParticipant.updateTables(participants);
 		
 		ActionActualiseLeLabelInformations();
@@ -186,13 +186,13 @@ public class InscriptionControleur implements ActionListener {
 		
 		Object source = event.getSource();
 		
-		if(source == cbChoixRegate) {
+		if(source.equals(cbChoixRegate)) {
 			ActionSelectionnerRegate();
 		}
-		else if(source == cbCategorie) {
+		else if(source.equals(cbCategorie)) {
 			this.categorieSelectionner = (Categorie) cbCategorie.getSelectedItem();
 		}
-		else if(source == btnInscription) {
+		else if(source.equals(btnInscription)) {
 			try {
 				ActionInscrire();
 			} catch (ExceptionChampsVide e) {
@@ -201,7 +201,7 @@ public class InscriptionControleur implements ActionListener {
 				e.printStackTrace();
 			}
 		}
-		else if(source == btnAnnuler) {
+		else if(source.equals(btnAnnuler)) {
 			ActionAnnulerParticipation();
 		}
 		

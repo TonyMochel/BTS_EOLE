@@ -1,6 +1,9 @@
 package fr.tonybloc.modele;
 
 import java.sql.Time;
+import java.util.Date;
+
+import fr.tonybloc.outils.Outils;
 /**
  * Objet Classement
  * @author Tony
@@ -10,11 +13,11 @@ public class Classement {
 	/**
 	 * Identifiant du voilier
 	 */
-	private int idVoilier;
+	private Voilier voilier;
 	/**
 	 * Identifiant de la régate
 	 */
-	private int idRegate;
+	private Regate regate;
 	/**
 	 * Temps arrivé
 	 */
@@ -36,9 +39,9 @@ public class Classement {
 	 * @param tempsArriver
 	 * @param tempsCompense
 	 */
-	public Classement(int idVoilier, int idRegate, Time tempsArrive, Time tempsCompense) {
-		this.idVoilier = idVoilier;
-		this.idRegate = idRegate;
+	public Classement(Voilier voilier, Regate regate, Time tempsArrive, Time tempsCompense) {
+		this.voilier = voilier;
+		this.regate = regate;
 		this.tempsArrive = tempsArrive;
 		this.tempsCompense = tempsCompense;
 	}
@@ -47,36 +50,56 @@ public class Classement {
 	 * @param idVoilier
 	 * @param idRegate
 	 */
-	public Classement(int idVoilier, int idRegate) {
-		this.idVoilier = idVoilier;
-		this.idRegate = idRegate;
+	public Classement(Voilier voilier, Regate idRegate) {
+		this.voilier = voilier;
+		this.regate = idRegate;
 		this.tempsArrive = null;
 		this.tempsCompense = null;
 	}
 	
-	public int getIdVoilier() {
-		return idVoilier;
+	public Voilier getVoilier() {
+		return voilier;
 	}
-	public void setIdVoilier(int idVoilier) {
-		this.idVoilier = idVoilier;
+	
+	public Regate getRegate() {
+		return regate;
 	}
-	public int getIdRegate() {
-		return idRegate;
-	}
-	public void setIdRegate(int idRegate) {
-		this.idRegate = idRegate;
-	}
+	
 	public Time getTempsArrive() {
 		return tempsArrive;
 	}
 	public void setTempsArrive(Time tempsArrive) {
 		this.tempsArrive = tempsArrive;
+		
+		if(tempsArrive == null) {
+			this.tempsCompense = null;
+		}else if(tempsArrive.equals( Time.valueOf("00:00:00") )) {
+			this.tempsCompense = tempsArrive;
+		}else {
+			this.tempsCompense = calculeTempCompense();
+		}
+		
 	}
 	public Time getTempsCompense() {
 		return tempsCompense;
 	}
-	public void setTempsCompense(Time tempsCompense) {
-		this.tempsCompense = tempsCompense;
+	
+	/**
+	 * Calcule le temps d'arriver avec l'handicap
+	 * @return
+	 */
+	private Time calculeTempCompense() {
+		Date dt = getTempsArrive();
+		
+		int secondTempArriver = Outils.convertHTStoS(dt);
+		System.out.println("Seconde :" + secondTempArriver);
+		int handicap = (int) Math.round( (5143 / (Math.sqrt(this.getVoilier().getRating() + 3.5)) * this.getRegate().getDistance()));
+		System.out.println("handicap :" + handicap);
+		
+		Time tempCompense = Time.valueOf(Outils.convertHMS(secondTempArriver + handicap));
+		System.out.println("Temp : " + tempCompense);
+
+		return tempCompense;
 	}
 	
 	
@@ -86,8 +109,8 @@ public class Classement {
 	@Override
 	public String toString() {
 		return "{ "
-				+ "'id Voilier' => " + this.idVoilier + ", "
-				+ "'id Regate' => " + this.idRegate + ", "
+				+ "'id Voilier' => " + this.voilier.getId() + ", "
+				+ "'id Regate' => " + this.regate.getId() + ", "
 				+ "'temps arrivé' => " + this.tempsArrive + ", "
 				+ "'temps compensé' => " + this.tempsCompense + ", "
 				+ "}";
