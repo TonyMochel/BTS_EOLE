@@ -22,11 +22,10 @@ public class Classement {
 	 * Temps arrivé
 	 */
 	private Time tempsArrive;
-	/**
-	 * temps compensé
-	 */
+	/** Temps compensé */
 	private Time tempsCompense;
-	
+	/** Rang du participant */
+	private int rang;
 	
 	/**
 	 * Crée une instance de la classe 'Classement' : vide
@@ -44,6 +43,7 @@ public class Classement {
 		this.regate = regate;
 		this.tempsArrive = tempsArrive;
 		this.tempsCompense = tempsCompense;
+		this.rang = -1;
 	}
 	/**
 	 * Crée une instance de la classe Classement
@@ -55,16 +55,21 @@ public class Classement {
 		this.regate = idRegate;
 		this.tempsArrive = null;
 		this.tempsCompense = null;
+		this.rang = -1;
 	}
 	
 	public Voilier getVoilier() {
 		return voilier;
-	}
-	
+	}	
 	public Regate getRegate() {
 		return regate;
 	}
-	
+	public int getRang() {
+		return rang;
+	}
+	public void setRang(int rang) {
+		this.rang = rang;
+	}
 	public Time getTempsArrive() {
 		return tempsArrive;
 	}

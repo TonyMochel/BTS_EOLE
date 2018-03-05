@@ -94,6 +94,7 @@ public class ClassementControleur implements ActionListener{
 		this.btnArrive.setEnabled(false);
 		this.btnAbandon.setEnabled(false);
 		this.btnModifier.setEnabled(false);
+		this.btnChronoStop.setEnabled(false);
 		
 	}
 	/**
@@ -103,7 +104,7 @@ public class ClassementControleur implements ActionListener{
 		this.regateSelectionner.setCloture(true);
 		this.regateManager.clotureRegate(this.regateSelectionner);
 		// Message
-		this.cbChoixRegate.setModel(new ModelComboBoxRegates());
+		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 		
 	}
 	/**
@@ -124,10 +125,10 @@ public class ClassementControleur implements ActionListener{
 			if(ligneSelectionner != AUCUNE_LIGNE_SELECTIONNER) {
 				this.modelListParticipantSimulation.updateTempArriver(ligneSelectionner, this.lbChrono.getText());
 			}else {
-				System.out.println("Aucune ligne séléctionner !");
+				JOptionPane.showMessageDialog(this.panelSimulation, "Aucun participant sélectionner", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}			
 		}else {
-			System.out.println("La régate n'a pas commencer !");
+			JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'a pas commencer", "Avertissement", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
@@ -140,10 +141,10 @@ public class ClassementControleur implements ActionListener{
 			if(ligneSelectionner != AUCUNE_LIGNE_SELECTIONNER) {
 				this.modelListParticipantSimulation.updateTempArriver(ligneSelectionner, "00:00:00");
 			}else {
-				System.out.println("Aucune ligne séléctionner !");
+				JOptionPane.showMessageDialog(this.panelSimulation, "Aucun participant sélectionner", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}	
 		}else {
-			System.out.println("La régate n'a pas commencer !");
+			JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'a pas commencer", "Avertissement", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 	
@@ -156,10 +157,11 @@ public class ClassementControleur implements ActionListener{
 			if(ligneSelectionner != AUCUNE_LIGNE_SELECTIONNER) {
 				this.modelListParticipantSimulation.updateTempArriver(ligneSelectionner, null);
 			}else {
-				System.out.println("Aucune ligne séléctionner !");
+				JOptionPane.showMessageDialog(this.panelSimulation, "Aucun participant sélectionner", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 		}else {
-			System.out.println("La régate n'a pas commencer !");
+			JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'a pas commencer", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			
 		}
 		
 	}
@@ -169,21 +171,20 @@ public class ClassementControleur implements ActionListener{
 	 */
 	private void ActionStartChrono() {
 		if(this.regateSelectionner == null) {
-			System.out.println("Aucune régate selectionner");
-			//JOptionPane.showMessageDialog(this.panelSimulation, "Aucune régate selectionner", "Titre", JOptionPane.WARNING_MESSAGE);
-			//System.out.println("Valeur : "+ test);
+			JOptionPane.showMessageDialog(this.panelSimulation, "Aucune régate séléctionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			
 		}else {
 			this.chrono.StartTimer();
 			this.isStarted = true;
 			this.cbChoixRegate.setEnabled(false);
 			this.btnChronoReset.setEnabled(false);
 			this.btnChronoStart.setEnabled(false);
-			
+
+			this.btnChronoStop.setEnabled(true);
 
 			this.btnArrive.setEnabled(true);
 			this.btnAbandon.setEnabled(true);
-			this.btnModifier.setEnabled(true);
-			
+			this.btnModifier.setEnabled(true);			
 		}
 	}
 	
@@ -196,13 +197,17 @@ public class ClassementControleur implements ActionListener{
 			this.isStarted = false;
 			this.btnChronoReset.setEnabled(true);
 			this.btnChronoStart.setEnabled(true);
-
+			this.btnChronoStop.setEnabled(false);
+			
 			this.btnArrive.setEnabled(false);
 			this.btnAbandon.setEnabled(false);
 			this.btnModifier.setEnabled(false);
 			
+			
+			
 		}else {
-			System.out.println("Tous les participant ne sont pas encore arrivée");
+			JOptionPane.showMessageDialog(this.panelSimulation, "Certaine participant ne sont pas encore arrivée !", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			
 		}
 		
 		
@@ -239,8 +244,11 @@ public class ClassementControleur implements ActionListener{
 			if(this.modelListParticipantSimulation.tousLesParticipantSontArrive()) {
 				ActionCloturerRegate();
 			}else {
-				// Message
-				System.out.println("Tous les participants ne sont pas encore arrivée !");
+				int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Tous les participant ne sont pas encore arrivé. Voulez-vous cloturer la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
+				if(confirm == JOptionPane.YES_OPTION) {
+					ActionCloturerRegate();
+					System.out.println("Action effectué");
+				}
 			}
 			
 		}

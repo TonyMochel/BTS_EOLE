@@ -149,6 +149,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 		Iterator iter = donnee.listIterator();
 		
 		while(iter.hasNext()) {
+			
 			Classement classement = (Classement) iter.next();
 			if(classement.getTempsArrive() == null) {
 				estArrive = false;

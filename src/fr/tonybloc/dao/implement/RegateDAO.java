@@ -157,6 +157,29 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return listRegate;
 	}
+	public List<Regate> findRegateClosure(){
+		List<Regate> listRegate = new ArrayList<Regate>();
+		try 
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT * FROM regate WHERE CLOTURE = true");
+			while(result.next()) {
+				listRegate.add(new Regate( 
+						result.getInt("ID_REGATE"), 
+						result.getString("LIBELLE"),
+						result.getDouble("DISTANCE"),
+						result.getDate("DATE_DEPART"),
+						result.getBoolean("CLOTURE")
+						));
+			}
+		}
+		catch(Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return listRegate;
+	}
 	/**
 	 * Retourn tout les regate qui ne sont pas cloturées
 	 */

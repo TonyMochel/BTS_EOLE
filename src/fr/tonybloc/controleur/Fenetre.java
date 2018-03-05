@@ -32,6 +32,7 @@ public class Fenetre extends JFrame {
 	VueCreationRegate vueCreationRegate;
 	VueInscription vueInscription;
 	VueSimulation vueSimulation;
+	VueResultatClassement vueResultat;
 	
 	public Fenetre() {
 		
@@ -41,11 +42,13 @@ public class Fenetre extends JFrame {
 		this.vueCreationRegate = new VueCreationRegate();
 		this.vueInscription = new VueInscription();
 		this.vueSimulation = new VueSimulation();
+		this.vueResultat = new VueResultatClassement();
 		
 		this.panelCreationRegate = vueCreationRegate.getContent();
 		this.panelInscription = vueInscription.getContent();
 		this.panelSimulation = vueSimulation.getContent();
-		
+		this.panelResultat = vueResultat.getContent();
+
 		// Controleur : Création de Regate
 		RegateControleur regateControleur = new RegateControleur
 				(
@@ -102,6 +105,7 @@ public class Fenetre extends JFrame {
 				this.vueSimulation.getVueCommande().getLbChrono(),
 				this.vueSimulation.getVueCommande().getChrono()
 				);
+		
 		this.vueSimulation.getVueCommande().getBtnCloture().addActionListener(classementControleur);
 		this.vueSimulation.getVueTableau().getBtnArriver().addActionListener(classementControleur);
 		this.vueSimulation.getVueTableau().getBtnModifier().addActionListener(classementControleur);
@@ -111,6 +115,26 @@ public class Fenetre extends JFrame {
 		this.vueSimulation.getVueCommande().getBtnRecommencer().addActionListener(classementControleur);
 		this.vueSimulation.getVueCommande().getBtnDemarreChrono().addActionListener(classementControleur);
 		
+		ResultatControleur resultControleur = new ResultatControleur(
+				this.vueResultat.getCbChoixRegateCloturer(),
+				this.vueResultat.getListClassementCategorie1(),
+				this.vueResultat.getListClassementCategorie2(),
+				this.vueResultat.getListClassementCategorie3(),
+				this.vueResultat.getListClassementCategorie4(),
+				this.vueResultat.getModelListResultat1(),
+				this.vueResultat.getModelListResultat2(),
+				this.vueResultat.getModelListResultat3(),
+				this.vueResultat.getModelListResultat4(),
+				this.vueResultat.getBtnTelechargerPDF(),
+				this.vueResultat.getBtnTelechargerCSV(),
+				this.vueResultat.getBtnImprimer()
+				);
+		
+		this.vueResultat.getCbChoixRegateCloturer().addActionListener(resultControleur);
+		this.vueResultat.getBtnTelechargerPDF().addActionListener(resultControleur);
+		this.vueResultat.getBtnTelechargerCSV().addActionListener(resultControleur);
+		this.vueResultat.getBtnImprimer().addActionListener(resultControleur);
+		
 		// Controleur : Menu
 		MenuControle menuControleur = new MenuControle
 				(
@@ -118,8 +142,10 @@ public class Fenetre extends JFrame {
 						this.panelCreationRegate,
 						this.panelInscription,
 						this.panelSimulation,
+						this.panelResultat,
 						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
 						this.vueSimulation.getVueTableau().getCbChoixRegate(),
+						this.vueResultat.getCbChoixRegateCloturer(),
 						this.menuPrincipal.getItemCreationRegate(), 
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
@@ -139,7 +165,6 @@ public class Fenetre extends JFrame {
 		// Parametrage de la fenetre
 		this.eoleApplication.setResizable(false);
 		this.eoleApplication.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.eoleApplication.setContentPane(this.vueCreationRegate.getContent());
 		this.eoleApplication.setJMenuBar(menuPrincipal);
 		this.eoleApplication.setMinimumSize(new Dimension(1200, 700));
 	    this.eoleApplication.pack();
@@ -162,7 +187,7 @@ public class Fenetre extends JFrame {
 		
 		// Controleur : Creation Régate
 		
-		
+		// https://www.youtube.com/watch?v=axkR5-evqsc
 		
 	}
 	

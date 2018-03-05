@@ -1,15 +1,24 @@
 package fr.tonybloc.outils;
 
-import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 import org.jdatepicker.impl.JDatePickerImpl;
+
+import fr.tonybloc.modele.Categorie;
+import fr.tonybloc.modele.Regate;
+
 
 public class Outils {
 	
@@ -91,5 +100,65 @@ public class Outils {
 	@SuppressWarnings("deprecation")
 	public static int convertHTStoS(Date date) {
 		return ( date.getSeconds() + (date.getMinutes()*60) + (date.getHours()*60*60) );
+	}
+	
+	/**
+	 * Convertie une JTable en fichier excel
+	 * @param table
+	 * @param file
+	 */
+	public static void toExcel(JTable tableCategorie1, JTable tableCategorie2, JTable tableCategorie3, JTable tableCategorie4, Regate regate, File file){
+	    try{
+	        TableModel modelCategorie1 = tableCategorie1.getModel();
+	        TableModel modelCategorie2 = tableCategorie2.getModel();
+	        TableModel modelCategorie3 = tableCategorie3.getModel();
+	        TableModel modelCategorie4 = tableCategorie4.getModel();
+	        
+	        FileWriter fw = new FileWriter(file);
+	        BufferedWriter bw = new BufferedWriter(fw);
+	        
+	        // En-tête :
+	        bw.write("CLASSEMENT DE LA COURSE : " + regate.getIntituler() + " DU " + regate.getDate_depart_string() + "\r\n");
+			bw.write("\r\n");
+			bw.write("\r\n");
+			
+	        // Categorie 1 :
+			bw.write("Classement : CATEGORIE 1" + "\r\n");
+			ecritLeClassementDeLaCategorie(modelCategorie1,bw);
+	        bw.write("\r\n");
+			bw.write("Classement : CATEGORIE 2" + "\r\n");
+	        ecritLeClassementDeLaCategorie(modelCategorie2,bw);
+	        bw.write("\r\n");
+			bw.write("Classement : CATEGORIE 3" + "\r\n");
+			ecritLeClassementDeLaCategorie(modelCategorie3,bw);
+	        bw.write("\r\n");
+			bw.write("Classement : CATEGORIE 4" + "\r\n");
+	        ecritLeClassementDeLaCategorie(modelCategorie4,bw);
+	        
+	        bw.close();
+
+	    }catch(IOException e){ System.out.println(e); }
+	}
+	
+	/**
+	 * 
+	 * @param modelCategorie
+	 * @param bw
+	 * @throws IOException 
+	 */
+	private static void ecritLeClassementDeLaCategorie(TableModel modelCategorie, BufferedWriter bw) throws IOException {
+		
+	    for(int indexCol = 0; indexCol < modelCategorie.getColumnCount(); indexCol++){
+	        bw.write(modelCategorie.getColumnName(indexCol) + ";");
+	    }
+	    bw.write("\r\n");
+	
+	    for(int rowIndex = 0; rowIndex < modelCategorie.getRowCount(); rowIndex++) {
+	        for(int colIndex = 0; colIndex < modelCategorie.getColumnCount(); colIndex++) {
+	            bw.write(modelCategorie.getValueAt(rowIndex,colIndex).toString() + ";");
+	        }
+	        bw.write("\r\n");
+	    }
+	    bw.write("\r\n");
 	}
 }

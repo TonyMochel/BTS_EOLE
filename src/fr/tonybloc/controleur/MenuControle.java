@@ -31,9 +31,11 @@ public class MenuControle implements ActionListener {
 	JPanel contenuCreationRegate;
 	JPanel contenuInscription;
 	JPanel contenuSimulation;
+	JPanel contenuResultat;
 	
 	JComboBox cbChoixRegateInscription;
 	JComboBox cbChoixRegateClassement;
+	JComboBox cbChoixRegateResult;
 	
 	JFrame frame;
 	
@@ -53,8 +55,10 @@ public class MenuControle implements ActionListener {
 			JPanel contenuCreationRegate,
 			JPanel contenuInscription,
 			JPanel contenuSimulation,
+			JPanel contenuResultat,
 			JComboBox cbChoixRegateInscription,
 			JComboBox cbChoixRegateClassement, 
+			JComboBox cbChoixRegateResult,
 			JMenuItem itemCreationRegate, 
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
@@ -66,6 +70,7 @@ public class MenuControle implements ActionListener {
 		this.contenuCreationRegate = contenuCreationRegate;
 		this.contenuInscription = contenuInscription;
 		this.contenuSimulation = contenuSimulation;
+		this.contenuResultat = contenuResultat;
 		
 		this.itemCreationRegate = itemCreationRegate;
 		this.itemInscription = itemInscription;
@@ -76,6 +81,7 @@ public class MenuControle implements ActionListener {
 		
 		this.cbChoixRegateInscription = cbChoixRegateInscription;
 		this.cbChoixRegateClassement = cbChoixRegateClassement;
+		this.cbChoixRegateResult = cbChoixRegateResult;
 	}
 	/**
 	 * Evenement
@@ -92,16 +98,21 @@ public class MenuControle implements ActionListener {
 		
 		}else if(source.equals(itemInscription)) {
 			
-			this.cbChoixRegateInscription.setModel(new ModelComboBoxRegates());
+			this.cbChoixRegateInscription.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 			
 			this.frame.setContentPane(this.contenuInscription);			
 			this.frame.setVisible(true);
 			
 		}else if(source.equals(this.itemResultatRegate)) {
 			
+			this.cbChoixRegateResult.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));
+			
+			this.frame.setContentPane(this.contenuResultat);
+			this.frame.setVisible(true);
+			
 		}else if(source.equals(this.itemSimulation)) {
 			
-			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates());
+			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 			
 			this.frame.setContentPane(this.contenuSimulation);
 			this.frame.setVisible(true);

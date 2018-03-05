@@ -186,5 +186,42 @@ public class ClassementDAO extends DAO<Classement> {
 		}
 		return rowCount;
 	}
+	
+	/**
+	 * Recherche tout les classement d'une regate
+	 * @param idVoilier
+	 * @param idRegate
+	 * @return
+	 */
+	public List<Classement> findClassementAt(Regate regate, Categorie categorie) {
+		List<Classement> listClassement = new ArrayList<Classement>();
+		try
+		{
+			ResultSet result;
+			Statement stat = this.connect.createStatement();
+			result = stat.executeQuery("SELECT v.*, c.*, cat.* from classement c, regate r, categorie cat, voilier v where c.ID_VOILIER = v.ID_VOILIER AND cat.ID_CATEGORIE = v.CATEGORIE AND c.ID_REGATE = r.ID_REGATE AND c.ID_REGATE = "+regate.getId()+" AND v.CATEGORIE = "+categorie.getId()+" ORDER BY c.TEMPS_COMPENSE ASC");
+			while(result.next()) {
+				listClassement.add(new Classement(
+						new Voilier(
+								result.getInt("ID_VOILIER"),
+								new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+								result.getString("NOM_VOILIER"),
+								result.getString("NOM_SKIPPEUR"),
+								result.getString("PRENOM_SKIPPEUR"),
+								result.getInt("RATING")
+								), 
+						regate, 
+						result.getTime("TEMPS_ARRIVER"),
+						result.getTime("TEMPS_COMPENSE")
+						));
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return listClassement;
+	}
 
 }

@@ -35,6 +35,7 @@ public class ModelListRegate extends AbstractTableModel {
 		this.regateManager = DAOFactory.getRegateDAO();
 		this.regates = regateManager.findAll();
 	}
+	
 	/**
 	 * Retourne le nombre de column
 	 * @return int

@@ -19,10 +19,21 @@ public class ModelComboBoxRegates extends AbstractListModel implements ComboBoxM
 	
 	private Regate regateSelectionner = null;
 	
-	public ModelComboBoxRegates() {
+	public final static boolean REGATE_CLOSURE = true;
+	public final static boolean REGATE_NOT_CLOSURE = false;
+	
+	public ModelComboBoxRegates(boolean typeRegate ) {
 		super();
 		this.regateManager = DAOFactory.getRegateDAO();
-		this.regates = regateManager.findRegateNotClosure();
+		
+		if(typeRegate == REGATE_CLOSURE) {
+			this.regates = regateManager.findRegateClosure();
+		}else if(typeRegate == REGATE_NOT_CLOSURE) {
+			this.regates = regateManager.findRegateNotClosure();
+		}else {
+			this.regates = new ArrayList<Regate>();
+		}
+		
 	}
 
 	@Override
