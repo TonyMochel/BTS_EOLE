@@ -2,14 +2,13 @@ package fr.tonybloc.controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -20,20 +19,16 @@ import fr.tonybloc.dao.implement.VoilierDAO;
 import fr.tonybloc.exceptions.ExceptionChampsVide;
 import fr.tonybloc.exceptions.ExceptionTropDeParticipants;
 import fr.tonybloc.modele.Categorie;
-import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 import fr.tonybloc.modele.composant.ModelComboBoxCategories;
-import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListParticipant;
 import fr.tonybloc.outils.JNumberField;
 import fr.tonybloc.outils.Outils;
 
 public class InscriptionControleur implements ActionListener {
 
-	// Modèle
-	//Voilier voilier;
-	//Categorie categorie;
+	JPanel panelInscription;
 	
 	// Composants : Swing
 	private JTextField tfNomVoilier; 
@@ -68,6 +63,7 @@ public class InscriptionControleur implements ActionListener {
 	 * @param cbCategorie
 	 */
 	public InscriptionControleur(
+			JPanel panelInscription,
 			ModelListParticipant modelListParticipant,
 			JTextField tfNomVoilier, 
 			JTextField tfNomSkippeur,
@@ -79,7 +75,7 @@ public class InscriptionControleur implements ActionListener {
 			JButton btnAnnuler,
 			JTable listParticipants,
 			JLabel lbInfoJTable) {
-		
+		this.panelInscription = panelInscription;
 		this.modelListParticipant = modelListParticipant;
 		
 		this.tfNomVoilier = tfNomVoilier; 
@@ -116,25 +112,29 @@ public class InscriptionControleur implements ActionListener {
 	private void ActionInscrire() throws ExceptionChampsVide, ExceptionTropDeParticipants {
 		
 		if(this.modelListParticipant.getRowCount() < 20) {
-			if(!Outils.estVide(tfNomSkippeur) && !Outils.estVide(tfPrenomSkippeur) && 
-					!Outils.estVide(tfNomVoilier) && !Outils.estVide(tfRating) &&
-						categorieSelectionner != null && regateSelectionner != null) {
-				
-				String nomSkippeur = tfNomSkippeur.getText();
-				String prenomSkippeur = tfPrenomSkippeur.getText();
-				String nomVoilier = tfNomVoilier.getText();
-				int rating = Integer.parseInt(tfRating.getText());
-				
-				this.modelListParticipant.addParticipant(new Voilier(categorieSelectionner, nomVoilier, nomSkippeur, prenomSkippeur, rating), regateSelectionner ); 
-						
-				ActionActualiseLeLabelInformations();
-				viderChampsFormulaire();
+			if(regateSelectionner == null) {
+				JOptionPane.showMessageDialog(this.panelInscription, "Aucune régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}else {
-				throw new ExceptionChampsVide();
-			}		
+				if(!Outils.estVide(tfNomSkippeur) && !Outils.estVide(tfPrenomSkippeur) && 
+						!Outils.estVide(tfNomVoilier) && !Outils.estVide(tfRating) &&
+							categorieSelectionner != null ) {
+								
+					String nomSkippeur = tfNomSkippeur.getText();
+					String prenomSkippeur = tfPrenomSkippeur.getText();
+					String nomVoilier = tfNomVoilier.getText();
+					int rating = Integer.parseInt(tfRating.getText());
+					
+					this.modelListParticipant.addParticipant(new Voilier(categorieSelectionner, nomVoilier, nomSkippeur, prenomSkippeur, rating), regateSelectionner ); 
+							
+					ActionActualiseLeLabelInformations();
+					viderChampsFormulaire();
+				}else {
+					throw new ExceptionChampsVide();
+				}
+			}	
 		}else {
 			throw new ExceptionTropDeParticipants();
-		}		
+		}	
 	}
 	
 	/**
@@ -142,9 +142,15 @@ public class InscriptionControleur implements ActionListener {
 	 */
 	private void ActionAnnulerParticipation() {
 		int ligneSelectionne = this.listParticipants.getSelectedRow();
-		modelListParticipant.removeParticpant(ligneSelectionne, this.regateSelectionner);
-		
-		ActionActualiseLeLabelInformations();
+		if(ligneSelectionne == -1) {
+			JOptionPane.showMessageDialog(this.panelInscription, "Aucune ligne sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+		}else {
+			int confirm = JOptionPane.showConfirmDialog(this.panelInscription, "Voulez-vous désinscrire le participant?", "Avertissement", JOptionPane.YES_NO_OPTION);
+			if(confirm == JOptionPane.YES_OPTION) {
+				modelListParticipant.removeParticpant(ligneSelectionne, this.regateSelectionner);
+				ActionActualiseLeLabelInformations();
+			}
+		}
 	}
 	
 	/**
@@ -196,9 +202,9 @@ public class InscriptionControleur implements ActionListener {
 			try {
 				ActionInscrire();
 			} catch (ExceptionChampsVide e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this.panelInscription, "Certain champs de saisies sont vide", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			} catch (ExceptionTropDeParticipants e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this.panelInscription, "Il y a trop de participant (max 20)", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		else if(source.equals(btnAnnuler)) {

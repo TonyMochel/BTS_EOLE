@@ -100,13 +100,20 @@ public class ClassementControleur implements ActionListener{
 	/**
 	 * Cloture la régate séléctionner
 	 */
-	private void ActionCloturerRegate() {
-		this.regateSelectionner.setCloture(true);
-		this.regateManager.clotureRegate(this.regateSelectionner);
-		// Message
-		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
+	private void ActionCloturerRegate() {	
+
+		if(this.regateSelectionner == null) {
+			JOptionPane.showMessageDialog(this.panelSimulation, "Aucune régate sélectionné", "Avertissement", JOptionPane.WARNING_MESSAGE);
+		}else {
+			this.regateSelectionner.setCloture(true);
+			this.regateManager.clotureRegate(this.regateSelectionner);
+			
+			this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));		
+			this.modelListParticipantSimulation.videDonnee();
+		}
 		
 	}
+	
 	/**
 	 * Modifier la JTables (affiche les participant à une regate)
 	 */
@@ -192,7 +199,7 @@ public class ClassementControleur implements ActionListener{
 	 * Stop le chronometre
 	 */
 	private void ActionStopChrono() {
-		if(this.modelListParticipantSimulation.tousLesParticipantSontArrive()) {
+//		if(this.modelListParticipantSimulation.tousLesParticipantSontArrive()) {
 			this.chrono.StopTimer();
 			this.isStarted = false;
 			this.btnChronoReset.setEnabled(true);
@@ -205,11 +212,11 @@ public class ClassementControleur implements ActionListener{
 			
 			
 			
-		}else {
-			JOptionPane.showMessageDialog(this.panelSimulation, "Certaine participant ne sont pas encore arrivée !", "Avertissement", JOptionPane.WARNING_MESSAGE);
-			
-		}
-		
+//		}else {
+//			int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Tous les participant ne sont pas encore arrivé. Voulez-vous stoper la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
+//			if(confirm == JOptionPane.YES_OPTION) {
+//		}
+//		
 		
 		
 	}
@@ -240,10 +247,13 @@ public class ClassementControleur implements ActionListener{
 			ActionResetChrono();
 		}else if(source.equals(btnChronoStop)) {
 			ActionStopChrono();
-		}else if(source.equals(btnCloture)) {
-			if(this.modelListParticipantSimulation.tousLesParticipantSontArrive()) {
+		}else if(source.equals(btnCloture)) {			
+			if(this.modelListParticipantSimulation.tousLesParticipantSontArrive() && isStarted == false) {
+				
 				ActionCloturerRegate();
-			}else {
+			} else if(isStarted) {
+				JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'est pas stopé", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			} else{
 				int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Tous les participant ne sont pas encore arrivé. Voulez-vous cloturer la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
 				if(confirm == JOptionPane.YES_OPTION) {
 					ActionCloturerRegate();
@@ -252,7 +262,6 @@ public class ClassementControleur implements ActionListener{
 			}
 			
 		}
-		
 	}
 	
 }

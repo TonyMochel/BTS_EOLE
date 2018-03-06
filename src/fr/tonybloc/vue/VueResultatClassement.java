@@ -37,9 +37,10 @@ public class VueResultatClassement {
 	private JButton btnTelechargerCSV;
 	private JButton btnImprimer;
 	
+	private JPanel panelClassement;
 	
 	private final Dimension dim = new Dimension(150, 30);
-	private final Font police = new Font("Arial", Font.PLAIN, 14);
+	private final Font police = new Font("Arial", Font.PLAIN, 12);
 	
 	/**
 	 * Crée une instance de la class vueResultatClassement
@@ -85,7 +86,7 @@ public class VueResultatClassement {
 		JPanel panelChoixRegate = new JPanel(new FlowLayout());
 		JPanel panelControle = new JPanel(new FlowLayout());
 		
-		JPanel panelGroupClassement = new JPanel( new GridLayout(4,0) );
+		this.panelClassement = new JPanel( new GridLayout(4,0) );
 		
 		JPanel panelCategorie1 = new JPanel(new BorderLayout());
 		JPanel panelCategorie2 = new JPanel(new BorderLayout());
@@ -103,10 +104,10 @@ public class VueResultatClassement {
 		panelCategorie4.add(new JScrollPane(listClassementCategorie4), BorderLayout.CENTER);
 	
 		
-		panelGroupClassement.add(panelCategorie1);
-		panelGroupClassement.add(panelCategorie2);
-		panelGroupClassement.add(panelCategorie3);
-		panelGroupClassement.add(panelCategorie4);
+		panelClassement.add(panelCategorie1);
+		panelClassement.add(panelCategorie2);
+		panelClassement.add(panelCategorie3);
+		panelClassement.add(panelCategorie4);
 		
 		panelControle.add(this.btnImprimer);
 		panelControle.add(this.btnTelechargerCSV);
@@ -118,12 +119,15 @@ public class VueResultatClassement {
 		panelGroupControle.add(panelChoixRegate, BorderLayout.NORTH);
 		panelGroupControle.add(panelControle, BorderLayout.CENTER);
 		
-		this.content.add(panelGroupClassement, BorderLayout.CENTER);
+		this.content.add(panelClassement, BorderLayout.CENTER);
 		this.content.add(panelGroupControle, BorderLayout.EAST);
 	}
 
 	public JPanel getContent() {
 		return content;
+	}
+	public JPanel getPanelClassement() {
+		return panelClassement;
 	}
 
 	public JTable getListClassementCategorie1() {

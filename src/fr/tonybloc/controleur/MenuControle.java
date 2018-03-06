@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 /**
@@ -27,11 +27,13 @@ public class MenuControle implements ActionListener {
 	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
+	JMenu menuAccueil;
 	
 	JPanel contenuCreationRegate;
 	JPanel contenuInscription;
 	JPanel contenuSimulation;
 	JPanel contenuResultat;
+	JPanel contenuAccueil;
 	
 	JComboBox cbChoixRegateInscription;
 	JComboBox cbChoixRegateClassement;
@@ -52,6 +54,7 @@ public class MenuControle implements ActionListener {
 	 */
 	public MenuControle(
 			JFrame frame,
+			JPanel contenuAccueil,
 			JPanel contenuCreationRegate,
 			JPanel contenuInscription,
 			JPanel contenuSimulation,
@@ -59,6 +62,7 @@ public class MenuControle implements ActionListener {
 			JComboBox cbChoixRegateInscription,
 			JComboBox cbChoixRegateClassement, 
 			JComboBox cbChoixRegateResult,
+			JMenu menuAccueil,
 			JMenuItem itemCreationRegate, 
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
@@ -67,6 +71,9 @@ public class MenuControle implements ActionListener {
 			JMenuItem itemInformation) {
 		
 		this.frame = frame;
+		this.menuAccueil = menuAccueil;
+		
+		this.contenuAccueil = contenuAccueil;
 		this.contenuCreationRegate = contenuCreationRegate;
 		this.contenuInscription = contenuInscription;
 		this.contenuSimulation = contenuSimulation;
@@ -91,7 +98,11 @@ public class MenuControle implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
-		if(source.equals(itemCreationRegate) ) {
+		if(source.equals(menuAccueil)) {
+			this.frame.setContentPane(this.contenuAccueil);
+			this.frame.setVisible(true);
+			
+		}else if(source.equals(itemCreationRegate) ) {
 			
 			this.frame.setContentPane(this.contenuCreationRegate);
 			this.frame.setVisible(true);

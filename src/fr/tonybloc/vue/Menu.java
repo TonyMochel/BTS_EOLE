@@ -1,6 +1,7 @@
 package fr.tonybloc.vue;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,8 @@ import javax.swing.KeyStroke;
  */
 public class Menu extends JMenuBar{
 	
+	JMenu menuAcceuil;
+	
 	JMenuItem itemCreationRegate;
 	JMenuItem itemInscription;
 	
@@ -28,6 +31,9 @@ public class Menu extends JMenuBar{
 	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
+	private final Font police = new Font("Arial", Font.PLAIN, 14);
+	private final Font policeSubMenu = new Font("Arial", Font.PLAIN, 12);
+	
 	/**
 	 * Menu de l'application
 	 */
@@ -35,7 +41,8 @@ public class Menu extends JMenuBar{
 		/*
 		 * Menu Acceuil  
 		 */
-		JMenu menuAcceuil = new JMenu("Acceuil");
+		this.menuAcceuil = new JMenu("Acceuil");
+		this.menuAcceuil.setFont(police);
 		
 		/*
 		 * Menu Création  
@@ -44,11 +51,16 @@ public class Menu extends JMenuBar{
 		this.itemCreationRegate = new JMenuItem("Création Régate", 'R');
 		this.itemInscription 	= new JMenuItem("Inscription", 'I');
 		
+		menuCreation.setFont(police);
+		this.itemCreationRegate.setFont(policeSubMenu);
+		this.itemInscription.setFont(policeSubMenu);
+		
 		this.itemCreationRegate.setAccelerator(KeyStroke.getKeyStroke('R', Toolkit.getDefaultToolkit()
 		        .getMenuShortcutKeyMask(), false));
 		this.itemInscription.setAccelerator(KeyStroke.getKeyStroke('I', Toolkit.getDefaultToolkit()
 		        .getMenuShortcutKeyMask(), false));
 		
+	
 		menuCreation.add(this.itemCreationRegate);
 		menuCreation.add(this.itemInscription);
 		
@@ -59,6 +71,10 @@ public class Menu extends JMenuBar{
 		JMenu menuSimulation = new JMenu("Simulation");
 		this.itemSimulation = new JMenuItem("Simulation", 'S');
 		this.itemResultatRegate = new JMenuItem("Résultat", 'R');
+		
+		menuSimulation.setFont(police);
+		this.itemSimulation.setFont(policeSubMenu);
+		this.itemResultatRegate.setFont(policeSubMenu);
 		
 		this.itemSimulation.setAccelerator(KeyStroke.getKeyStroke('S', Toolkit.getDefaultToolkit()
 		        .getMenuShortcutKeyMask(), false));
@@ -75,6 +91,10 @@ public class Menu extends JMenuBar{
 		JMenu menuAPropos = new JMenu("A Propos");
 		this.itemAide = new JMenuItem("Aide", 'H');
 		this.itemInformation = new JMenuItem("Information", 'I');
+		
+		menuAPropos.setFont(police);
+		this.itemAide.setFont(policeSubMenu);
+		this.itemInformation.setFont(policeSubMenu);
 		
 		this.itemAide.setAccelerator(KeyStroke.getKeyStroke('H', Toolkit.getDefaultToolkit()
 		        .getMenuShortcutKeyMask(), false));
@@ -93,6 +113,9 @@ public class Menu extends JMenuBar{
 		
 	}
 	
+	public JMenu getMenuAccueil() {
+		return menuAcceuil;
+	}
 	public JMenuItem getItemCreationRegate() {
 		return itemCreationRegate;
 	}

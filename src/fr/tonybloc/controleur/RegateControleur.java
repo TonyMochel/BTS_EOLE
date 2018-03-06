@@ -2,18 +2,16 @@ package fr.tonybloc.controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -21,11 +19,12 @@ import org.jdatepicker.impl.JDatePickerImpl;
 
 import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
-import fr.tonybloc.exceptions.ExceptionChampsVide;
 import fr.tonybloc.exceptions.ExceptionAucuneLigneSelectionne;
+import fr.tonybloc.exceptions.ExceptionChampsVide;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.composant.ModelListRegate;
-import fr.tonybloc.outils.*;
+import fr.tonybloc.outils.JDoubleField;
+import fr.tonybloc.outils.Outils;
 
 /**
  * 
@@ -34,7 +33,8 @@ import fr.tonybloc.outils.*;
  */
 public class RegateControleur implements ActionListener {
 
-	//JPanel panelCreationRegate;
+	JPanel panelCreationRegate;
+	
 	private JTextField tfNomRegate;
 	private JDoubleField tfDistance;
 	private JDatePickerImpl dpDate;
@@ -67,6 +67,7 @@ public class RegateControleur implements ActionListener {
 	 * @param listRegates
 	 */
 	public RegateControleur ( 
+			JPanel panelCreationRegate,
 			ModelListRegate modelListRegate, 
 			JTextField tfNomRegate, 
 			JDoubleField tfDistance, 
@@ -77,7 +78,7 @@ public class RegateControleur implements ActionListener {
 			JButton btnModifier,
 			JTable listRegates ) {
 		
-		//panelCreationRegate = new JPanel();
+		panelCreationRegate = panelCreationRegate;
 		this.modelListRegate = modelListRegate;
 		this.tfNomRegate = tfNomRegate;
 		this.tfDistance = tfDistance;
@@ -107,7 +108,7 @@ public class RegateControleur implements ActionListener {
 			try {
 				this.ActionCreer();
 			} catch (ExceptionChampsVide e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this.panelCreationRegate, "Des champs de saisies sont vides", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 			
 		}else if(source.equals(this.btnModifier)) {
@@ -116,7 +117,7 @@ public class RegateControleur implements ActionListener {
 			try {
 				ActionModificationActiver();
 			} catch (ExceptionAucuneLigneSelectionne e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this.panelCreationRegate, "Aucune ligne sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 			
 		}else if(source.equals(this.btnSupprimer)) {
@@ -125,7 +126,7 @@ public class RegateControleur implements ActionListener {
 			try {
 				this.ActionSupprimer();
 			} catch (ExceptionAucuneLigneSelectionne e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(this.panelCreationRegate, "Aucune ligne sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 			
 		}else if(source.equals(this.btnAnnuler)) {
@@ -148,7 +149,10 @@ public class RegateControleur implements ActionListener {
 		int ligneSelectionne = this.listeRegates.getSelectedRow();
 		
 		if( ligneSelectionne != -1) {
-			this.modelListRegate.removeRegate(ligneSelectionne);
+			int confirm = JOptionPane.showConfirmDialog(this.panelCreationRegate, "Voulez-vous supprimer la régate ?", "Avertissement", JOptionPane.YES_NO_OPTION);
+			if(confirm == JOptionPane.YES_OPTION) {
+				this.modelListRegate.removeRegate(ligneSelectionne);
+			}
 		}else {
 			throw new ExceptionAucuneLigneSelectionne();
 		}

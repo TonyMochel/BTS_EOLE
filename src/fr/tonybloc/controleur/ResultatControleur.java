@@ -1,13 +1,20 @@
 package fr.tonybloc.controleur;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.text.MessageFormat;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import fr.tonybloc.dao.DAOFactory;
@@ -26,6 +33,9 @@ public class ResultatControleur implements ActionListener{
 	private final ClassementDAO classementManager = DAOFactory.getClassementDAO();
 	private final CategorieDAO categorieManager = DAOFactory.getCategorieDAO();
 	
+	private JPanel panelPrintClassement;
+	
+	private JPanel panelResultat;
 	private JTable listResultat1;
 	private JTable listResultat2;
 	private JTable listResultat3;
@@ -56,6 +66,7 @@ public class ResultatControleur implements ActionListener{
 	 * @param btnImprimer
 	 */
 	public ResultatControleur(
+			JPanel panelResultat,
 			JComboBox<Regate> cbChoixRegateCloturer,
 			JTable listResultat1,
 			JTable listResultat2,
@@ -67,8 +78,10 @@ public class ResultatControleur implements ActionListener{
 			ModelListResultat modelListResultat4,
 			JButton btnTelechargerPDF,
 			JButton btnTelechargerCSV,
-			JButton btnImprimer			
+			JButton btnImprimer	,
+			JPanel panelPrintClassement
 			) {
+		this.panelResultat = panelResultat;
 		
 		this.cbChoixRegateCloturer = cbChoixRegateCloturer;
 		this.listResultat1 = listResultat1;
@@ -82,6 +95,7 @@ public class ResultatControleur implements ActionListener{
 		this.btnTelechargerPDF = btnTelechargerPDF;
 		this.btnTelechargerCSV = btnTelechargerCSV;
 		this.btnImprimer = btnImprimer;	
+		this.panelPrintClassement = panelPrintClassement;
 	}
 	
 	/**
@@ -95,28 +109,69 @@ public class ResultatControleur implements ActionListener{
 		this.modelListResultat4.updateTable(this.regateSelectionner, categorieManager.find(4));
 	}
 	
+	/**
+	 * Téléchage le fichier de résultat en .csv
+	 */
+	private void ActionTelechargerCsv() {
+		
+		if(this.regateSelectionner == null) {
+			JOptionPane.showMessageDialog(this.panelResultat, "Aucun régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+		}else {
+			String cheminFichier = "./classement/" + this.regateSelectionner.getId() + "" + this.regateSelectionner.getIntituler().replaceAll(" ", "_") + "" + this.regateSelectionner.getDate_depart_string() + ".csv";
+			File fichierCSV = new File(cheminFichier);
+			
+			Outils.toExcel(this.listResultat1, this.listResultat2, this.listResultat3, this.listResultat4, this.regateSelectionner, fichierCSV);
+		}
+	}
+	/**
+	 * Imprime la fiche de résultat
+	 */
+	private void ActionImprimer() {
+		if(this.regateSelectionner == null) {
+			JOptionPane.showMessageDialog(this.panelResultat, "Aucun régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+		}else {			
+		
+			PrinterJob pj = PrinterJob.getPrinterJob();
+			pj.setJobName(" Print Component ");
+			pj.setPrintable (new Printable() {    
+				public int print(Graphics pg, PageFormat pf, int pageNum){
+					if (pageNum > 0){
+						return Printable.NO_SUCH_PAGE;
+					}
+	
+					Graphics2D g2 = (Graphics2D) pg;
+					g2.translate(pf.getImageableX(), pf.getImageableY());
+					panelPrintClassement.paint(g2);
+					return Printable.PAGE_EXISTS;
+			    }
+			});
+			if (pj.printDialog() == false) {
+				return;
+			}
+			try {
+				pj.print();
+			} catch (PrinterException ex) {
+				if(this.regateSelectionner == null) {
+					JOptionPane.showMessageDialog(this.panelResultat, "Aucune imprimantes trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * ActionListener
+	 * @param event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
 		
 		if(source.equals(cbChoixRegateCloturer)) {
 			ActionSelectionnerRegate();
-		}
-		else if(source.equals(btnImprimer)) {
-			MessageFormat header = new MessageFormat("Classement des participants");
-			MessageFormat footer = new MessageFormat("test");
-			try {
-				this.listResultat1.print(JTable.PrintMode.NORMAL,header, footer );
-				
-			}catch(java.awt.print.PrinterException e) {
-				System.out.println("Erreur d'impression");
-			}
+		}else if(source.equals(btnImprimer)) {
+			ActionImprimer();
 		}else if(source.equals(btnTelechargerCSV)) {
-			
-			String cheminFichier = "./" + this.regateSelectionner.getId() + "" + this.regateSelectionner.getIntituler().replaceAll(" ", "_") + "" + this.regateSelectionner.getDate_depart_string() + ".csv";
-			File fichierCSV = new File(cheminFichier);
-			
-			Outils.toExcel(this.listResultat1, this.listResultat2, this.listResultat3, this.listResultat4, this.regateSelectionner, fichierCSV);
+			ActionTelechargerCsv();
 		}
 	}
 }

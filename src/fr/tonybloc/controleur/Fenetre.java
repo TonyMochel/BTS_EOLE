@@ -25,10 +25,11 @@ public class Fenetre extends JFrame {
 	private JPanel panelInscription;
 	private JPanel panelSimulation;
 	private JPanel panelResultat;
-	private JPanel panelAide;
+	private JPanel panelAccueil;
 	private JPanel panelInformation;
 	
 	Menu menuPrincipal;
+	VueAccueil vueAccueil;
 	VueCreationRegate vueCreationRegate;
 	VueInscription vueInscription;
 	VueSimulation vueSimulation;
@@ -36,14 +37,17 @@ public class Fenetre extends JFrame {
 	
 	public Fenetre() {
 		
-		this.eoleApplication = new JFrame("Test de menu");
+		this.eoleApplication = new JFrame("Eole : Gestionnaire de régate");
 		
 		this.menuPrincipal = new Menu();
+		
+		this.vueAccueil = new VueAccueil();
 		this.vueCreationRegate = new VueCreationRegate();
 		this.vueInscription = new VueInscription();
 		this.vueSimulation = new VueSimulation();
 		this.vueResultat = new VueResultatClassement();
 		
+		this.panelAccueil = vueAccueil.getContent();
 		this.panelCreationRegate = vueCreationRegate.getContent();
 		this.panelInscription = vueInscription.getContent();
 		this.panelSimulation = vueSimulation.getContent();
@@ -52,6 +56,7 @@ public class Fenetre extends JFrame {
 		// Controleur : Création de Regate
 		RegateControleur regateControleur = new RegateControleur
 				(
+						this.panelCreationRegate,
 						this.vueCreationRegate.getVueListe().getModel(),
 						this.vueCreationRegate.getVueFormulaire().getTfNomRegate(),
 						this.vueCreationRegate.getVueFormulaire().getTfDistance(),
@@ -71,6 +76,7 @@ public class Fenetre extends JFrame {
 		// Controleur : Inscription des participants
 		InscriptionControleur inscriptionControleur = new InscriptionControleur
 				(
+						this.panelInscription,
 						this.vueInscription.getVueListe().getModel(),
 						this.vueInscription.getVueFormulaire().getTfNomVoilier(), 
 						this.vueInscription.getVueFormulaire().getTfNomSkippeur(),
@@ -116,6 +122,7 @@ public class Fenetre extends JFrame {
 		this.vueSimulation.getVueCommande().getBtnDemarreChrono().addActionListener(classementControleur);
 		
 		ResultatControleur resultControleur = new ResultatControleur(
+				this.panelResultat,
 				this.vueResultat.getCbChoixRegateCloturer(),
 				this.vueResultat.getListClassementCategorie1(),
 				this.vueResultat.getListClassementCategorie2(),
@@ -127,7 +134,8 @@ public class Fenetre extends JFrame {
 				this.vueResultat.getModelListResultat4(),
 				this.vueResultat.getBtnTelechargerPDF(),
 				this.vueResultat.getBtnTelechargerCSV(),
-				this.vueResultat.getBtnImprimer()
+				this.vueResultat.getBtnImprimer(),
+				this.vueResultat.getPanelClassement()
 				);
 		
 		this.vueResultat.getCbChoixRegateCloturer().addActionListener(resultControleur);
@@ -139,6 +147,7 @@ public class Fenetre extends JFrame {
 		MenuControle menuControleur = new MenuControle
 				(
 						this.eoleApplication,
+						this.panelAccueil,
 						this.panelCreationRegate,
 						this.panelInscription,
 						this.panelSimulation,
@@ -146,6 +155,7 @@ public class Fenetre extends JFrame {
 						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
 						this.vueSimulation.getVueTableau().getCbChoixRegate(),
 						this.vueResultat.getCbChoixRegateCloturer(),
+						this.menuPrincipal.getMenuAccueil(),
 						this.menuPrincipal.getItemCreationRegate(), 
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
@@ -153,7 +163,7 @@ public class Fenetre extends JFrame {
 						this.menuPrincipal.getItemAide(), 
 						this.menuPrincipal.getItemInformation()
 				);
-		
+		this.menuPrincipal.getMenuAccueil().addActionListener(menuControleur);
 		this.menuPrincipal.getItemCreationRegate().addActionListener(menuControleur);
 		this.menuPrincipal.getItemInscription().addActionListener(menuControleur);
 		this.menuPrincipal.getItemSimulation().addActionListener(menuControleur);
@@ -166,8 +176,9 @@ public class Fenetre extends JFrame {
 		this.eoleApplication.setResizable(false);
 		this.eoleApplication.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.eoleApplication.setJMenuBar(menuPrincipal);
-		this.eoleApplication.setMinimumSize(new Dimension(1200, 700));
-	    this.eoleApplication.pack();
+		this.eoleApplication.setContentPane(panelAccueil);
+		this.eoleApplication.setMinimumSize(new Dimension(1400, 900));
+		this.eoleApplication.pack();
 	    this.eoleApplication.setVisible(true);
 		
 		

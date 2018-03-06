@@ -157,4 +157,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 		}
 		return estArrive;
 	}
+	public void videDonnee() {
+		this.donnee = new ArrayList<Classement>();
+	}
 }
