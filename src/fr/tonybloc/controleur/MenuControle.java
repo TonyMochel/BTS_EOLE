@@ -27,7 +27,6 @@ public class MenuControle implements ActionListener {
 	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
-	JMenu menuAccueil;
 	
 	JPanel contenuCreationRegate;
 	JPanel contenuInscription;
@@ -35,10 +34,14 @@ public class MenuControle implements ActionListener {
 	JPanel contenuResultat;
 	JPanel contenuAccueil;
 	
-	JComboBox cbChoixRegateInscription;
-	JComboBox cbChoixRegateClassement;
-	JComboBox cbChoixRegateResult;
-	
+	RegateControleur regateControleur;
+	InscriptionControleur inscriptionControleur;
+	ClassementControleur classementControleur;
+	ResultatControleur resultatControleur;
+//	JComboBox cbChoixRegateInscription;
+//	JComboBox cbChoixRegateClassement;
+//	JComboBox cbChoixRegateResult;
+//	
 	JFrame frame;
 	
 	private RegateDAO regateManager;
@@ -59,10 +62,13 @@ public class MenuControle implements ActionListener {
 			JPanel contenuInscription,
 			JPanel contenuSimulation,
 			JPanel contenuResultat,
-			JComboBox cbChoixRegateInscription,
-			JComboBox cbChoixRegateClassement, 
-			JComboBox cbChoixRegateResult,
-			JMenu menuAccueil,
+			RegateControleur regateControleur,
+			InscriptionControleur inscriptionControleur, 
+			ClassementControleur classementControleur,
+			ResultatControleur resultatControleur,
+//			JComboBox cbChoixRegateInscription,
+//			JComboBox cbChoixRegateClassement, 
+//			JComboBox cbChoixRegateResult,
 			JMenuItem itemCreationRegate, 
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
@@ -71,7 +77,6 @@ public class MenuControle implements ActionListener {
 			JMenuItem itemInformation) {
 		
 		this.frame = frame;
-		this.menuAccueil = menuAccueil;
 		
 		this.contenuAccueil = contenuAccueil;
 		this.contenuCreationRegate = contenuCreationRegate;
@@ -86,9 +91,13 @@ public class MenuControle implements ActionListener {
 		this.itemAide = itemAide;
 		this.itemInformation = itemInformation;
 		
-		this.cbChoixRegateInscription = cbChoixRegateInscription;
-		this.cbChoixRegateClassement = cbChoixRegateClassement;
-		this.cbChoixRegateResult = cbChoixRegateResult;
+		this.regateControleur = regateControleur;
+		this.inscriptionControleur = inscriptionControleur;
+		this.classementControleur = classementControleur;
+		this.resultatControleur = resultatControleur;
+//		this.cbChoixRegateInscription = cbChoixRegateInscription;
+//		this.cbChoixRegateClassement = cbChoixRegateClassement;
+//		this.cbChoixRegateResult = cbChoixRegateResult;
 	}
 	/**
 	 * Evenement
@@ -98,32 +107,28 @@ public class MenuControle implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		
-		if(source.equals(menuAccueil)) {
-			this.frame.setContentPane(this.contenuAccueil);
-			this.frame.setVisible(true);
-			
-		}else if(source.equals(itemCreationRegate) ) {
+		if(source.equals(itemCreationRegate) ) {
+			regateControleur.updateComponent();
 			
 			this.frame.setContentPane(this.contenuCreationRegate);
 			this.frame.setVisible(true);
 		
 		}else if(source.equals(itemInscription)) {
-			
-			this.cbChoixRegateInscription.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
+			inscriptionControleur.updateComponent();
 			
 			this.frame.setContentPane(this.contenuInscription);			
 			this.frame.setVisible(true);
 			
 		}else if(source.equals(this.itemResultatRegate)) {
-			
-			this.cbChoixRegateResult.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));
+			this.resultatControleur.updateComponent();
+//			this.cbChoixRegateResult.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));
 			
 			this.frame.setContentPane(this.contenuResultat);
 			this.frame.setVisible(true);
 			
 		}else if(source.equals(this.itemSimulation)) {
-			
-			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
+			this.classementControleur.updateComponent();
+//			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 			
 			this.frame.setContentPane(this.contenuSimulation);
 			this.frame.setVisible(true);

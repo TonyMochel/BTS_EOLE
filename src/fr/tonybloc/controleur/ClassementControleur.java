@@ -108,8 +108,9 @@ public class ClassementControleur implements ActionListener{
 			this.regateSelectionner.setCloture(true);
 			this.regateManager.clotureRegate(this.regateSelectionner);
 			
-			this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));		
-			this.modelListParticipantSimulation.videDonnee();
+			this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));	
+			this.regateSelectionner = null;
+			this.modelListParticipantSimulation.updateTable(regateSelectionner);
 		}
 		
 	}
@@ -249,19 +250,26 @@ public class ClassementControleur implements ActionListener{
 			ActionStopChrono();
 		}else if(source.equals(btnCloture)) {			
 			if(this.modelListParticipantSimulation.tousLesParticipantSontArrive() && isStarted == false) {
-				
-				ActionCloturerRegate();
+				int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Voulez-vous cloturer la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
+				if(confirm == JOptionPane.YES_OPTION) {
+					ActionCloturerRegate();
+				}
 			} else if(isStarted) {
 				JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'est pas stopé", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			} else{
 				int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Tous les participant ne sont pas encore arrivé. Voulez-vous cloturer la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
 				if(confirm == JOptionPane.YES_OPTION) {
 					ActionCloturerRegate();
-					System.out.println("Action effectué");
 				}
 			}
 			
 		}
 	}
-	
+
+	public void updateComponent() {
+		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
+		this.regateSelectionner = null;
+		this.modelListParticipantSimulation.updateTable(null);
+		
+	}	
 }

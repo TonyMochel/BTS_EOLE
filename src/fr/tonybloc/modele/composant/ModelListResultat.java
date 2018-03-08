@@ -113,7 +113,13 @@ public class ModelListResultat extends AbstractTableModel{
 			classement.setRang(rang);
 		}
 		
-		
+		fireTableDataChanged();
+	}
+	/**
+	 * Mes à jour les donnée de la table
+	 */
+	public void updateTable() {
+		this.donnee = new ArrayList<Classement>();
 		fireTableDataChanged();
 	}
 }

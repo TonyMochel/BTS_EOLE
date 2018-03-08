@@ -20,8 +20,6 @@ import javax.swing.KeyStroke;
  */
 public class Menu extends JMenuBar{
 	
-	JMenu menuAcceuil;
-	
 	JMenuItem itemCreationRegate;
 	JMenuItem itemInscription;
 	
@@ -38,11 +36,6 @@ public class Menu extends JMenuBar{
 	 * Menu de l'application
 	 */
 	public Menu() {
-		/*
-		 * Menu Acceuil  
-		 */
-		this.menuAcceuil = new JMenu("Acceuil");
-		this.menuAcceuil.setFont(police);
 		
 		/*
 		 * Menu Création  
@@ -106,16 +99,12 @@ public class Menu extends JMenuBar{
 		/*
 		 * Ajoute au JMenuBar les éléments du menu  
 		 */
-		add(menuAcceuil);
 		add(menuCreation);
 		add(menuSimulation);
 		add(menuAPropos);
 		
 	}
 	
-	public JMenu getMenuAccueil() {
-		return menuAcceuil;
-	}
 	public JMenuItem getItemCreationRegate() {
 		return itemCreationRegate;
 	}

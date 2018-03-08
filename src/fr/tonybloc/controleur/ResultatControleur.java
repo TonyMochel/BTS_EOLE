@@ -23,6 +23,7 @@ import fr.tonybloc.dao.implement.ClassementDAO;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.dao.implement.VoilierDAO;
 import fr.tonybloc.modele.Regate;
+import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListResultat;
 import fr.tonybloc.outils.Outils;
 
@@ -121,6 +122,7 @@ public class ResultatControleur implements ActionListener{
 			File fichierCSV = new File(cheminFichier);
 			
 			Outils.toExcel(this.listResultat1, this.listResultat2, this.listResultat3, this.listResultat4, this.regateSelectionner, fichierCSV);
+			JOptionPane.showMessageDialog(this.panelResultat, "Téléchargement éffectué", "Info", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	/**
@@ -173,5 +175,18 @@ public class ResultatControleur implements ActionListener{
 		}else if(source.equals(btnTelechargerCSV)) {
 			ActionTelechargerCsv();
 		}
+	}
+	
+	/**
+	 * Mes à jour les composants
+	 */
+	public void updateComponent() {
+		this.cbChoixRegateCloturer.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));
+		this.regateSelectionner = null;
+		this.modelListResultat1.updateTable();
+		this.modelListResultat2.updateTable();
+		this.modelListResultat3.updateTable();
+		this.modelListResultat4.updateTable();
+		
 	}
 }

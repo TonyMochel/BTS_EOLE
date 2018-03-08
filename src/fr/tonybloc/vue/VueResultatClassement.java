@@ -111,7 +111,7 @@ public class VueResultatClassement {
 		
 		panelControle.add(this.btnImprimer);
 		panelControle.add(this.btnTelechargerCSV);
-		panelControle.add(this.btnTelechargerPDF);
+		//panelControle.add(this.btnTelechargerPDF);
 		
 		panelChoixRegate.add(lbChoixRegate);
 		panelChoixRegate.add(this.cbChoixRegateCloturer);

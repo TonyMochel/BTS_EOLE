@@ -22,6 +22,7 @@ import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.exceptions.ExceptionAucuneLigneSelectionne;
 import fr.tonybloc.exceptions.ExceptionChampsVide;
 import fr.tonybloc.modele.Regate;
+import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListRegate;
 import fr.tonybloc.outils.JDoubleField;
 import fr.tonybloc.outils.Outils;
@@ -241,5 +242,11 @@ public class RegateControleur implements ActionListener {
 		this.dpDate.getJFormattedTextField().setText("");
 		this.btnCreation.setText("Créer");
 		this.action = ACTION_CREE;
+	}
+	/**
+	 * Mes à jour les composants
+	 */
+	public void updateComponent(){		
+		this.modelListRegate.updateTable();
 	}
 }

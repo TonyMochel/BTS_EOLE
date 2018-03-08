@@ -21,7 +21,7 @@ public class VueAccueil {
 		this.content.setBorder(new EmptyBorder(20, 10, 20, 10));
 		JPanel panelGroup = new JPanel(new BorderLayout());
 		
-		this.lbTitre = new JLabel("LOGICIEL DE GESTION DE REGATES", SwingConstants.CENTER);
+		this.lbTitre = new JLabel("APPLICATION : GESTIONNAIRE DE REGATE", SwingConstants.CENTER);
 		this.lbTitre.setFont(policeTitle);
 		
 		ImageIcon icCourse 	= new ImageIcon("./img/logo_eole.png");

@@ -119,5 +119,13 @@ public class ModelListRegate extends AbstractTableModel {
 		this.regates.set(rowIndex, regate);
 		fireTableRowsUpdated(rowIndex, rowIndex);
 	}
+	
+	/**
+	 * Mes à jour toutes les donnée de la table
+	 */
+	public void updateTable() {
+		this.regates = this.regateManager.findAll();
+		fireTableDataChanged();
+	}
 
 }

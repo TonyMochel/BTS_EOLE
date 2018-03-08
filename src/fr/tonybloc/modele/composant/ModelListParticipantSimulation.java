@@ -55,8 +55,11 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	 * @param regate
 	 */
 	public void updateTable(Regate regate) {		
-		
-		this.donnee = classementManager.findAllParticipant(regate);
+		if(regate == null) {
+			this.donnee = new ArrayList<Classement>();
+		}else {
+			this.donnee = classementManager.findAllParticipant(regate);
+		}	
 		fireTableDataChanged();
 		
 	}

@@ -22,6 +22,7 @@ import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 import fr.tonybloc.modele.composant.ModelComboBoxCategories;
+import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListParticipant;
 import fr.tonybloc.outils.JNumberField;
 import fr.tonybloc.outils.Outils;
@@ -158,9 +159,7 @@ public class InscriptionControleur implements ActionListener {
 	 */
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegate.getSelectedItem();
-		System.out.println(regateSelectionner.getId() + " - " + regateSelectionner.getIntituler());
-		List<Voilier> participants = regateManager.getAllParticipant(regateSelectionner);
-		modelListParticipant.updateTables(participants);
+		modelListParticipant.updateTables(this.regateSelectionner);
 		
 		ActionActualiseLeLabelInformations();
 		
@@ -171,7 +170,6 @@ public class InscriptionControleur implements ActionListener {
 	 */
 	private void ActionActualiseLeLabelInformations(){
 		this.lbInfoJTable.setText("Régate : " + regateSelectionner.getIntituler() + " - Nombre de participants : " + modelListParticipant.getRowCount()+ "/20");
-
 	}
 	
 	/**
@@ -214,5 +212,16 @@ public class InscriptionControleur implements ActionListener {
 		System.out.println("Click sur le bouton");
 
 	}
+	
+	/**
+	 * Mes à jour les composants
+	 */
+	public void updateComponent(){
+		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
+		this.regateSelectionner = null;
+		this.lbInfoJTable.setText("Aucune régate sélectionné");
+		this.modelListParticipant.updateTables(null);
+	}
+	
 
 }

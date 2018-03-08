@@ -152,10 +152,13 @@ public class Fenetre extends JFrame {
 						this.panelInscription,
 						this.panelSimulation,
 						this.panelResultat,
-						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
-						this.vueSimulation.getVueTableau().getCbChoixRegate(),
-						this.vueResultat.getCbChoixRegateCloturer(),
-						this.menuPrincipal.getMenuAccueil(),
+						regateControleur,
+						inscriptionControleur,
+						classementControleur,
+						resultControleur,
+//						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
+//						this.vueSimulation.getVueTableau().getCbChoixRegate(),
+//						this.vueResultat.getCbChoixRegateCloturer(),
 						this.menuPrincipal.getItemCreationRegate(), 
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
@@ -163,7 +166,6 @@ public class Fenetre extends JFrame {
 						this.menuPrincipal.getItemAide(), 
 						this.menuPrincipal.getItemInformation()
 				);
-		this.menuPrincipal.getMenuAccueil().addActionListener(menuControleur);
 		this.menuPrincipal.getItemCreationRegate().addActionListener(menuControleur);
 		this.menuPrincipal.getItemInscription().addActionListener(menuControleur);
 		this.menuPrincipal.getItemSimulation().addActionListener(menuControleur);
@@ -180,26 +182,11 @@ public class Fenetre extends JFrame {
 		this.eoleApplication.setMinimumSize(new Dimension(1400, 900));
 		this.eoleApplication.pack();
 	    this.eoleApplication.setVisible(true);
-		
-		
 	}
 	
 	
 	public static void main(String[] args) {
 		new Fenetre();
-		
-		
-		/*
-		JOptionPane.showMessageDialog(maFrame,
-				"Course non créée \nLa distance n'est pas un décimal",
-				"Avertissement",
-		         JOptionPane.WARNING_MESSAGE);
-		*/
-		
-		// Controleur : Creation Régate
-		
-		// https://www.youtube.com/watch?v=axkR5-evqsc
-		
 	}
 	
 

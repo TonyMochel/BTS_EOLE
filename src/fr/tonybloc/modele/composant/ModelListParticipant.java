@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.ClassementDAO;
+import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.dao.implement.VoilierDAO;
 import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
@@ -15,7 +16,7 @@ import fr.tonybloc.modele.Voilier;
 public class ModelListParticipant extends AbstractTableModel {
 
 	
-	
+	private RegateDAO regateManager;
 	private VoilierDAO participantManager;
 	private ClassementDAO classementManager;
 	
@@ -34,6 +35,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	 */
 	public ModelListParticipant() {
 		super();
+		regateManager = DAOFactory.getRegateDAO();
 		participantManager = DAOFactory.getVoilierDAO();
 		classementManager = DAOFactory.getClassementDAO();
 		
@@ -124,10 +126,16 @@ public class ModelListParticipant extends AbstractTableModel {
 		fireTableRowsDeleted(rowIndex, rowIndex);	
 	}
 	
-	public void updateTables(List<Voilier> participants) {
-		this.participants = participants;
+	/**
+	 * Met à jours les donnée de la JTable
+	 * @param regate
+	 */
+	public void updateTables(Regate regate) {
+		if(regate == null) {
+			this.participants = new ArrayList<Voilier>();
+		}else {
+			this.participants = regateManager.getAllParticipant(regate);
+		}		
 		fireTableDataChanged();
 	}
-	
-	
 }
