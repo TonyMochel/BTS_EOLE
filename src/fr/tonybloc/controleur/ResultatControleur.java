@@ -27,11 +27,13 @@ import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListResultat;
 import fr.tonybloc.outils.Outils;
 
+/**
+ * Controleur résultat
+ * @author Tony
+ *
+ */
 public class ResultatControleur implements ActionListener{
 	
-	private final RegateDAO regateManager = DAOFactory.getRegateDAO();
-	private final VoilierDAO voilierManager = DAOFactory.getVoilierDAO();
-	private final ClassementDAO classementManager = DAOFactory.getClassementDAO();
 	private final CategorieDAO categorieManager = DAOFactory.getCategorieDAO();
 	
 	private JPanel panelPrintClassement;
@@ -55,16 +57,21 @@ public class ResultatControleur implements ActionListener{
 	private Regate regateSelectionner;
 	
 	/**
-	 * Crée une instance de la classe
+	 * Crée une instance de la classe 'ResultatControleur'
+	 * @param panelResultat
 	 * @param cbChoixRegateCloturer
 	 * @param listResultat1
 	 * @param listResultat2
 	 * @param listResultat3
 	 * @param listResultat4
-	 * @param modelListResultat
+	 * @param modelListResultat1
+	 * @param modelListResultat2
+	 * @param modelListResultat3
+	 * @param modelListResultat4
 	 * @param btnTelechargerPDF
 	 * @param btnTelechargerCSV
 	 * @param btnImprimer
+	 * @param panelPrintClassement
 	 */
 	public ResultatControleur(
 			JPanel panelResultat,
@@ -135,6 +142,7 @@ public class ResultatControleur implements ActionListener{
 		
 			PrinterJob pj = PrinterJob.getPrinterJob();
 			pj.setJobName(" Print Component ");
+			
 			pj.setPrintable (new Printable() {    
 				public int print(Graphics pg, PageFormat pf, int pageNum){
 					if (pageNum > 0){

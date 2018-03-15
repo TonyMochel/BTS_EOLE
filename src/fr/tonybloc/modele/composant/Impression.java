@@ -7,10 +7,14 @@ import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 
 import javax.swing.JPanel;
-
+/**
+ * Impression
+ * @author Tony
+ *
+ */
 public class Impression extends JPanel implements Printable{
 
-	  /** **/
+	
 
 	JPanel frameToPrint;
 	public int print(Graphics g, PageFormat pf, int page) throws PrinterException {

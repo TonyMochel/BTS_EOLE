@@ -16,25 +16,45 @@ import fr.tonybloc.dao.implement.*;
 import fr.tonybloc.modele.*;
 import fr.tonybloc.outils.JNumberField;
 import fr.tonybloc.vue.*;
-
+/**
+ * Fenetre de l'application
+ * @author Tony
+ *
+ */
 public class Fenetre extends JFrame {
 
+	/** Frame de l'application */
 	private JFrame eoleApplication;
 	
+	/** Page création d'une régate */
 	private JPanel panelCreationRegate;
+	/** Page Inscription des participants */
 	private JPanel panelInscription;
+	/** Page de simulation */
 	private JPanel panelSimulation;
+	/** Page de résultat */
 	private JPanel panelResultat;
+	/** Page d'accueil */
 	private JPanel panelAccueil;
+	/** Page d'information*/
 	private JPanel panelInformation;
 	
+	/** Menu de l'application */
 	Menu menuPrincipal;
+	/** Vue page acceuil */
 	VueAccueil vueAccueil;
+	/** Vue page création de régate */
 	VueCreationRegate vueCreationRegate;
+	/** Vue page inscription */
 	VueInscription vueInscription;
+	/** Vue page simulation */
 	VueSimulation vueSimulation;
+	/** Vue page résultat */
 	VueResultatClassement vueResultat;
 	
+	/**
+	 * Constructeur de la class 'Fenetre'
+	 */
 	public Fenetre() {
 		
 		this.eoleApplication = new JFrame("Eole : Gestionnaire de régate");
@@ -156,9 +176,6 @@ public class Fenetre extends JFrame {
 						inscriptionControleur,
 						classementControleur,
 						resultControleur,
-//						this.vueInscription.getVueFormulaire().getCbChoixRegate(),
-//						this.vueSimulation.getVueTableau().getCbChoixRegate(),
-//						this.vueResultat.getCbChoixRegateCloturer(),
 						this.menuPrincipal.getItemCreationRegate(), 
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
@@ -179,7 +196,7 @@ public class Fenetre extends JFrame {
 		this.eoleApplication.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.eoleApplication.setJMenuBar(menuPrincipal);
 		this.eoleApplication.setContentPane(panelAccueil);
-		this.eoleApplication.setMinimumSize(new Dimension(1400, 900));
+		this.eoleApplication.setMinimumSize(new Dimension(1200, 700));
 		this.eoleApplication.pack();
 	    this.eoleApplication.setVisible(true);
 	}

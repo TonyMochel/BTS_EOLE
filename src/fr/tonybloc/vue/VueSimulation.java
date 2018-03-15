@@ -4,9 +4,13 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
+/**
+ * Vue page simulation de la régate
+ * @author Tony
+ *
+ */
 public class VueSimulation {
 
-	
 	private VueSimulationTableau vueTableau;
 	private VueSimulationCommande vueCommande;
 	

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.modele.composant.ModelComboBoxRegates;
+
 /**
  * Controleur du menu
  * @author Tony
@@ -27,7 +28,6 @@ public class MenuControle implements ActionListener {
 	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
-	
 	JPanel contenuCreationRegate;
 	JPanel contenuInscription;
 	JPanel contenuSimulation;
@@ -38,16 +38,23 @@ public class MenuControle implements ActionListener {
 	InscriptionControleur inscriptionControleur;
 	ClassementControleur classementControleur;
 	ResultatControleur resultatControleur;
-//	JComboBox cbChoixRegateInscription;
-//	JComboBox cbChoixRegateClassement;
-//	JComboBox cbChoixRegateResult;
-//	
+
 	JFrame frame;
 	
 	private RegateDAO regateManager;
 	
 	/**
-	 * Instancie le Controleur
+	 * Crée une instance de la classe 'MenuControle'
+	 * @param frame
+	 * @param contenuAccueil
+	 * @param contenuCreationRegate
+	 * @param contenuInscription
+	 * @param contenuSimulation
+	 * @param contenuResultat
+	 * @param regateControleur
+	 * @param inscriptionControleur
+	 * @param classementControleur
+	 * @param resultatControleur
 	 * @param itemCreationRegate
 	 * @param itemInscription
 	 * @param itemSimulation
@@ -66,9 +73,6 @@ public class MenuControle implements ActionListener {
 			InscriptionControleur inscriptionControleur, 
 			ClassementControleur classementControleur,
 			ResultatControleur resultatControleur,
-//			JComboBox cbChoixRegateInscription,
-//			JComboBox cbChoixRegateClassement, 
-//			JComboBox cbChoixRegateResult,
 			JMenuItem itemCreationRegate, 
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
@@ -95,12 +99,9 @@ public class MenuControle implements ActionListener {
 		this.inscriptionControleur = inscriptionControleur;
 		this.classementControleur = classementControleur;
 		this.resultatControleur = resultatControleur;
-//		this.cbChoixRegateInscription = cbChoixRegateInscription;
-//		this.cbChoixRegateClassement = cbChoixRegateClassement;
-//		this.cbChoixRegateResult = cbChoixRegateResult;
 	}
 	/**
-	 * Evenement
+	 * ActionPerformed
 	 * @param e
 	 */
 	@Override
@@ -121,14 +122,12 @@ public class MenuControle implements ActionListener {
 			
 		}else if(source.equals(this.itemResultatRegate)) {
 			this.resultatControleur.updateComponent();
-//			this.cbChoixRegateResult.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));
-			
+
 			this.frame.setContentPane(this.contenuResultat);
 			this.frame.setVisible(true);
 			
 		}else if(source.equals(this.itemSimulation)) {
 			this.classementControleur.updateComponent();
-//			this.cbChoixRegateClassement.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 			
 			this.frame.setContentPane(this.contenuSimulation);
 			this.frame.setVisible(true);
@@ -139,12 +138,6 @@ public class MenuControle implements ActionListener {
 		}else {
 			System.out.println("Elément de menu [" + e.getActionCommand()
 	         + "] utilisé.");	
-		}
-		 		
+		}	 		
 	}
-	
-	public void AfficheCreateionRegatePanel() {
-		
-	}
-
 }

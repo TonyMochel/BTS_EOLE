@@ -24,8 +24,11 @@ import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.outils.*;
 
-
-// http://www.dreamincode.net/forums/topic/339909-text-field-text-overlay/ 
+/**
+ * Vue formulaire : Inscription des participants 
+ * @author Tony
+ *
+ */
 public class VueInscriptionFormulaire {
 
 	private JPanel formulaire;

@@ -14,15 +14,18 @@ import fr.tonybloc.dao.implement.VoilierDAO;
 import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
-
+/**
+ * Model de la JTable : Liste des Participants (Simulation)
+ * @author Tony
+ *
+ */
 public class ModelListParticipantSimulation extends AbstractTableModel{
 
-	
-	private VoilierDAO participantManager;
+	/** Classement Handler */
 	private ClassementDAO classementManager;
-	private RegateDAO regateManager;
-	
+	/** Donnée de la JTable */
 	private List<Classement> donnee;
+	/** En-tête de la JTable */
 	private final String[] entetes = {"ID", "VOILIER", "NOM", "PRENOM", "TEMPS REEL", "TEMPS COMPENSE"};
 	
 
@@ -42,10 +45,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	 */
 	public ModelListParticipantSimulation() {
 		super();
-		this.participantManager = DAOFactory.getVoilierDAO();
 		this.classementManager = DAOFactory.getClassementDAO();
-		this.regateManager = DAOFactory.getRegateDAO();
-		
 		this.donnee = new ArrayList<Classement>();
 		
 	}
@@ -113,16 +113,9 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 				return voilier.getPrenomSkippeur();
 			case TEMPS_REEL:
 				Time tempsArriver = classement.getTempsArrive();
-//				if(tempsArriver == null) {
-//					tempsArriver = Time.valueOf("00:00:00");
-//				}
 				return tempsArriver;
 			case TEMPS_COMPENSE:
 				Time tempsCompense = classement.getTempsCompense();
-//				System.out.println("Temps : "+tempsCompense);
-//				if(tempsCompense == null) {
-//					tempsCompense = Time.valueOf("00:00:00");
-//				}
 				return tempsCompense;
 			default: 
 				return null;
@@ -130,6 +123,11 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 		
 	}
 	
+	/**
+	 * Met à jour le TempArriver
+	 * @param rowIndex
+	 * @param sTime
+	 */
 	public void updateTempArriver(int rowIndex, String sTime) {
 		Time tempArriver;
 		if(sTime == null) {
@@ -146,6 +144,10 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 		fireTableRowsUpdated(rowIndex, rowIndex);
 	}
 	
+	/**
+	 * Verifie, que tous les participants sont arrivés
+	 * @return boolean
+	 */
 	public boolean tousLesParticipantSontArrive() {
 		
 		boolean estArrive = true;

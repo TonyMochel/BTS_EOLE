@@ -27,6 +27,11 @@ import fr.tonybloc.modele.composant.ModelListParticipant;
 import fr.tonybloc.outils.JNumberField;
 import fr.tonybloc.outils.Outils;
 
+/**
+ * Controleur page inscription
+ * @author Tony
+ *
+ */
 public class InscriptionControleur implements ActionListener {
 
 	JPanel panelInscription;
@@ -57,11 +62,19 @@ public class InscriptionControleur implements ActionListener {
 	
 	
 	/**
-	 * Instancie le controleur
-	 * @param voilier
+	 * Crée une instance de la classe 'InscriptionControleur'
+	 * @param panelInscription
+	 * @param modelListParticipant
 	 * @param tfNomVoilier
 	 * @param tfNomSkippeur
+	 * @param tfPrenomSkippeur
+	 * @param tfRating
 	 * @param cbCategorie
+	 * @param cbChoixRegate
+	 * @param btnInscription
+	 * @param btnAnnuler
+	 * @param listParticipants
+	 * @param lbInfoJTable
 	 */
 	public InscriptionControleur(
 			JPanel panelInscription,
@@ -93,13 +106,12 @@ public class InscriptionControleur implements ActionListener {
 		init();
 	}
 	
-	
+	/** Intialise les composant graphiques*/
 	private void init() {
 		this.regateSelectionner = null;
 		this.categorieSelectionner = null;
 //		Outils.placeholder(this.tfNomSkippeur, PLACEHOLDER_NOM_SKIPPEUR);
 //		Outils.placeholder(this.tfPrenomSkippeur, PLACEHOLDER_PRENOM_SKIPPEUR);
-		
 //		this.cbChoixRegate.setModel(new ModelComboBoxRegates());
 		this.cbCategorie.setModel(new ModelComboBoxCategories());
 		

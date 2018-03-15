@@ -12,15 +12,23 @@ import fr.tonybloc.dao.implement.VoilierDAO;
 import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
-
+/**
+ * Model de la JTable : Liste des Participants
+ * @author Tony
+ *
+ */
 public class ModelListParticipant extends AbstractTableModel {
 
-	
+	/** Regate Handler */
 	private RegateDAO regateManager;
+	/** Voilier Handler */
 	private VoilierDAO participantManager;
+	/** Classement Handler */
 	private ClassementDAO classementManager;
 	
+	/** Donnée de la JTable */
 	private List<Voilier> participants;
+	/** En-tête de la JTable */
 	private final String[] entetes = { "ID_VOILIER","NOM_SKIPPEUR","PRENOM_SKIPPEUR","NOM_VOILIER","CATEGORIE","RATING"};
 	
 	public final static int ID_VOILIER = 0;
@@ -31,7 +39,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	public final static int RATING = 5;
 	
 	/**
-	 * Crée une instance de la classe ModelListParticipant
+	 * Crée une instance de la classe 'ModelListParticipant'
 	 */
 	public ModelListParticipant() {
 		super();
@@ -117,6 +125,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	/**
 	 * Supprime un Participant de la liste
 	 * @param rowIndex
+	 * @param regate
 	 */
 	public void removeParticpant(int rowIndex, Regate regate) {
 		

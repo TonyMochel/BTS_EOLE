@@ -14,18 +14,20 @@ import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
-
+/**
+ * Model de la JTable : Liste des résultat
+ * @author Tony
+ *
+ */
 public class ModelListResultat extends AbstractTableModel{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private VoilierDAO participantManager;
-	private ClassementDAO classementManager;
-	private RegateDAO regateManager;
 	
+	/** Classement Handler */
+	private ClassementDAO classementManager;
+	/** Donnée de la JTable */
 	private List<Classement> donnee;
+	/** En-tête de la JTable */
 	private String [] entetes = {"RANG", "VOILIER", "NOM", "PRENOM", "TEMPS REEL", "TEMPS COMPENSE"};
 	
 	private final static int RANG = 0; 
@@ -35,7 +37,6 @@ public class ModelListResultat extends AbstractTableModel{
 	private final static int TEMPS_REEL = 4;
 	private final static int TEMPS_COMPENSE = 5;
 	
-	private static int test = 0;
 	/**
 	 * Crée une instance de la class ModelListClassement
 	 * 
@@ -44,28 +45,36 @@ public class ModelListResultat extends AbstractTableModel{
 	 */
 	public ModelListResultat() {
 		super();
-		test++;
-		this.participantManager = DAOFactory.getVoilierDAO();
+		
 		this.classementManager = DAOFactory.getClassementDAO();
-		this.regateManager = DAOFactory.getRegateDAO();
 		
 		this.donnee = new ArrayList<Classement>();
 	}
 
-	public static int getTest() {
-		return test;
-	}
-	
+	/**
+	 * Retourne le nombre de column
+	 * @return int
+	 */
 	@Override
 	public int getColumnCount() {
 		return entetes.length;
 	}
-
+	
+	/**
+	 * Retourne le nombre d'element dans la liste
+	 * @return int
+	 */
 	@Override
 	public int getRowCount() {
 		return donnee.size();
 	}
 
+	/**
+	 * Retourne une donnée du classement selectionner
+	 * @param rowIndex
+	 * @param columnIndex
+	 * @return Object
+	 */
 	@Override
 	public Object getValueAt(int rowIndex, int colIndex) {
 		Classement classement = donnee.get(rowIndex);
@@ -115,6 +124,7 @@ public class ModelListResultat extends AbstractTableModel{
 		
 		fireTableDataChanged();
 	}
+	
 	/**
 	 * Mes à jour les donnée de la table
 	 */

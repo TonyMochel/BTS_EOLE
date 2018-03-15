@@ -20,6 +20,11 @@ import fr.tonybloc.modele.composant.Chronometre;
 import fr.tonybloc.modele.composant.ModelComboBoxRegates;
 import fr.tonybloc.modele.composant.ModelListParticipantSimulation;
 
+/**
+ * Controleur page classement
+ * @author Tony
+ *
+ */
 public class ClassementControleur implements ActionListener{
 	
 	private JPanel panelSimulation;
@@ -45,11 +50,26 @@ public class ClassementControleur implements ActionListener{
 	private ModelListParticipantSimulation modelListParticipantSimulation;
 	
 	private Regate regateSelectionner;
-	private Classement classementSelected;
 	private boolean isStarted;
 	
 	private final static int AUCUNE_LIGNE_SELECTIONNER = -1;
 	
+	/**
+	 * Crée une instance de la classe 'ClassementControleur'
+	 * @param panelSimulation
+	 * @param modelListParticipant
+	 * @param btnCloture
+	 * @param btnArreter
+	 * @param btnModifier
+	 * @param btnAbandon
+	 * @param btnChronoStop
+	 * @param btnChronoReset
+	 * @param btnChronoStart
+	 * @param cbChoixRegate
+	 * @param listParticipants
+	 * @param lbChrono
+	 * @param chrono
+	 */
 	public ClassementControleur(
 			JPanel panelSimulation,
 			ModelListParticipantSimulation modelListParticipant,
@@ -85,9 +105,8 @@ public class ClassementControleur implements ActionListener{
 		this.chrono = chrono;
 		init();
 	}
-	
+	/** initialise les composants graphiques */
 	private void init() {
-		this.classementSelected = null;
 		this.regateSelectionner = null;	
 		this.isStarted = false;
 		
@@ -98,7 +117,7 @@ public class ClassementControleur implements ActionListener{
 		
 	}
 	/**
-	 * Cloture la régate séléctionner
+	 * Action : Cloture la régate séléctionner
 	 */
 	private void ActionCloturerRegate() {	
 
@@ -116,7 +135,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Modifier la JTables (affiche les participant à une regate)
+	 * Action : Mes à jour les donnée de la JTable (affiche les participant à une regate)
 	 */
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegate.getSelectedItem();
@@ -124,7 +143,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Arrivé d'un participant
+	 * Action : Arrivé d'un participant
 	 */
 	private void ActionParticipantArriver() {
 		
@@ -141,7 +160,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Abandon du participant
+	 * Action : Abandon du participant
 	 */
 	private void ActionParticipantAbandon() {
 		if(isStarted) {
@@ -157,7 +176,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Modifie un participants
+	 * Action : Modifie un participants
 	 */
 	private void ActionParticipantModifier() {	
 		if(isStarted) {
@@ -168,14 +187,12 @@ public class ClassementControleur implements ActionListener{
 				JOptionPane.showMessageDialog(this.panelSimulation, "Aucun participant sélectionner", "Avertissement", JOptionPane.WARNING_MESSAGE);
 			}
 		}else {
-			JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'a pas commencer", "Avertissement", JOptionPane.WARNING_MESSAGE);
-			
+			JOptionPane.showMessageDialog(this.panelSimulation, "La régate n'a pas commencer", "Avertissement", JOptionPane.WARNING_MESSAGE);		
 		}
-		
 	}
 	
 	/**
-	 * Démarre le Chronometre
+	 * Action : Démarre le Chronometre
 	 */
 	private void ActionStartChrono() {
 		if(this.regateSelectionner == null) {
@@ -197,7 +214,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Stop le chronometre
+	 * Action : Stop le chronometre
 	 */
 	private void ActionStopChrono() {
 //		if(this.modelListParticipantSimulation.tousLesParticipantSontArrive()) {
@@ -209,21 +226,16 @@ public class ClassementControleur implements ActionListener{
 			
 			this.btnArrive.setEnabled(false);
 			this.btnAbandon.setEnabled(false);
-			this.btnModifier.setEnabled(false);
-			
-			
+			this.btnModifier.setEnabled(false);			
 			
 //		}else {
 //			int confirm = JOptionPane.showConfirmDialog(this.panelSimulation, "Tous les participant ne sont pas encore arrivé. Voulez-vous stoper la course ?", "Avertissement", JOptionPane.YES_NO_OPTION);
 //			if(confirm == JOptionPane.YES_OPTION) {
-//		}
-//		
-		
-		
+//		}		
 	}
 	
 	/**
-	 * Réinitialise le Chronometre
+	 * Action : Réinitialise le Chronometre
 	 */
 	private void ActionResetChrono() {
 		this.chrono.ResetTimer();
@@ -266,6 +278,9 @@ public class ClassementControleur implements ActionListener{
 		}
 	}
 
+	/**
+	 * Mes à jour les composants graphiques
+	 */
 	public void updateComponent() {
 		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));
 		this.regateSelectionner = null;

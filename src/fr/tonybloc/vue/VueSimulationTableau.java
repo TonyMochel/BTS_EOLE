@@ -18,6 +18,12 @@ import javax.swing.border.EmptyBorder;
 
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.composant.ModelListParticipantSimulation;
+
+/**
+ * Vue Table : Liste des participant avec temps d'arrivée
+ * @author Tony
+ *
+ */
 public class VueSimulationTableau {
 
 	private JPanel content;

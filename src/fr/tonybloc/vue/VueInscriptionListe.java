@@ -17,7 +17,11 @@ import javax.swing.table.TableColumnModel;
 
 import fr.tonybloc.modele.composant.ModelListParticipant;
 import fr.tonybloc.modele.composant.ModelListRegate;
-
+/**
+ * Vue Table : Liste des participants
+ * @author Tony
+ *
+ */
 public class VueInscriptionListe{
 
 	private JPanel panelListParticipant;

@@ -19,6 +19,11 @@ import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.composant.ModelListRegate;
 import fr.tonybloc.modele.composant.ModelListResultat;
 
+/**
+ * Vue page de résultat
+ * @author Tony
+ *
+ */
 public class VueResultatClassement {
 
 	private JPanel content;

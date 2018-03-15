@@ -28,7 +28,7 @@ import fr.tonybloc.outils.JDoubleField;
 import fr.tonybloc.outils.Outils;
 
 /**
- * 
+ * Controleur page régate
  * @author Tony
  *
  */
@@ -57,12 +57,14 @@ public class RegateControleur implements ActionListener {
 	private int ligneAModifier;
 	
 	/**
-	 * Instentiation du controleur
+	 * Crée une instance de la classe 'RegateControleur'
+	 * @param panelCreationRegate
 	 * @param modelListRegate
 	 * @param tfNomRegate
 	 * @param tfDistance
 	 * @param dpDate
 	 * @param btnCreation
+	 * @param btnAnnuler
 	 * @param btnSupprimer
 	 * @param btnModifier
 	 * @param listRegates
@@ -233,7 +235,7 @@ public class RegateControleur implements ActionListener {
 		viderChampsFormulaire();
 	}
 	/**
-	 * Netoye les zone de saisies
+	 * Nettoye les zone de saisies
 	 */
 	private void viderChampsFormulaire() {
 		this.btnAnnuler.setVisible(false);

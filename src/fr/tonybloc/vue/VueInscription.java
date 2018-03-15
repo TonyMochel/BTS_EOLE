@@ -26,7 +26,7 @@ import fr.tonybloc.dao.implement.*;
 import fr.tonybloc.modele.*;
 
 /**
- * Formulaire : création d'un voilier 
+ * Vue inscription des participants
  * @author Tony
  *
  */

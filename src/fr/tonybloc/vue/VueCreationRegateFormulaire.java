@@ -26,7 +26,11 @@ import fr.tonybloc.modele.date.DateLabelFormatter;
 import fr.tonybloc.outils.CapitaliseDocumentFilter;
 import fr.tonybloc.outils.JDoubleField;
 
-
+/**
+ * Vue du formulaire : Création régate
+ * @author Tony
+ *
+ */
 public class VueCreationRegateFormulaire {
 
 	private JPanel formulaire;

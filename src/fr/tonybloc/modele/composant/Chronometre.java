@@ -4,6 +4,11 @@ import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 
+/**
+ * Chronometre
+ * @author Tony
+ *
+ */
 public class Chronometre {
 	
 	private int iHours = 0;			
@@ -17,9 +22,10 @@ public class Chronometre {
 	private static ActionListener alTimer;
 	
 	/**
-	 * Contructeur de la classe
+	 * Contructeur de la classe 'Chronometre'
 	 */
 	public Chronometre(){
+		
 		lblChrono = new JLabel(
 				( ( iHours < 10 ) 	? "0" + iHours : iHours )		+ ":" +
 				( ( iMinutes < 10 ) ? "0" + iMinutes : iMinutes )	+ ":" +

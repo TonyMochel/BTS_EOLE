@@ -11,31 +11,18 @@ import java.util.Date;
  */
 public class Regate {
 
-	/**
-	 * Identifiant d'une régate
-	 */
+	/** Identifiant d'une régate */
 	private int id;
-	/**
-	 * Distance de la régate
-	 */
+	/** Distance de la régate */
 	private double distance;
-	
-	/**
-	 * Intituler de la régate
-	 */
+	/** Intituler de la régate */
 	private String intituler;
-	
-	/**
-	 * Date de depart de la régate
-	 */
+	/** Date de depart */
 	private String date_depart;
-	
-	/**
-	 * Est-elle coloturé ?
-	 */
+	/** cloture */
 	private boolean cloture = false;
 	
-	
+	/** Format de la date de depart**/
 	private final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
 	/**
@@ -45,10 +32,10 @@ public class Regate {
 	
 	/**
 	 * Crée une instance de la classe 'Regate'
-	 * @param intituler
-	 * @param distance
-	 * @param date_depart
-	 * @param cloture
+	 * @param intituler : String
+	 * @param distance : double
+	 * @param date_depart : Date
+	 * @param cloture : boolean
 	 */
 	public Regate(String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = 0;
@@ -59,11 +46,11 @@ public class Regate {
 	}
 	/**
 	 * Crée une instance de la classe 'Regate'
-	 * @param id
-	 * @param intituler
-	 * @param distance
-	 * @param date_de_depart
-	 * @param cloture
+	 * @param id : int
+	 * @param intituler : String
+	 * @param distance : double
+	 * @param date_de_depart : Date
+	 * @param cloture : boolean
 	 */
 	public Regate(int id, String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = id;
@@ -72,7 +59,6 @@ public class Regate {
 		this.date_depart = DATE_FORMAT.format(date_depart);
 		this.cloture = cloture;
 	}
-	
 	
 	
 	public int getId() {
@@ -98,7 +84,7 @@ public class Regate {
 	public void setIntituler(String intituler) {
 		this.intituler = intituler;
 	}
-
+	
 	public Date getDate_depart_date() {
 		try {
 			return (Date) DATE_FORMAT.parse(date_depart);

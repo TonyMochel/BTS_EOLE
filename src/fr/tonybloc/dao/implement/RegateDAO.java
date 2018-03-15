@@ -11,6 +11,11 @@ import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 
+/**
+ * Handler Regate
+ * @author Tony
+ *
+ */
 public class RegateDAO extends DAO<Regate> {
 
 	/**
@@ -105,6 +110,10 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return regate;
 	}
+	/**
+	 * Cherche le dernière regate inserée
+	 * @return
+	 */
 	public Regate findLastRegateInserted() {
 		Regate regate = new Regate();
 		try 
@@ -157,6 +166,10 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return listRegate;
 	}
+	/**
+	 * Cherche toutes les régate cloturés
+	 * @return
+	 */
 	public List<Regate> findRegateClosure(){
 		List<Regate> listRegate = new ArrayList<Regate>();
 		try 
@@ -207,6 +220,11 @@ public class RegateDAO extends DAO<Regate> {
 		return listRegate;
 	}
 	
+	/**
+	 * Cherche tout les particiants d'une régate
+	 * @param regate
+	 * @return
+	 */
 	public List<Voilier> getAllParticipant(Regate regate){
 		
 		
@@ -256,6 +274,11 @@ public class RegateDAO extends DAO<Regate> {
 		return rowCount;
 	}
 	
+	/**
+	 * Cloture une régate
+	 * @param obj
+	 * @return
+	 */
 	public boolean clotureRegate(Regate obj) {
 		boolean requeteExecuter = false;
 		try 

@@ -13,6 +13,11 @@ import javax.swing.border.EmptyBorder;
 
 import fr.tonybloc.modele.composant.Chronometre;
 
+/**
+ * Vue paneau de controle de la simulation
+ * @author Tony
+ *
+ */
 public class VueSimulationCommande {
 
 	private JPanel content;

@@ -10,17 +10,11 @@ import fr.tonybloc.outils.Outils;
  */
 public class Classement {
 	
-	/**
-	 * Identifiant du voilier
-	 */
+	/** Identifiant du voilier */
 	private Voilier voilier;
-	/**
-	 * Identifiant de la régate
-	 */
+	/** Régate ciblé */
 	private Regate regate;
-	/**
-	 * Temps arrivé
-	 */
+	/** Temps arrivé */
 	private Time tempsArrive;
 	/** Temps compensé */
 	private Time tempsCompense;
@@ -33,10 +27,10 @@ public class Classement {
 	public Classement() {}
 	/**
 	 * Crée une instance de la classe 'Classement'
-	 * @param idVoilier
-	 * @param idRegate
-	 * @param tempsArriver
-	 * @param tempsCompense
+	 * @param voilier : Voilier
+	 * @param regate : Regate
+	 * @param tempsArriver : Time
+	 * @param tempsCompense : Time
 	 */
 	public Classement(Voilier voilier, Regate regate, Time tempsArrive, Time tempsCompense) {
 		this.voilier = voilier;
@@ -47,8 +41,8 @@ public class Classement {
 	}
 	/**
 	 * Crée une instance de la classe Classement
-	 * @param idVoilier
-	 * @param idRegate
+	 * @param voilier : Voilier
+	 * @param regate : Regate
 	 */
 	public Classement(Voilier voilier, Regate idRegate) {
 		this.voilier = voilier;
@@ -90,8 +84,8 @@ public class Classement {
 	}
 	
 	/**
-	 * Calcule le temps d'arriver avec l'handicap
-	 * @return
+	 * Calcule le temps d'arriver avec l'handicap (temps compensé)
+	 * @return Time
 	 */
 	private Time calculeTempCompense() {
 		Date dt = getTempsArrive();

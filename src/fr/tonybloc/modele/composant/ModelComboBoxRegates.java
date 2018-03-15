@@ -11,17 +11,27 @@ import javax.swing.event.ListDataListener;
 import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.modele.Regate;
-
+/**
+ * Model des combobox choix Regate
+ * @author Tony
+ *
+ */
 public class ModelComboBoxRegates extends AbstractListModel implements ComboBoxModel {
 
+	/** Regate Handler */
 	private RegateDAO regateManager;
+	/** Donnée contenu dans la comboBox */
 	private List<Regate> regates;
-	
+	/** Regate selectionner dans la comboBox*/
 	private Regate regateSelectionner = null;
 	
 	public final static boolean REGATE_CLOSURE = true;
 	public final static boolean REGATE_NOT_CLOSURE = false;
 	
+	/**
+	 * Crée une instance de la classe 'ModelComboBoxRegates'
+	 * @param typeRegate
+	 */
 	public ModelComboBoxRegates(boolean typeRegate ) {
 		super();
 		this.regateManager = DAOFactory.getRegateDAO();

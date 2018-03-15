@@ -7,13 +7,9 @@ package fr.tonybloc.modele;
  */
 public class Categorie {
 	
-	/**
-	 * Identifiant de la catégorie
-	 */
+	/** Identifiant de la catégorie */
 	private int id;
-	/**
-	 * Libeller de la catégorie
-	 */
+	/** Libeller de la catégorie */
 	private String libeller;
 	
 	

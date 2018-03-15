@@ -9,8 +9,17 @@ import java.util.List;
 import fr.tonybloc.dao.DAO;
 import fr.tonybloc.modele.Categorie;
 
+/**
+ * Handler Categorie
+ * @author Tony
+ *
+ */
 public class CategorieDAO extends DAO<Categorie>{
 
+	/**
+	 * Crée une instance de la classe 'CategorieDAO'
+	 * @param con
+	 */
 	public CategorieDAO(Connection con) {
 		super(con);
 		// TODO Auto-generated constructor stub

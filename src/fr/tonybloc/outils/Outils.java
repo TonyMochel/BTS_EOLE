@@ -19,7 +19,11 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
 
-
+/**
+ * Methode tiers (Boite à outils)
+ * @author Tony
+ *
+ */
 public class Outils {
 	
 	/**

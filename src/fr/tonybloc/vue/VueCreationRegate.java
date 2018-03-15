@@ -3,7 +3,11 @@ package fr.tonybloc.vue;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
-
+/**
+ * Vue de la page : création regate
+ * @author Tony
+ *
+ */
 public class VueCreationRegate {
 
 	private VueCreationRegateFormulaire vueFormulaire;

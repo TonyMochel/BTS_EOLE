@@ -12,17 +12,25 @@ import javax.swing.JTextField;
 */
 public class JNumberField extends JTextField
 {
- 
-    public JNumberField()
-    {
+	/**
+	 * Crée une instance de la classe 'JNumberField'
+	 */
+    public JNumberField(){
         super();
     }
  
+    /**
+     * Crée une instance de la classe 'JNumberField'
+     * @param string
+     */
     public JNumberField(String string)
     {
         super(string);
     }
  
+    /**
+     * Limiter les caractères de saisise
+     */
     protected void processComponentKeyEvent(KeyEvent e)
     {
         int id = e.getID();
@@ -43,7 +51,12 @@ public class JNumberField extends JTextField
  
         }
     }
- 
+    
+    /**
+     * Defini si le caractère saisie est permis
+     * @param event
+     * @return
+     */
     protected boolean allowKey(KeyEvent event)
     {
         int keyCode = event.getKeyCode();

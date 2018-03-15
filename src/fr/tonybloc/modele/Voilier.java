@@ -7,29 +7,17 @@ package fr.tonybloc.modele;
  */
 public class Voilier {
 	
-	/**
-	 * Identifiant du voilier
-	 */
+	/** Identifiant du voilier */
 	private int id;
-	/**
-	 * Catégorie du voilier
-	 */
+	/** Catégorie du voilier */
 	private Categorie categorie;
-	/**
-	 * Nom du voilier
-	 */
+	/** Nom du voilier */
 	private String nomVoilier;
-	/**
-	 * Nom du skippeur (Capitaine)
-	 */
+	/** Nom du skippeur (Capitaine) */
 	private String nomSkippeur;
-	/**
-	 * Prenom du skippeur (Capitaine)
-	 */
+	/** Prenom du skippeur (Capitaine) */
 	private String prenomSkippeur;
-	/**
-	 * Rating du voilier
-	 */
+	/** Rating du voilier */
 	private int rating;
 	
 	
@@ -37,11 +25,13 @@ public class Voilier {
 	 * Crée une instance de la classe 'Voilier' : vide
 	 */
 	public Voilier() {}
+	
 	/**
 	 * Crée une instance de la classe 'Voilier'
 	 * @param categorie
 	 * @param nomVoilier
 	 * @param nomSkippeur
+	 * @param prenomSkippeur 
 	 * @param rating
 	 */
 	public Voilier(Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {
@@ -58,6 +48,7 @@ public class Voilier {
 	 * @param categorie
 	 * @param nomVoilier
 	 * @param nomSkippeur
+	 * @param prenomSkippeur
 	 * @param rating
 	 */
 	public Voilier(int id, Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {

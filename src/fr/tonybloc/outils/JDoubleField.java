@@ -13,16 +13,24 @@ import javax.swing.JTextField;
 public class JDoubleField extends JTextField
 {
  
-    public JDoubleField()
-    {
+	/**
+	 * Crée une instance de la classe 'JDoubleField'
+	 */
+    public JDoubleField(){
         super();
     }
  
-    public JDoubleField(String string)
-    {
+    /**
+     * Crée une instance de la class 'JDoubleField'
+     * @param string
+     */
+    public JDoubleField(String string){
         super(string);
     }
- 
+    
+    /**
+     * Limiter les caractères de saisise
+     */
     protected void processComponentKeyEvent(KeyEvent e)
     {
         int id = e.getID();
@@ -50,6 +58,11 @@ public class JDoubleField extends JTextField
         }
     }
  
+    /**
+     * Defini si le caractère saisie est permis
+     * @param event
+     * @return
+     */
     protected boolean allowKey(KeyEvent event)
     {
         int keyCode = event.getKeyCode();

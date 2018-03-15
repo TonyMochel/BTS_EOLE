@@ -15,6 +15,11 @@ import javax.swing.table.TableModel;
 
 import fr.tonybloc.modele.composant.ModelListRegate;
 
+/**
+ * Vue Tableau : Liste de régate
+ * @author Tony
+ *
+ */
 public class VueCreationRegateListe {
 
 	private JPanel panelListRegate;

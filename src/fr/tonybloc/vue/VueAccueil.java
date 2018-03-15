@@ -9,7 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
+/**
+ * Vue de la page d'acceuil
+ * @author Tony
+ *
+ */
 public class VueAccueil {
 	private JPanel content;
 	private JLabel lbTitre;

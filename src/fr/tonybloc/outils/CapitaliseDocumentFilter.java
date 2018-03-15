@@ -3,13 +3,23 @@ package fr.tonybloc.outils;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-
+/**
+ * Classe permettent d'appliqué un placeholder à un TextField
+ * @author Tony
+ *
+ */
 public class CapitaliseDocumentFilter extends DocumentFilter {
 	
+	/**
+	 * Crée une instance de la class 'CapitaliseDocumentFilter'
+	 */
 	public CapitaliseDocumentFilter() {
 		super();
 	}
 	
+	/**
+	 * Définie le comportement du placeholder
+	 */
 	public void insertString(DocumentFilter.FilterBypass fb, int offset, String text,
 			AttributeSet attr) throws BadLocationException {
 		
@@ -23,7 +33,9 @@ public class CapitaliseDocumentFilter extends DocumentFilter {
 		}
 		
 	}
-
+	/**
+	 * Défini le comportement de la saisie
+	 */
 	public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, 
 			AttributeSet attrs) throws BadLocationException {
 

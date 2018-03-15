@@ -7,17 +7,20 @@ import javax.swing.table.AbstractTableModel;
 import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.modele.Regate;
-
+/**
+ * Model de la JTable : Liste des régate
+ * @author Tony
+ *
+ */
 public class ModelListRegate extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	/** Regate Handler */
 	private RegateDAO regateManager;
-	
+	/** Donnée de la JTable */
 	private List<Regate> regates;
+	/** En-tête de la JTable */
 	private final String[] entetes = { "ID_REGATE", "LIBELLE", "DISTANCE", "DATE_DEPART", "CLOTURE"};
 	
 	public final static int ID_REGATE = 0;
@@ -62,6 +65,8 @@ public class ModelListRegate extends AbstractTableModel {
 	}
 	/**
 	 * Retourne une donnée d'une régate selectionner
+	 * @param rowIndex
+	 * @param columnIndex
 	 * @return Object
 	 */
 	@Override

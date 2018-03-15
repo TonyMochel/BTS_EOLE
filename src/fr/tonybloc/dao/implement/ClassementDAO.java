@@ -14,6 +14,11 @@ import fr.tonybloc.modele.Classement;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 
+/**
+ * Handler Classement
+ * @author Tony
+ *
+ */
 public class ClassementDAO extends DAO<Classement> {
 
 	public ClassementDAO(Connection con) {
@@ -195,26 +200,48 @@ public class ClassementDAO extends DAO<Classement> {
 	 */
 	public List<Classement> findClassementAt(Regate regate, Categorie categorie) {
 		List<Classement> listClassement = new ArrayList<Classement>();
+		
+		List<Classement> listParticipantAbandonne = new ArrayList<Classement>();
+		
 		try
 		{
 			ResultSet result;
 			Statement stat = this.connect.createStatement();
 			result = stat.executeQuery("SELECT v.*, c.*, cat.* from classement c, regate r, categorie cat, voilier v where c.ID_VOILIER = v.ID_VOILIER AND cat.ID_CATEGORIE = v.CATEGORIE AND c.ID_REGATE = r.ID_REGATE AND c.ID_REGATE = "+regate.getId()+" AND v.CATEGORIE = "+categorie.getId()+" ORDER BY c.TEMPS_COMPENSE ASC");
 			while(result.next()) {
-				listClassement.add(new Classement(
-						new Voilier(
-								result.getInt("ID_VOILIER"),
-								new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
-								result.getString("NOM_VOILIER"),
-								result.getString("NOM_SKIPPEUR"),
-								result.getString("PRENOM_SKIPPEUR"),
-								result.getInt("RATING")
-								), 
-						regate, 
-						result.getTime("TEMPS_ARRIVER"),
-						result.getTime("TEMPS_COMPENSE")
-						));
+				if(result.getTime("TEMPS_ARRIVER") == null) {
+					listParticipantAbandonne.add(new Classement(
+							new Voilier(
+									result.getInt("ID_VOILIER"),
+									new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+									result.getString("NOM_VOILIER"),
+									result.getString("NOM_SKIPPEUR"),
+									result.getString("PRENOM_SKIPPEUR"),
+									result.getInt("RATING")
+									), 
+							regate, 
+							Time.valueOf("00:00:00"),
+							Time.valueOf("00:00:00")
+							));	
+				}else {
+					listClassement.add(new Classement(
+							new Voilier(
+									result.getInt("ID_VOILIER"),
+									new Categorie(result.getInt("ID_CATEGORIE"), result.getString("LIBELLER")),
+									result.getString("NOM_VOILIER"),
+									result.getString("NOM_SKIPPEUR"),
+									result.getString("PRENOM_SKIPPEUR"),
+									result.getInt("RATING")
+									), 
+							regate, 
+							result.getTime("TEMPS_ARRIVER"),
+							result.getTime("TEMPS_COMPENSE")
+							));	
+				}
+				
 			}
+			
+			listClassement.addAll(listParticipantAbandonne);
 		}
 		catch (Exception e)
 		{
