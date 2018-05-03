@@ -20,7 +20,7 @@ public class Categorie {
 	
 	/**
 	 * Crée une instance de la classe 'Categorie'
-	 * @param libeller
+	 * @param libeller : intituler de la categorie
 	 */
 	public Categorie(String libeller) {
 		this.id = 0;
@@ -28,8 +28,8 @@ public class Categorie {
 	}
 	/**
 	 * Crée une instance de la classe 'Catégorie'
-	 * @param id
-	 * @param libeller
+	 * @param id : identifiant de la categorie
+	 * @param libeller : libeller de la categorie
 	 */
 	public Categorie(int id, String libeller) {
 		this.id = id;
@@ -50,9 +50,6 @@ public class Categorie {
 		this.libeller = libeller;
 	}
 	
-	/**
-	 * Description de l'objet Voilier
-	 */
 	@Override
 	public String toString() {
 		return this.libeller;

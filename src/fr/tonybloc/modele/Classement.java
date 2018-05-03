@@ -27,10 +27,10 @@ public class Classement {
 	public Classement() {}
 	/**
 	 * Crée une instance de la classe 'Classement'
-	 * @param voilier : Voilier
+	 * @param voilier : voilier
 	 * @param regate : Regate
-	 * @param tempsArriver : Time
-	 * @param tempsCompense : Time
+	 * @param tempsArriver : temps d'arriver du voilier
+	 * @param tempsCompense : temps composé du voilier
 	 */
 	public Classement(Voilier voilier, Regate regate, Time tempsArrive, Time tempsCompense) {
 		this.voilier = voilier;
@@ -101,10 +101,6 @@ public class Classement {
 		return tempCompense;
 	}
 	
-	
-	/**
-	 * Description de l'objet Classement
-	 */
 	@Override
 	public String toString() {
 		return "{ "

@@ -131,7 +131,7 @@ public class VueCreationRegateFormulaire {
 		panelContent.add(panelTextField, BorderLayout.CENTER);
 		panelContent.add(panelSouth, BorderLayout.SOUTH);
 		
-		panelContent.setBorder(BorderFactory.createTitledBorder("Creation de régates"));
+		panelContent.setBorder(BorderFactory.createTitledBorder("Création de régates"));
 		
 		formulaire.add(panelContent, BorderLayout.NORTH);
 		

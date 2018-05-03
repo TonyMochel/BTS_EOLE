@@ -25,7 +25,6 @@ public class MenuControle implements ActionListener {
 	JMenuItem itemSimulation;
 	JMenuItem itemResultatRegate;
 	
-	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
 	JPanel contenuCreationRegate;
@@ -33,6 +32,7 @@ public class MenuControle implements ActionListener {
 	JPanel contenuSimulation;
 	JPanel contenuResultat;
 	JPanel contenuAccueil;
+	JPanel contenuInformation;
 	
 	RegateControleur regateControleur;
 	InscriptionControleur inscriptionControleur;
@@ -45,22 +45,22 @@ public class MenuControle implements ActionListener {
 	
 	/**
 	 * Crée une instance de la classe 'MenuControle'
-	 * @param frame
-	 * @param contenuAccueil
-	 * @param contenuCreationRegate
-	 * @param contenuInscription
-	 * @param contenuSimulation
-	 * @param contenuResultat
-	 * @param regateControleur
-	 * @param inscriptionControleur
-	 * @param classementControleur
-	 * @param resultatControleur
-	 * @param itemCreationRegate
-	 * @param itemInscription
-	 * @param itemSimulation
-	 * @param itemResultatRegate
-	 * @param itemAide
-	 * @param itemInformation
+	 * @param frame : Fenetre principale de l'application
+	 * @param contenuAccueil : JPanel de la page d'acceuil
+	 * @param contenuCreationRegate : JPanel de la page creation de régate
+	 * @param contenuInscription : JPanel de la page inscription des participants
+	 * @param contenuSimulation : JPanel de la page simulation de la régate
+	 * @param contenuResultat : JPanel de la page de résultat de la régate
+	 * @param contenuInformation : JPanel de la page d'informations
+	 * @param regateControleur : Controleur régate
+	 * @param inscriptionControleur : Controleur inscription
+	 * @param classementControleur : Controleur classement
+	 * @param resultatControleur : Controleur résultat
+	 * @param itemCreationRegate : Onglet du menu (page régate)
+	 * @param itemInscription : Onglet du menu (page inscription)
+	 * @param itemSimulation : Onglet du menu (page simulation)
+	 * @param itemResultatRegate : Onglet du menu (page résultats)
+	 * @param itemInformation : Onglet du menu (page information)
 	 */
 	public MenuControle(
 			JFrame frame,
@@ -69,6 +69,7 @@ public class MenuControle implements ActionListener {
 			JPanel contenuInscription,
 			JPanel contenuSimulation,
 			JPanel contenuResultat,
+			JPanel contenuInformation,
 			RegateControleur regateControleur,
 			InscriptionControleur inscriptionControleur, 
 			ClassementControleur classementControleur,
@@ -77,7 +78,6 @@ public class MenuControle implements ActionListener {
 			JMenuItem itemInscription,
 			JMenuItem itemSimulation,
 			JMenuItem itemResultatRegate,
-			JMenuItem itemAide,
 			JMenuItem itemInformation) {
 		
 		this.frame = frame;
@@ -87,12 +87,11 @@ public class MenuControle implements ActionListener {
 		this.contenuInscription = contenuInscription;
 		this.contenuSimulation = contenuSimulation;
 		this.contenuResultat = contenuResultat;
-		
+		this.contenuInformation = contenuInformation;
 		this.itemCreationRegate = itemCreationRegate;
 		this.itemInscription = itemInscription;
 		this.itemSimulation = itemSimulation;
 		this.itemResultatRegate = itemResultatRegate;
-		this.itemAide = itemAide;
 		this.itemInformation = itemInformation;
 		
 		this.regateControleur = regateControleur;
@@ -100,10 +99,8 @@ public class MenuControle implements ActionListener {
 		this.classementControleur = classementControleur;
 		this.resultatControleur = resultatControleur;
 	}
-	/**
-	 * ActionPerformed
-	 * @param e
-	 */
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
@@ -131,10 +128,10 @@ public class MenuControle implements ActionListener {
 			
 			this.frame.setContentPane(this.contenuSimulation);
 			this.frame.setVisible(true);
-		}else if(source.equals(this.itemAide)) {
 			
 		}else if(source.equals(this.itemInformation)) {
-			
+			this.frame.setContentPane(this.contenuInformation);
+			this.frame.setVisible(true);
 		}else {
 			System.out.println("Elément de menu [" + e.getActionCommand()
 	         + "] utilisé.");	

@@ -56,7 +56,7 @@ public class Chronometre {
 	}
 	
 	/**
-	 * Methode executant tout les seconde (DELAI) l'evenement alTimer
+	 * Création du Timer
 	 */
 	public void createChrono(){
 		// Execution tout les seconde de l'evenement alTimer

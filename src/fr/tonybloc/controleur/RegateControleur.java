@@ -58,16 +58,16 @@ public class RegateControleur implements ActionListener {
 	
 	/**
 	 * Crée une instance de la classe 'RegateControleur'
-	 * @param panelCreationRegate
-	 * @param modelListRegate
-	 * @param tfNomRegate
-	 * @param tfDistance
-	 * @param dpDate
-	 * @param btnCreation
-	 * @param btnAnnuler
-	 * @param btnSupprimer
-	 * @param btnModifier
-	 * @param listRegates
+	 * @param panelCreationRegate : JPanel Création de régate
+	 * @param modelListRegate : Model de la JTable
+	 * @param tfNomRegate : TextField Nom de la régate
+	 * @param tfDistance : TextFeild Distance
+	 * @param dpDate : DatePicker date de commencement de la régate
+	 * @param btnCreation : JButton Création de la régate
+	 * @param btnAnnuler : JButton annuler la modification
+	 * @param btnSupprimer : JButton suppression de la régate
+	 * @param btnModifier : JButton modification de la régate
+	 * @param listRegates : JTable liste des régates
 	 */
 	public RegateControleur ( 
 			JPanel panelCreationRegate,
@@ -97,9 +97,6 @@ public class RegateControleur implements ActionListener {
 		this.ligneAModifier = -1;
 	}
 	
-	/**
-	 * Gestion des Actions
-	 */
 	@Override
 	public void actionPerformed(ActionEvent e){
 		Object source = e.getSource();
@@ -144,7 +141,7 @@ public class RegateControleur implements ActionListener {
 		}
 	}
 	/**
-	 * Action du suppression : Supprime une régate
+	 * Action de suppression : Supprime une régate
 	 * @throws ExceptionAucuneLigneSelectionne
 	 */
 	private void ActionSupprimer() throws ExceptionAucuneLigneSelectionne {
@@ -191,7 +188,7 @@ public class RegateControleur implements ActionListener {
 	}
 	
 	/**
-	 * Action:  Crée une régate;
+	 * Action: Crée une régate;
 	 * @throws ExceptionChampsVide
 	 */
 	private void ActionCreer() throws ExceptionChampsVide {
@@ -235,7 +232,7 @@ public class RegateControleur implements ActionListener {
 		viderChampsFormulaire();
 	}
 	/**
-	 * Nettoye les zone de saisies
+	 * Nettoie les zones de saisies
 	 */
 	private void viderChampsFormulaire() {
 		this.btnAnnuler.setVisible(false);
@@ -246,7 +243,7 @@ public class RegateControleur implements ActionListener {
 		this.action = ACTION_CREE;
 	}
 	/**
-	 * Mes à jour les composants
+	 * Met à jour les composants
 	 */
 	public void updateComponent(){		
 		this.modelListRegate.updateTable();

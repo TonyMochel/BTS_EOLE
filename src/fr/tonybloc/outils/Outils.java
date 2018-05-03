@@ -108,7 +108,11 @@ public class Outils {
 	
 	/**
 	 * Convertie une JTable en fichier excel
-	 * @param table
+	 * @param tableCategorie1
+	 * @param tableCategorie2
+	 * @param tableCategorie3
+	 * @param tableCategorie4
+	 * @param regate
 	 * @param file
 	 */
 	public static void toExcel(JTable tableCategorie1, JTable tableCategorie2, JTable tableCategorie3, JTable tableCategorie4, Regate regate, File file){
@@ -145,7 +149,7 @@ public class Outils {
 	}
 	
 	/**
-	 * 
+	 * Ecrit le classement des participants d'une categorie
 	 * @param modelCategorie
 	 * @param bw
 	 * @throws IOException 

@@ -55,8 +55,7 @@ public class VueInscriptionFormulaire {
 		this.formulaire.setBorder(new EmptyBorder(20, 10, 20, 10));
 		
 		//JLabel
-//		JLabel lbChercheParticipant = new JLabel("Participants");
-		JLabel lbChoixRegate = new JLabel("Choix Regate");
+		JLabel lbChoixRegate = new JLabel("Choix Régate");
 		JLabel lbNomSkippeur = new JLabel("Nom Skippeur");
 		JLabel lbPrenomSkippeur = new JLabel("Prénom Skippeur");
 		JLabel lbNomVoilier = new JLabel("Nom voilier");

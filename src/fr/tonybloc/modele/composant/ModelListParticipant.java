@@ -26,7 +26,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	/** Classement Handler */
 	private ClassementDAO classementManager;
 	
-	/** Donnée de la JTable */
+	/** Données de la JTable */
 	private List<Voilier> participants;
 	/** En-tête de la JTable */
 	private final String[] entetes = { "ID_VOILIER","NOM_SKIPPEUR","PRENOM_SKIPPEUR","NOM_VOILIER","CATEGORIE","RATING"};
@@ -51,7 +51,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	
 	/**
-	 * Retourne le nombre de column
+	 * Cherche le nombre de colonne dans la Jtable
 	 * @return int
 	 */
 	@Override
@@ -60,7 +60,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 
 	/**
-	 * Retourne le nombre d'éléments dans la liste
+	 * Cherche le nombre d'éléments dans la liste
 	 * @return int
 	 */
 	@Override
@@ -69,7 +69,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	
 	/**
-	 * Retourn le nom de la colonne
+	 * Cherche le nom de la colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
@@ -77,7 +77,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	
 	/**
-	 * Retourn une donnée d'un participant selectionner
+	 * Cherche une donnée d'un participant selectionné
 	 * @param rowIndex : indice de la ligne
 	 * @param columnIndex : indice de la colonne
 	 * @return Object
@@ -107,7 +107,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	
 	/**
-	 * Ajoute un Participant à la liste
+	 * Ajoute un participant à la JTable
 	 * @param participant
 	 * @param regate
 	 */
@@ -123,7 +123,7 @@ public class ModelListParticipant extends AbstractTableModel {
 		fireTableRowsInserted(participants.size()-1, participants.size() -1);
 	}
 	/**
-	 * Supprime un Participant de la liste
+	 * Supprime un participant de la JTable
 	 * @param rowIndex
 	 * @param regate
 	 */
@@ -136,7 +136,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	
 	/**
-	 * Met à jours les donnée de la JTable
+	 * Met à jour les données contenu dans la JTable
 	 * @param regate
 	 */
 	public void updateTables(Regate regate) {

@@ -21,9 +21,12 @@ import fr.tonybloc.modele.Voilier;
  */
 public class ClassementDAO extends DAO<Classement> {
 
+	/**
+	 * Crée une instance de la classe DAO
+	 * @param con : connexion à la BDD
+	 */
 	public ClassementDAO(Connection con) {
 		super(con);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -96,8 +99,8 @@ public class ClassementDAO extends DAO<Classement> {
 	
 	/**
 	 * Recherche un objet classement dans la base de donnée : eole
-	 * @param idVoilier
-	 * @param idRegate
+	 * @param voilier : voilier courrent
+	 * @param regate : régate courrente
 	 * @return
 	 */
 	public Classement find(Voilier voilier, Regate regate) {
@@ -134,8 +137,7 @@ public class ClassementDAO extends DAO<Classement> {
 	
 	/**
 	 * Recherche tout les classement d'une regate
-	 * @param idVoilier
-	 * @param idRegate
+	 * @param regate : regate courrent
 	 * @return
 	 */
 	public List<Classement> findAllParticipant(Regate regate) {
@@ -171,8 +173,9 @@ public class ClassementDAO extends DAO<Classement> {
 	}
 	
 	/**
-	 * Retourne le nombre d'élèment de la table : classement, pour une Régate
-	 * @return int
+	 * Retourne le nombre d'élèments de la table : classement (pour une Régate)
+	 * @param idRegate : identifiant de la régate
+	 * @return
 	 */
 	public int getRowCount(int idRegate) {
 		int rowCount = 0;
@@ -193,9 +196,9 @@ public class ClassementDAO extends DAO<Classement> {
 	}
 	
 	/**
-	 * Recherche tout les classement d'une regate
-	 * @param idVoilier
-	 * @param idRegate
+	 * Recherche le classements des participants d'une categorier (d'une regate)
+	 * @param regate : regate courrente
+	 * @param categorie : categorie courrente
 	 * @return
 	 */
 	public List<Classement> findClassementAt(Regate regate, Categorie categorie) {

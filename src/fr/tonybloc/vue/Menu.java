@@ -26,7 +26,6 @@ public class Menu extends JMenuBar{
 	JMenuItem itemSimulation;
 	JMenuItem itemResultatRegate;
 	
-	JMenuItem itemAide;
 	JMenuItem itemInformation;
 	
 	private final Font police = new Font("Arial", Font.PLAIN, 14);
@@ -82,18 +81,13 @@ public class Menu extends JMenuBar{
 		 * Menu A Propos  
 		 */
 		JMenu menuAPropos = new JMenu("A Propos");
-		this.itemAide = new JMenuItem("Aide", 'H');
 		this.itemInformation = new JMenuItem("Information", 'I');
 		
 		menuAPropos.setFont(police);
-		this.itemAide.setFont(policeSubMenu);
 		this.itemInformation.setFont(policeSubMenu);
 		
-		this.itemAide.setAccelerator(KeyStroke.getKeyStroke('H', Toolkit.getDefaultToolkit()
-		        .getMenuShortcutKeyMask(), false));
 		this.itemInformation.setAccelerator(KeyStroke.getKeyStroke('I', Toolkit.getDefaultToolkit()
 		        .getMenuShortcutKeyMask(), false));				
-		menuAPropos.add(this.itemAide);
 		menuAPropos.add(this.itemInformation);
 		
 		/*
@@ -116,9 +110,6 @@ public class Menu extends JMenuBar{
 	}
 	public JMenuItem getItemResultatRegate() {
 		return itemResultatRegate;
-	}
-	public JMenuItem getItemAide() {
-		return itemAide;
 	}
 	public JMenuItem getItemInformation() {
 		return itemInformation;

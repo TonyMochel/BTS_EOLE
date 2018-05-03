@@ -39,9 +39,6 @@ public class ModelListResultat extends AbstractTableModel{
 	
 	/**
 	 * Crée une instance de la class ModelListClassement
-	 * 
-	 * @param regate
-	 * @param categorie
 	 */
 	public ModelListResultat() {
 		super();
@@ -52,8 +49,7 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 
 	/**
-	 * Retourne le nombre de column
-	 * @return int
+	 * Cherche le nombre de colonnes
 	 */
 	@Override
 	public int getColumnCount() {
@@ -61,8 +57,7 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 	
 	/**
-	 * Retourne le nombre d'element dans la liste
-	 * @return int
+	 * Cherche le nombre d'élements dans la liste
 	 */
 	@Override
 	public int getRowCount() {
@@ -70,10 +65,7 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 
 	/**
-	 * Retourne une donnée du classement selectionner
-	 * @param rowIndex
-	 * @param columnIndex
-	 * @return Object
+	 * Cherche une donnée du classement selectionné
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int colIndex) {
@@ -98,14 +90,14 @@ public class ModelListResultat extends AbstractTableModel{
 		}
 	}
 	/**
-	 * Retourn le nom de la colonne
+	 * Cherche le nom de la colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];
 	}
 	/**
-	 * Met à jour les donnée de la JTable
+	 * Met à jour les données de la JTable
 	 * @param regate
 	 * @param categorie
 	 */
@@ -126,7 +118,7 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 	
 	/**
-	 * Mes à jour les donnée de la table
+	 * Met à jour les données de la table
 	 */
 	public void updateTable() {
 		this.donnee = new ArrayList<Classement>();

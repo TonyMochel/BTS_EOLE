@@ -58,20 +58,20 @@ public class ResultatControleur implements ActionListener{
 	
 	/**
 	 * Crée une instance de la classe 'ResultatControleur'
-	 * @param panelResultat
-	 * @param cbChoixRegateCloturer
-	 * @param listResultat1
-	 * @param listResultat2
-	 * @param listResultat3
-	 * @param listResultat4
-	 * @param modelListResultat1
-	 * @param modelListResultat2
-	 * @param modelListResultat3
-	 * @param modelListResultat4
-	 * @param btnTelechargerPDF
-	 * @param btnTelechargerCSV
-	 * @param btnImprimer
-	 * @param panelPrintClassement
+	 * @param panelResultat : panel de resultat
+	 * @param cbChoixRegateCloturer : ComboBox Choix de régate
+	 * @param listResultat1 : JTable Categorie A
+	 * @param listResultat2 : JTable Categorie B
+	 * @param listResultat3 : JTable Categorie C
+	 * @param listResultat4 : JTable Categorie D
+	 * @param modelListResultat1 : Model de la JTable Categorie A
+	 * @param modelListResultat2 : Model de la JTable Categorie B
+	 * @param modelListResultat3 : Model de la JTable Categorie C
+	 * @param modelListResultat4 : Model de la JTable Categorie D
+	 * @param btnTelechargerPDF : JButton téléchargement en PDF
+	 * @param btnTelechargerCSV : JButton téléchagement en CSV
+	 * @param btnImprimer : JButton téléchagement impréssion
+	 * @param panelPrintClassement : JPanel à imprimer
 	 */
 	public ResultatControleur(
 			JPanel panelResultat,
@@ -107,7 +107,7 @@ public class ResultatControleur implements ActionListener{
 	}
 	
 	/**
-	 * Modifier la JTables (affiche les participant à une regate)
+	 * Acion : Modifie la JTables (affiche les participants à une regate)
 	 */
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegateCloturer.getSelectedItem();		
@@ -118,26 +118,26 @@ public class ResultatControleur implements ActionListener{
 	}
 	
 	/**
-	 * Téléchage le fichier de résultat en .csv
+	 * Action : Téléchage le fichier de résultat en .csv
 	 */
 	private void ActionTelechargerCsv() {
 		
 		if(this.regateSelectionner == null) {
-			JOptionPane.showMessageDialog(this.panelResultat, "Aucun régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this.panelResultat, "Aucune régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
 		}else {
 			String cheminFichier = "./classement/" + this.regateSelectionner.getId() + "" + this.regateSelectionner.getIntituler().replaceAll(" ", "_") + "" + this.regateSelectionner.getDate_depart_string() + ".csv";
 			File fichierCSV = new File(cheminFichier);
 			
 			Outils.toExcel(this.listResultat1, this.listResultat2, this.listResultat3, this.listResultat4, this.regateSelectionner, fichierCSV);
-			JOptionPane.showMessageDialog(this.panelResultat, "Téléchargement éffectué", "Info", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this.panelResultat, "Téléchargement effectué", "Info", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	/**
-	 * Imprime la fiche de résultat
+	 * Action : Imprime la fiche de résultat
 	 */
 	private void ActionImprimer() {
 		if(this.regateSelectionner == null) {
-			JOptionPane.showMessageDialog(this.panelResultat, "Aucun régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this.panelResultat, "Aucune régate sélectionnée", "Avertissement", JOptionPane.WARNING_MESSAGE);
 		}else {			
 		
 			PrinterJob pj = PrinterJob.getPrinterJob();
@@ -162,16 +162,12 @@ public class ResultatControleur implements ActionListener{
 				pj.print();
 			} catch (PrinterException ex) {
 				if(this.regateSelectionner == null) {
-					JOptionPane.showMessageDialog(this.panelResultat, "Aucune imprimantes trouvé", "Erreur", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this.panelResultat, "Aucune imprimante trouvée", "Erreur", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
 	}
 	
-	/**
-	 * ActionListener
-	 * @param event
-	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		Object source = event.getSource();
@@ -186,7 +182,7 @@ public class ResultatControleur implements ActionListener{
 	}
 	
 	/**
-	 * Mes à jour les composants
+	 * Met à jour les composants
 	 */
 	public void updateComponent() {
 		this.cbChoixRegateCloturer.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_CLOSURE));

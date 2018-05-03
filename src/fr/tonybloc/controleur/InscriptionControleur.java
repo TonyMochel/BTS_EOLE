@@ -63,18 +63,18 @@ public class InscriptionControleur implements ActionListener {
 	
 	/**
 	 * Crée une instance de la classe 'InscriptionControleur'
-	 * @param panelInscription
-	 * @param modelListParticipant
-	 * @param tfNomVoilier
-	 * @param tfNomSkippeur
-	 * @param tfPrenomSkippeur
-	 * @param tfRating
-	 * @param cbCategorie
-	 * @param cbChoixRegate
-	 * @param btnInscription
-	 * @param btnAnnuler
-	 * @param listParticipants
-	 * @param lbInfoJTable
+	 * @param panelInscription : JPanel page inscription
+	 * @param modelListParticipant : Model de la JTable liste des participants
+	 * @param tfNomVoilier : TextField nom du voilier
+	 * @param tfNomSkippeur : TextField nom du skippeur
+	 * @param tfPrenomSkippeur : TextField prénom du skippeur
+	 * @param tfRating : TextField valeur de rating
+	 * @param cbCategorie : ComboBox des categorie de voilier
+	 * @param cbChoixRegate : ComboBox liste des régates
+	 * @param btnInscription : JButton Inscription d'un participant
+	 * @param btnAnnuler : JBUtton annulation d'une inscription
+	 * @param listParticipants : JTable liste des participants
+	 * @param lbInfoJTable : Libeler nombre de participant à la course
 	 */
 	public InscriptionControleur(
 			JPanel panelInscription,
@@ -106,7 +106,7 @@ public class InscriptionControleur implements ActionListener {
 		init();
 	}
 	
-	/** Intialise les composant graphiques*/
+	/** Intialise les composants graphiques*/
 	private void init() {
 		this.regateSelectionner = null;
 		this.categorieSelectionner = null;
@@ -167,7 +167,7 @@ public class InscriptionControleur implements ActionListener {
 	}
 	
 	/**
-	 * Modifier la JTables (affiche les participant à une regate)
+	 * Modifie la JTables (affiche les participants à une regate)
 	 */
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegate.getSelectedItem();
@@ -178,7 +178,7 @@ public class InscriptionControleur implements ActionListener {
 	}
 	
 	/**
-	 * Actualise le JLable décrivant la JTable
+	 * Actualise le label : nombre de participants
 	 */
 	private void ActionActualiseLeLabelInformations(){
 		this.lbInfoJTable.setText("Régate : " + regateSelectionner.getIntituler() + " - Nombre de participants : " + modelListParticipant.getRowCount()+ "/20");
@@ -194,9 +194,6 @@ public class InscriptionControleur implements ActionListener {
 		this.tfRating.setText("");
 	}
 	
-	/**
-	 * ActionListener
-	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		
@@ -226,7 +223,7 @@ public class InscriptionControleur implements ActionListener {
 	}
 	
 	/**
-	 * Mes à jour les composants
+	 * Met à jour les composants
 	 */
 	public void updateComponent(){
 		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));

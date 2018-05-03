@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Object Regate
+ * Object Régate
  * @author Tony
  *
  */
@@ -32,10 +32,10 @@ public class Regate {
 	
 	/**
 	 * Crée une instance de la classe 'Regate'
-	 * @param intituler : String
-	 * @param distance : double
-	 * @param date_depart : Date
-	 * @param cloture : boolean
+	 * @param intituler : intutuler de la course
+	 * @param distance : distance de la course
+	 * @param date_depart : date de départ de la course
+	 * @param cloture : course colture?
 	 */
 	public Regate(String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = 0;
@@ -46,11 +46,11 @@ public class Regate {
 	}
 	/**
 	 * Crée une instance de la classe 'Regate'
-	 * @param id : int
-	 * @param intituler : String
-	 * @param distance : double
-	 * @param date_de_depart : Date
-	 * @param cloture : boolean
+	 * @param id : identifiant de la course
+	 * @param intituler : intutuler de la course
+	 * @param distance : distance de la course
+	 * @param date_depart : date de départ de la course
+	 * @param cloture : course colture?
 	 */
 	public Regate(int id, String intituler, double distance, Date date_depart, boolean cloture) {
 		this.id = id;
@@ -111,9 +111,6 @@ public class Regate {
 		this.cloture = cloture;
 	}
 
-	/**
-	 * Description de l'objet Regate
-	 */
 	@Override
 	public String toString() {
 		return this.intituler + " du " + this.date_depart;

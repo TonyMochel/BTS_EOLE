@@ -38,8 +38,8 @@ public class VueSimulationCommande {
 		this.content = new JPanel(new BorderLayout());
 		this.content.setBorder(new EmptyBorder(20, 10, 20, 10));
 		
-		this.btnCloturerRegate = new JButton("Clotuer la régate");
-		this.btnArreteChrono = new JButton("Arreter");
+		this.btnCloturerRegate = new JButton("Clôturer la régate");
+		this.btnArreteChrono = new JButton("Arrêter");
 		this.btnDemarreChrono = new JButton("Démarrer");
 		this.btnRecommencer = new JButton("Recommencer");
 		

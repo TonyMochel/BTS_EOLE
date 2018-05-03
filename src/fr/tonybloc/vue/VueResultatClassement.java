@@ -65,10 +65,10 @@ public class VueResultatClassement {
 		this.listClassementCategorie4 = new JTable(modelListResultat4);
                   
 		JLabel lbChoixRegate = new JLabel("Sélectionner une régate : ");
-		JLabel lbCategorie1 = new JLabel("Classement : catégorie 1");
-		JLabel lbCategorie2 = new JLabel("Classement : catégorie 2");
-		JLabel lbCategorie3 = new JLabel("Classement : catégorie 3");
-		JLabel lbCategorie4 = new JLabel("Classement : catégorie 4");
+		JLabel lbCategorie1 = new JLabel("Classement : Catégorie 1");
+		JLabel lbCategorie2 = new JLabel("Classement : Catégorie 2");
+		JLabel lbCategorie3 = new JLabel("Classement : Catégorie 3");
+		JLabel lbCategorie4 = new JLabel("Classement : Catégorie 4");
 		
 		this.cbChoixRegateCloturer = new JComboBox<Regate>();
 		this.btnTelechargerPDF = new JButton("Télécharger PDF");

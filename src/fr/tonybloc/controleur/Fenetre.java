@@ -2,12 +2,15 @@ package fr.tonybloc.controleur;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.net.ConnectException;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalTime;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -17,7 +20,7 @@ import fr.tonybloc.modele.*;
 import fr.tonybloc.outils.JNumberField;
 import fr.tonybloc.vue.*;
 /**
- * Fenetre de l'application
+ * Fenêtre de l'application
  * @author Tony
  *
  */
@@ -26,13 +29,15 @@ public class Fenetre extends JFrame {
 	/** Frame de l'application */
 	private JFrame eoleApplication;
 	
+	private JFrame frameAucuneConnexion;
+	
 	/** Page création d'une régate */
 	private JPanel panelCreationRegate;
 	/** Page Inscription des participants */
 	private JPanel panelInscription;
 	/** Page de simulation */
 	private JPanel panelSimulation;
-	/** Page de résultat */
+	/** Page de résultats */
 	private JPanel panelResultat;
 	/** Page d'accueil */
 	private JPanel panelAccueil;
@@ -51,6 +56,9 @@ public class Fenetre extends JFrame {
 	VueSimulation vueSimulation;
 	/** Vue page résultat */
 	VueResultatClassement vueResultat;
+	/** Vue page d'information*/
+	VueInformation vueInformation;
+	
 	
 	/**
 	 * Constructeur de la class 'Fenetre'
@@ -66,14 +74,16 @@ public class Fenetre extends JFrame {
 		this.vueInscription = new VueInscription();
 		this.vueSimulation = new VueSimulation();
 		this.vueResultat = new VueResultatClassement();
+		this.vueInformation = new VueInformation();
 		
 		this.panelAccueil = vueAccueil.getContent();
 		this.panelCreationRegate = vueCreationRegate.getContent();
 		this.panelInscription = vueInscription.getContent();
 		this.panelSimulation = vueSimulation.getContent();
 		this.panelResultat = vueResultat.getContent();
-
-		// Controleur : Création de Regate
+		this.panelInformation = vueInformation.getContent();
+		
+		// Controleur : Création d'une Regate
 		RegateControleur regateControleur = new RegateControleur
 				(
 						this.panelCreationRegate,
@@ -141,6 +151,7 @@ public class Fenetre extends JFrame {
 		this.vueSimulation.getVueCommande().getBtnRecommencer().addActionListener(classementControleur);
 		this.vueSimulation.getVueCommande().getBtnDemarreChrono().addActionListener(classementControleur);
 		
+		// Controler : Résultat d'une régate
 		ResultatControleur resultControleur = new ResultatControleur(
 				this.panelResultat,
 				this.vueResultat.getCbChoixRegateCloturer(),
@@ -163,7 +174,7 @@ public class Fenetre extends JFrame {
 		this.vueResultat.getBtnTelechargerCSV().addActionListener(resultControleur);
 		this.vueResultat.getBtnImprimer().addActionListener(resultControleur);
 		
-		// Controleur : Menu
+		// Controleur : Menu de l'application
 		MenuControle menuControleur = new MenuControle
 				(
 						this.eoleApplication,
@@ -172,6 +183,7 @@ public class Fenetre extends JFrame {
 						this.panelInscription,
 						this.panelSimulation,
 						this.panelResultat,
+						this.panelInformation,
 						regateControleur,
 						inscriptionControleur,
 						classementControleur,
@@ -180,18 +192,16 @@ public class Fenetre extends JFrame {
 						this.menuPrincipal.getItemInscription(),
 						this.menuPrincipal.getItemSimulation(), 
 						this.menuPrincipal.getItemResultatRegate(),
-						this.menuPrincipal.getItemAide(), 
 						this.menuPrincipal.getItemInformation()
 				);
 		this.menuPrincipal.getItemCreationRegate().addActionListener(menuControleur);
 		this.menuPrincipal.getItemInscription().addActionListener(menuControleur);
 		this.menuPrincipal.getItemSimulation().addActionListener(menuControleur);
 		this.menuPrincipal.getItemResultatRegate().addActionListener(menuControleur);
-		this.menuPrincipal.getItemAide().addActionListener(menuControleur);
 		this.menuPrincipal.getItemInformation().addActionListener(menuControleur);
 		
 		
-		// Parametrage de la fenetre
+		// Parametrage de la fenêtre
 		this.eoleApplication.setResizable(false);
 		this.eoleApplication.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.eoleApplication.setJMenuBar(menuPrincipal);
@@ -201,9 +211,9 @@ public class Fenetre extends JFrame {
 	    this.eoleApplication.setVisible(true);
 	}
 	
-	
-	public static void main(String[] args) {
-		new Fenetre();
+	// Lancement de l'application
+	public static void main(String[] args) {		
+		JFrame application = new Fenetre();
 	}
 	
 

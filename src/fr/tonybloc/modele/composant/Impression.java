@@ -17,6 +17,7 @@ public class Impression extends JPanel implements Printable{
 	
 
 	JPanel frameToPrint;
+	
 	public int print(Graphics g, PageFormat pf, int page) throws PrinterException {
 		if (page > 0) {
 			  return NO_SUCH_PAGE;

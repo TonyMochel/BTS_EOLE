@@ -12,8 +12,17 @@ import fr.tonybloc.modele.Categorie;
 import fr.tonybloc.modele.Regate;
 import fr.tonybloc.modele.Voilier;
 
+/**
+ * Handler Voilier
+ * @author Tony
+ *
+ */
 public class VoilierDAO extends DAO<Voilier> {
 
+	/**
+	 * Crée une instance de la classe VoilierDOA
+	 * @param con : connexion à la BDD
+	 */
 	public VoilierDAO(Connection con) {
 		super(con);
 		// TODO Auto-generated constructor stub
@@ -106,7 +115,7 @@ public class VoilierDAO extends DAO<Voilier> {
 	
 	
 	/**
-	 * Retourne le nombre d'élèment de la table : voilier
+	 * Cherche le nombre d'élèments de la table : voilier
 	 * @return int
 	 */
 	public int getRowCount() {

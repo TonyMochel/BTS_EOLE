@@ -18,7 +18,7 @@ public class ModelListRegate extends AbstractTableModel {
 
 	/** Regate Handler */
 	private RegateDAO regateManager;
-	/** Donnée de la JTable */
+	/** Données de la JTable */
 	private List<Regate> regates;
 	/** En-tête de la JTable */
 	private final String[] entetes = { "ID_REGATE", "LIBELLE", "DISTANCE", "DATE_DEPART", "CLOTURE"};
@@ -40,7 +40,7 @@ public class ModelListRegate extends AbstractTableModel {
 	}
 	
 	/**
-	 * Retourne le nombre de column
+	 * Cherche le nombre de colonne
 	 * @return int
 	 */
 	@Override
@@ -48,17 +48,16 @@ public class ModelListRegate extends AbstractTableModel {
 		return this.entetes.length;
 	}
 	/**
-	 * Retourne le nombre d'element dans la liste
+	 * Retourne le nombre d'élement dans la JTable
 	 * @return int
 	 */
 	@Override
 	public int getRowCount() {
 		return this.regates.size();
 	}
-
+	
 	/**
-	 * Retourn le nom de la colonne
-	 * @return String
+	 * Cherche le nom de la colonne
 	 */
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];
@@ -126,7 +125,7 @@ public class ModelListRegate extends AbstractTableModel {
 	}
 	
 	/**
-	 * Mes à jour toutes les donnée de la table
+	 * Mes à jour toutes les données de la table
 	 */
 	public void updateTable() {
 		this.regates = this.regateManager.findAll();

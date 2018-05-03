@@ -5,11 +5,10 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTextField;
  
 /**
-* Class héritant de la class JTextfield
-* permettant de limiter la saisie au caractères choisi
-* Nombre entier
-* 
-*/
+ * Classe JDoubleField : Permet de limiter la saisie d'un champs (au caractères : Nombres entier)
+ * @author Tony
+ *
+ */
 public class JNumberField extends JTextField
 {
 	/**
@@ -29,7 +28,7 @@ public class JNumberField extends JTextField
     }
  
     /**
-     * Limiter les caractères de saisise
+     * Limite la saisise des caractère
      */
     protected void processComponentKeyEvent(KeyEvent e)
     {

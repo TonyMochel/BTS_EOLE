@@ -18,11 +18,10 @@ public class CategorieDAO extends DAO<Categorie>{
 
 	/**
 	 * Crée une instance de la classe 'CategorieDAO'
-	 * @param con
+	 * @param con : connexion à la BDD
 	 */
 	public CategorieDAO(Connection con) {
 		super(con);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

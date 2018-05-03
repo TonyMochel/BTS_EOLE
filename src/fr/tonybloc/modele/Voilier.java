@@ -28,11 +28,11 @@ public class Voilier {
 	
 	/**
 	 * Crée une instance de la classe 'Voilier'
-	 * @param categorie
-	 * @param nomVoilier
-	 * @param nomSkippeur
-	 * @param prenomSkippeur 
-	 * @param rating
+	 * @param categorie : categorie du voilier
+	 * @param nomVoilier : nom du voilier
+	 * @param nomSkippeur : nom du skippeur
+	 * @param prenomSkippeur : prenom du skippeur
+	 * @param rating : valeur du rating
 	 */
 	public Voilier(Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {
 		this.id = 0;
@@ -44,12 +44,12 @@ public class Voilier {
 	}
 	/**
 	 * Crée une instance de la classe 'Voilier'
-	 * @param id
-	 * @param categorie
-	 * @param nomVoilier
-	 * @param nomSkippeur
-	 * @param prenomSkippeur
-	 * @param rating
+	 * @param id : identifiant du voilier
+	 * @param categorie : categorie du voilier
+	 * @param nomVoilier : nom du voilier
+	 * @param nomSkippeur : nom du skippeur
+	 * @param prenomSkippeur : prenom du skippeur
+	 * @param rating : valeur du rating
 	 */
 	public Voilier(int id, Categorie categorie, String nomVoilier, String nomSkippeur, String prenomSkippeur, int rating) {
 		this.id = id;
@@ -108,9 +108,6 @@ public class Voilier {
 		this.rating = rating;
 	}
 
-	/**
-	 * Description de l'objet Voilier
-	 */
 	@Override
 	public String toString() {
 		return "{ "

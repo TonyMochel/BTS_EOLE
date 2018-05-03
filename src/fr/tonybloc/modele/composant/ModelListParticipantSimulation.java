@@ -23,7 +23,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 
 	/** Classement Handler */
 	private ClassementDAO classementManager;
-	/** Donnée de la JTable */
+	/** Données de la JTable */
 	private List<Classement> donnee;
 	/** En-tête de la JTable */
 	private final String[] entetes = {"ID", "VOILIER", "NOM", "PRENOM", "TEMPS REEL", "TEMPS COMPENSE"};
@@ -51,7 +51,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 	
 	/**
-	 * Met à jours les donnée de la JTable
+	 * Met à jour les données de la JTable
 	 * @param regate
 	 */
 	public void updateTable(Regate regate) {		
@@ -65,8 +65,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 	
 	/**
-	 * Retourne le nombre de column
-	 * @return int
+	 * Cherche le nombre de colonnes
 	 */
 	@Override
 	public int getColumnCount() {
@@ -74,8 +73,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 
 	/**
-	 * Retourne le nombre d'éléments dans la liste
-	 * @return int
+	 * Cherche le nombre d'éléments dans la JTable
 	 */
 	@Override
 	public int getRowCount() {
@@ -83,7 +81,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 
 	/**
-	 * Retourne le nom de la colonne
+	 * Cherche le nom d'une colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
@@ -91,10 +89,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 	
 	/**
-	 * Retourn une donnée d'un participant selectionner
-	 * @param rowIndex : indice de la ligne
-	 * @param columnIndex : indice de la colonne
-	 * @return Object
+	 * Cherche une donnée d'un participant séléctionné
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int colIndex) {
@@ -124,7 +119,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 	
 	/**
-	 * Met à jour le TempArriver
+	 * Met à jour le temps d'arrivé d'un participants
 	 * @param rowIndex
 	 * @param sTime
 	 */
@@ -145,7 +140,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	}
 	
 	/**
-	 * Verifie, que tous les participants sont arrivés
+	 * Verifie que tous les participants sont arrivés
 	 * @return boolean
 	 */
 	public boolean tousLesParticipantSontArrive() {
@@ -162,6 +157,9 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 		}
 		return estArrive;
 	}
+	/**
+	 * Nétoie la données contenu dans la JTable
+	 */
 	public void videDonnee() {
 		this.donnee = new ArrayList<Classement>();
 	}

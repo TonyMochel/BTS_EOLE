@@ -5,7 +5,6 @@ import fr.tonybloc.dao.implement.*;
 
 /**
  * La classe 'DAOFactory' gère l'instanciation des classes DAO
- * 
  * @author Tony
  *
  */
@@ -21,7 +20,11 @@ public class DAOFactory {
 	 * @return DAO
 	 */
 	public static VoilierDAO getVoilierDAO() {
-		return new VoilierDAO(connect);
+		try {
+			return new VoilierDAO(connect);
+		}catch(Exception exp) {
+			return null;
+		}		
 	}
 	
 	/**
@@ -29,7 +32,11 @@ public class DAOFactory {
 	 * @return DAO
 	 */
 	public static RegateDAO getRegateDAO() {
-		return new RegateDAO(connect);
+		try {
+			return new RegateDAO(connect);	
+		}catch(Exception exp) {
+			return null;
+		}		
 	}
 	
 	/**
@@ -37,7 +44,11 @@ public class DAOFactory {
 	 * @return DAO
 	 */
 	public static CategorieDAO getCategorieDAO() {
-		return new CategorieDAO(connect);
+		try {
+			return new CategorieDAO(connect);	
+		}catch(Exception exp) {
+			return null;
+		}		
 	}
 	
 	/**
@@ -45,6 +56,10 @@ public class DAOFactory {
 	 * @return DAO
 	 */
 	public static ClassementDAO getClassementDAO() {
-		return new ClassementDAO(connect);
+		try {
+			return new ClassementDAO(connect);	
+		}catch(Exception exp) {
+			return null;
+		}		
 	}
 }

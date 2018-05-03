@@ -56,19 +56,19 @@ public class ClassementControleur implements ActionListener{
 	
 	/**
 	 * Crée une instance de la classe 'ClassementControleur'
-	 * @param panelSimulation
-	 * @param modelListParticipant
-	 * @param btnCloture
-	 * @param btnArreter
-	 * @param btnModifier
-	 * @param btnAbandon
-	 * @param btnChronoStop
-	 * @param btnChronoReset
-	 * @param btnChronoStart
-	 * @param cbChoixRegate
-	 * @param listParticipants
-	 * @param lbChrono
-	 * @param chrono
+	 * @param panelSimulation : JPanel simulation
+	 * @param modelListParticipant : Modele de la JTable
+	 * @param btnCloture : JButton de colture
+	 * @param btnArreter : JButton arret de la course
+	 * @param btnModifier : JButton modifier
+	 * @param btnAbandon : JButton abandon d'un participants
+	 * @param btnChronoStop : JButton Stop Chrono
+	 * @param btnChronoReset : JButton remise à zéro du Chrono
+	 * @param btnChronoStart : JButton démarrer le chrono
+	 * @param cbChoixRegate : ComboBox choix de régate
+	 * @param listParticipants : JTable liste des participants
+	 * @param lbChrono : Libeler temp du chrono
+	 * @param chrono : Chronometre
 	 */
 	public ClassementControleur(
 			JPanel panelSimulation,
@@ -117,7 +117,7 @@ public class ClassementControleur implements ActionListener{
 		
 	}
 	/**
-	 * Action : Cloture la régate séléctionner
+	 * Action : Cloture la régate séléctionnée
 	 */
 	private void ActionCloturerRegate() {	
 
@@ -135,7 +135,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Action : Mes à jour les donnée de la JTable (affiche les participant à une regate)
+	 * Action : Met à jour les données de la JTable (affiche les participants à une regate)
 	 */
 	private void ActionSelectionnerRegate() {
 		this.regateSelectionner = (Regate) cbChoixRegate.getSelectedItem();
@@ -160,7 +160,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Action : Abandon du participant
+	 * Action : Abandon d'un participant
 	 */
 	private void ActionParticipantAbandon() {
 		if(isStarted) {
@@ -176,7 +176,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Action : Modifie un participants
+	 * Action : Modification des données du participant
 	 */
 	private void ActionParticipantModifier() {	
 		if(isStarted) {
@@ -192,7 +192,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Action : Démarre le Chronometre
+	 * Action : Démarre le Chronomètre
 	 */
 	private void ActionStartChrono() {
 		if(this.regateSelectionner == null) {
@@ -235,7 +235,7 @@ public class ClassementControleur implements ActionListener{
 	}
 	
 	/**
-	 * Action : Réinitialise le Chronometre
+	 * Action : Réinitialise le Chronomètre
 	 */
 	private void ActionResetChrono() {
 		this.chrono.ResetTimer();
@@ -279,7 +279,7 @@ public class ClassementControleur implements ActionListener{
 	}
 
 	/**
-	 * Mes à jour les composants graphiques
+	 * Met à jour les composants graphiques
 	 */
 	public void updateComponent() {
 		this.cbChoixRegate.setModel(new ModelComboBoxRegates(ModelComboBoxRegates.REGATE_NOT_CLOSURE));

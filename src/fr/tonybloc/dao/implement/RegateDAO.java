@@ -20,14 +20,12 @@ public class RegateDAO extends DAO<Regate> {
 
 	/**
 	 * Crée une instance de la classe RegateDAO
-	 * @param con
+	 * @param con : connexion à la BDD
 	 */
 	public RegateDAO(Connection con) {
 		super(con);
 	}
-	/**
-	 * Ajoute une nouvelle 'Régate' dans la base de donnée
-	 */
+	
 	@Override
 	public boolean create(Regate obj) {
 		boolean requeteExecuter = false;
@@ -43,9 +41,8 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return requeteExecuter;
 	}
-	/**
-	 * Supprime une 'Régate' dans la base de donnée
-	 */
+	
+	
 	@Override
 	public boolean delete(Regate obj) {
 		boolean requeteExecuter = false;
@@ -62,9 +59,7 @@ public class RegateDAO extends DAO<Regate> {
 		return requeteExecuter;
 	}
 
-	/**
-	 * Met à jour une 'Régate' dans la base de donnée
-	 */
+	
 	@Override
 	public boolean update(Regate obj) {
 		boolean requeteExecuter = false;
@@ -82,10 +77,7 @@ public class RegateDAO extends DAO<Regate> {
 		return requeteExecuter;
 	}
 
-	/**
-	 * Retourne un element de la table : Régate 
-	 * @return Regate
-	 */
+	
 	@Override
 	public Regate find(int id) {
 		Regate regate = new Regate();
@@ -110,8 +102,9 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return regate;
 	}
+
 	/**
-	 * Cherche le dernière regate inserée
+	 * Cherche la dernière régate inserée
 	 * @return
 	 */
 	public Regate findLastRegateInserted() {
@@ -138,10 +131,8 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return regate;
 	}
-	/**
-	 * Retourn tous les élément de la table : Régate
-	 * @return List<Regate>
-	 */
+	
+	
 	@Override
 	public List<Regate> findAll() {
 		List<Regate> listRegate = new ArrayList<Regate>();
@@ -166,8 +157,9 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return listRegate;
 	}
+	
 	/**
-	 * Cherche toutes les régate cloturés
+	 * Cherche toutes les régates cloturées
 	 * @return
 	 */
 	public List<Regate> findRegateClosure(){
@@ -193,8 +185,9 @@ public class RegateDAO extends DAO<Regate> {
 		}
 		return listRegate;
 	}
+	
 	/**
-	 * Retourn tout les regate qui ne sont pas cloturées
+	 * Cherche toutes les regates qui ne sont pas cloturées
 	 */
 	public List<Regate> findRegateNotClosure() {
 		List<Regate> listRegate = new ArrayList<Regate>();
@@ -222,7 +215,7 @@ public class RegateDAO extends DAO<Regate> {
 	
 	/**
 	 * Cherche tout les particiants d'une régate
-	 * @param regate
+	 * @param regate : regate courrente
 	 * @return
 	 */
 	public List<Voilier> getAllParticipant(Regate regate){
@@ -253,7 +246,7 @@ public class RegateDAO extends DAO<Regate> {
 	}
 	
 	/**
-	 * Retourne le nombre d'élèment de la table : Régate
+	 * Cherche le nombre d'élèments de la table : Régate
 	 * @return int
 	 */
 	public int getRowCount() {
@@ -276,7 +269,7 @@ public class RegateDAO extends DAO<Regate> {
 	
 	/**
 	 * Cloture une régate
-	 * @param obj
+	 * @param obj : regate courrente
 	 * @return
 	 */
 	public boolean clotureRegate(Regate obj) {

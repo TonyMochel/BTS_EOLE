@@ -12,7 +12,7 @@ import fr.tonybloc.dao.DAOFactory;
 import fr.tonybloc.dao.implement.RegateDAO;
 import fr.tonybloc.modele.Regate;
 /**
- * Model des combobox choix Regate
+ * Model des combobox choix régate
  * @author Tony
  *
  */
@@ -20,9 +20,9 @@ public class ModelComboBoxRegates extends AbstractListModel implements ComboBoxM
 
 	/** Regate Handler */
 	private RegateDAO regateManager;
-	/** Donnée contenu dans la comboBox */
+	/** Données contenu dans la comboBox */
 	private List<Regate> regates;
-	/** Regate selectionner dans la comboBox*/
+	/** Regate séléctionnée dans la comboBox*/
 	private Regate regateSelectionner = null;
 	
 	public final static boolean REGATE_CLOSURE = true;

@@ -7,8 +7,8 @@ import java.util.Calendar;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
 /**
- * Classe de personalisation.
- * Personalise le format de la date du datepicker
+ * Classe de pérsonalisation.
+ * Pérsonalise le format de la date du datepicker
  * @author Tony
  *
  */

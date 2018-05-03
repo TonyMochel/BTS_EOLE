@@ -1,9 +1,13 @@
 package fr.tonybloc.dao;
 
 import java.sql.DriverManager;
+
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 
-/*
+/**
+ * Classe de connexion
  * @author : Anthony Mochel
  */
 public class EoleConnect {
@@ -37,7 +41,7 @@ public class EoleConnect {
 		} 
 		catch (Exception  e) 
 		{
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Aucune Connexion à la base de donnée");
 		}
 	}
 	
