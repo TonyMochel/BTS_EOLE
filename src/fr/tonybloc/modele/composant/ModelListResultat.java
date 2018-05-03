@@ -66,6 +66,8 @@ public class ModelListResultat extends AbstractTableModel{
 
 	/**
 	 * Cherche une donnée du classement selectionné
+	 * @param rowIndex : index de la ligne
+	 * @param colIndex : index de la colonne
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int colIndex) {
@@ -91,6 +93,7 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 	/**
 	 * Cherche le nom de la colonne
+	 * @param columnIndex : index de la colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
@@ -98,8 +101,8 @@ public class ModelListResultat extends AbstractTableModel{
 	}
 	/**
 	 * Met à jour les données de la JTable
-	 * @param regate
-	 * @param categorie
+	 * @param regate : regate cible
+	 * @param categorie : categorie cible
 	 */
 	public void updateTable(Regate regate, Categorie categorie) {
 		List<Classement> listClassement = classementManager.findClassementAt(regate, categorie);

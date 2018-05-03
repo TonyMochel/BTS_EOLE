@@ -29,7 +29,7 @@ public class Classement {
 	 * Crée une instance de la classe 'Classement'
 	 * @param voilier : voilier
 	 * @param regate : Regate
-	 * @param tempsArriver : temps d'arriver du voilier
+	 * @param tempsArrive : temps d'arriver du voilier
 	 * @param tempsCompense : temps composé du voilier
 	 */
 	public Classement(Voilier voilier, Regate regate, Time tempsArrive, Time tempsCompense) {
@@ -42,7 +42,7 @@ public class Classement {
 	/**
 	 * Crée une instance de la classe Classement
 	 * @param voilier : Voilier
-	 * @param regate : Regate
+	 * @param idRegate : index de la régate
 	 */
 	public Classement(Voilier voilier, Regate idRegate) {
 		this.voilier = voilier;

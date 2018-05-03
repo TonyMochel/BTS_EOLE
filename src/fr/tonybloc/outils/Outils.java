@@ -28,7 +28,7 @@ public class Outils {
 	
 	/**
 	 * Vérifie si un composant (JTextComponent) est vide
-	 * @param composant
+	 * @param composant : JTextComponent a annalyser
 	 * @return boolean
 	 */
 	public static boolean estVide(JTextComponent composant)
@@ -37,16 +37,16 @@ public class Outils {
 	}
 	/**
 	 * Vérifie si un composant (JDatePickerImpl) est vide
-	 * @param composant
-	 * @return
+	 * @param composant : JDaatePicker a annalyser
+	 * @return boolean
 	 */
 	public static boolean estVide(JDatePickerImpl composant) {
 		return ( composant.getModel().getValue().equals("") ) ? true : false;
 	}
 	/**
 	 * Convertie une date en Calendar
-	 * @param date
-	 * @return
+	 * @param date : date à convertir
+	 * @return Calendar
 	 */
 	public static Calendar dateToCalendar(Date date){ 
 		Calendar cal = Calendar.getInstance();
@@ -56,8 +56,8 @@ public class Outils {
 	
 	/**
 	 * Initialise un placeholder sur un JTextField
-	 * @param obj
-	 * @param text
+	 * @param obj : TextField cible
+	 * @param text : texte du placeholder
 	 */
 	public static void placeholder(JTextField obj, String text) {
 		obj.setText(text);
@@ -80,8 +80,8 @@ public class Outils {
 	}
 	/**
 	 * Convertie un nombre de seconde en HH:MM:SS
-	 * @param pSeconde
-	 * @return
+	 * @param pSeconde : nombre de seconde à convertir
+	 * @return String
 	 */
 	public static String convertHMS(int pSeconde) {
 		int heure = (int) pSeconde/3600;
@@ -98,8 +98,8 @@ public class Outils {
 	
 	/**
 	 * Convertie une date (HH:MM:SS) en seconde
-	 * @param date
-	 * @return
+	 * @param date : date à convertire
+	 * @return int
 	 */
 	@SuppressWarnings("deprecation")
 	public static int convertHTStoS(Date date) {
@@ -108,12 +108,12 @@ public class Outils {
 	
 	/**
 	 * Convertie une JTable en fichier excel
-	 * @param tableCategorie1
-	 * @param tableCategorie2
-	 * @param tableCategorie3
-	 * @param tableCategorie4
-	 * @param regate
-	 * @param file
+	 * @param tableCategorie1 : JTable participant de la categorie A
+	 * @param tableCategorie2 : JTable participant de la categorie B
+	 * @param tableCategorie3 : JTable participant de la categorie C
+	 * @param tableCategorie4 : JTable participant de la categorie D
+	 * @param regate : Régate courrente
+	 * @param file : fichier d'export (résultat)
 	 */
 	public static void toExcel(JTable tableCategorie1, JTable tableCategorie2, JTable tableCategorie3, JTable tableCategorie4, Regate regate, File file){
 	    try{
@@ -150,8 +150,8 @@ public class Outils {
 	
 	/**
 	 * Ecrit le classement des participants d'une categorie
-	 * @param modelCategorie
-	 * @param bw
+	 * @param modelCategorie : Model de la JTable categorie
+	 * @param bw : BufferWriter
 	 * @throws IOException 
 	 */
 	private static void ecritLeClassementDeLaCategorie(TableModel modelCategorie, BufferedWriter bw) throws IOException {

@@ -20,7 +20,7 @@ public class JNumberField extends JTextField
  
     /**
      * Crée une instance de la classe 'JNumberField'
-     * @param string
+     * @param string : string
      */
     public JNumberField(String string)
     {
@@ -53,7 +53,7 @@ public class JNumberField extends JTextField
     
     /**
      * Defini si le caractère saisie est permis
-     * @param event
+     * @param event : clic
      * @return
      */
     protected boolean allowKey(KeyEvent event)

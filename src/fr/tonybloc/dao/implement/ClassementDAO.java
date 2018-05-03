@@ -101,7 +101,7 @@ public class ClassementDAO extends DAO<Classement> {
 	 * Recherche un objet classement dans la base de donnée : eole
 	 * @param voilier : voilier courrent
 	 * @param regate : régate courrente
-	 * @return
+	 * @return Classement
 	 */
 	public Classement find(Voilier voilier, Regate regate) {
 		Classement classement = new Classement();
@@ -138,7 +138,7 @@ public class ClassementDAO extends DAO<Classement> {
 	/**
 	 * Recherche tout les classement d'une regate
 	 * @param regate : regate courrent
-	 * @return
+	 * @return List<Classement>
 	 */
 	public List<Classement> findAllParticipant(Regate regate) {
 		List<Classement> listClassement = new ArrayList<Classement>();
@@ -175,7 +175,7 @@ public class ClassementDAO extends DAO<Classement> {
 	/**
 	 * Retourne le nombre d'élèments de la table : classement (pour une Régate)
 	 * @param idRegate : identifiant de la régate
-	 * @return
+	 * @return int
 	 */
 	public int getRowCount(int idRegate) {
 		int rowCount = 0;
@@ -199,7 +199,7 @@ public class ClassementDAO extends DAO<Classement> {
 	 * Recherche le classements des participants d'une categorier (d'une regate)
 	 * @param regate : regate courrente
 	 * @param categorie : categorie courrente
-	 * @return
+	 * @return List<Classement>
 	 */
 	public List<Classement> findClassementAt(Regate regate, Categorie categorie) {
 		List<Classement> listClassement = new ArrayList<Classement>();

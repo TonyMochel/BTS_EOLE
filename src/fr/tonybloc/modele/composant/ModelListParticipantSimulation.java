@@ -52,7 +52,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	
 	/**
 	 * Met à jour les données de la JTable
-	 * @param regate
+	 * @param regate : regate cible
 	 */
 	public void updateTable(Regate regate) {		
 		if(regate == null) {
@@ -82,6 +82,7 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 
 	/**
 	 * Cherche le nom d'une colonne
+	 * @param columnIndex : index de la colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
@@ -90,6 +91,8 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	
 	/**
 	 * Cherche une donnée d'un participant séléctionné
+	 * @param rowIndex : index de la ligne
+	 * @param colIndex : index de la colonne 
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int colIndex) {
@@ -120,8 +123,8 @@ public class ModelListParticipantSimulation extends AbstractTableModel{
 	
 	/**
 	 * Met à jour le temps d'arrivé d'un participants
-	 * @param rowIndex
-	 * @param sTime
+	 * @param rowIndex : index de la ligne
+	 * @param sTime : temps d'arrivé
 	 */
 	public void updateTempArriver(int rowIndex, String sTime) {
 		Time tempArriver;

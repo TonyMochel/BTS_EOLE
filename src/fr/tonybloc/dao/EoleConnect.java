@@ -47,6 +47,7 @@ public class EoleConnect {
 	
 	/**
 	 * Retourne l'unique instance de la class de connexion
+	 * @return Connection
 	 */
 	public static Connection getInstance() {
 		

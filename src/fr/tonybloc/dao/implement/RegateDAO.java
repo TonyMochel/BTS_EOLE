@@ -105,7 +105,7 @@ public class RegateDAO extends DAO<Regate> {
 
 	/**
 	 * Cherche la dernière régate inserée
-	 * @return
+	 * @return Regate
 	 */
 	public Regate findLastRegateInserted() {
 		Regate regate = new Regate();
@@ -160,7 +160,7 @@ public class RegateDAO extends DAO<Regate> {
 	
 	/**
 	 * Cherche toutes les régates cloturées
-	 * @return
+	 * @return List<Regate>
 	 */
 	public List<Regate> findRegateClosure(){
 		List<Regate> listRegate = new ArrayList<Regate>();
@@ -188,6 +188,7 @@ public class RegateDAO extends DAO<Regate> {
 	
 	/**
 	 * Cherche toutes les regates qui ne sont pas cloturées
+	 * @return List<Regate>
 	 */
 	public List<Regate> findRegateNotClosure() {
 		List<Regate> listRegate = new ArrayList<Regate>();
@@ -216,7 +217,7 @@ public class RegateDAO extends DAO<Regate> {
 	/**
 	 * Cherche tout les particiants d'une régate
 	 * @param regate : regate courrente
-	 * @return
+	 * @return List<Voilier>
 	 */
 	public List<Voilier> getAllParticipant(Regate regate){
 		
@@ -270,7 +271,7 @@ public class RegateDAO extends DAO<Regate> {
 	/**
 	 * Cloture une régate
 	 * @param obj : regate courrente
-	 * @return
+	 * @return boolean
 	 */
 	public boolean clotureRegate(Regate obj) {
 		boolean requeteExecuter = false;

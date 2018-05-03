@@ -70,6 +70,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	
 	/**
 	 * Cherche le nom de la colonne
+	 * @param columnIndex : index de la colonne
 	 * @return String
 	 */
 	public String getColumnName(int columnIndex) {
@@ -108,8 +109,8 @@ public class ModelListParticipant extends AbstractTableModel {
 	
 	/**
 	 * Ajoute un participant à la JTable
-	 * @param participant
-	 * @param regate
+	 * @param participant : voilier cible
+	 * @param regate : regate cible
 	 */
 	public void addParticipant(Voilier participant, Regate regate) {
 		
@@ -124,8 +125,8 @@ public class ModelListParticipant extends AbstractTableModel {
 	}
 	/**
 	 * Supprime un participant de la JTable
-	 * @param rowIndex
-	 * @param regate
+	 * @param rowIndex : index de la ligne
+	 * @param regate : regate cible
 	 */
 	public void removeParticpant(int rowIndex, Regate regate) {
 		
@@ -137,7 +138,7 @@ public class ModelListParticipant extends AbstractTableModel {
 	
 	/**
 	 * Met à jour les données contenu dans la JTable
-	 * @param regate
+	 * @param regate : regate cible
 	 */
 	public void updateTables(Regate regate) {
 		if(regate == null) {

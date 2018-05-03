@@ -30,7 +30,7 @@ public class ModelComboBoxRegates extends AbstractListModel implements ComboBoxM
 	
 	/**
 	 * Crée une instance de la classe 'ModelComboBoxRegates'
-	 * @param typeRegate
+	 * @param typeRegate : type de la regate
 	 */
 	public ModelComboBoxRegates(boolean typeRegate ) {
 		super();

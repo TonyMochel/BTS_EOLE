@@ -138,7 +138,7 @@ public class VoilierDAO extends DAO<Voilier> {
 
 	/**
 	 * Cherche le dernier voilier inséré
-	 * @return
+	 * @return Voilier
 	 */
 	public Voilier findLastVoilierInserted() {
 		Voilier voilier = new Voilier();

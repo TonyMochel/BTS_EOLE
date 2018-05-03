@@ -64,8 +64,8 @@ public class ModelListRegate extends AbstractTableModel {
 	}
 	/**
 	 * Retourne une donnée d'une régate selectionner
-	 * @param rowIndex
-	 * @param columnIndex
+	 * @param rowIndex : index de la ligne
+	 * @param columnIndex : index de la colonne
 	 * @return Object
 	 */
 	@Override
@@ -93,7 +93,7 @@ public class ModelListRegate extends AbstractTableModel {
 	
 	/**
 	 * Ajoute une Régate à la liste
-	 * @param regate
+	 * @param regate : regate cible
 	 */
 	public void addRegate(Regate regate) {
 		this.regateManager.create(regate);
@@ -104,7 +104,7 @@ public class ModelListRegate extends AbstractTableModel {
 	}
 	/**
 	 * Supprime une Régate de la liste
-	 * @param rowIndex
+	 * @param rowIndex : index de la ligne
 	 */
 	public void removeRegate(int rowIndex) {
 		
@@ -115,8 +115,8 @@ public class ModelListRegate extends AbstractTableModel {
 	
 	/**
 	 * Mise à jour d'une Régate de la liste
-	 * @param regate
-	 * @param rowIndex
+	 * @param regate : regate cible
+	 * @param rowIndex : index de la ligne
 	 */
 	public void updateRegate(Regate regate, int rowIndex) {
 		this.regateManager.update(regate);

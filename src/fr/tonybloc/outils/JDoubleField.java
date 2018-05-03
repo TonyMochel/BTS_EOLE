@@ -21,7 +21,7 @@ public class JDoubleField extends JTextField
  
     /**
      * Crée une instance de la class 'JDoubleField'
-     * @param string
+     * @param string : string
      */
     public JDoubleField(String string){
         super(string);
@@ -59,7 +59,7 @@ public class JDoubleField extends JTextField
  
     /**
      * Defini si le caractère saisie est permis
-     * @param event
+     * @param event : clic
      * @return
      */
     protected boolean allowKey(KeyEvent event)
